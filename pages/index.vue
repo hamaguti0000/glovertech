@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { hero, problems, services, subsidy, plans } from '~/data/site'
+import { hero, problems, services, subsidy, plans, flowSteps, profile } from '~/data/site'
 </script>
 
 <template>
@@ -19,5 +19,12 @@ import { hero, problems, services, subsidy, plans } from '~/data/site'
       :notes="subsidy.notes"
     />
     <PricingSection :plans="plans" />
+    <FlowSection :steps="flowSteps" />
+    <ProfileSection
+      :name="profile.name"
+      :role="profile.role"
+      :description="profile.description"
+      :meeting-hours="profile.meetingHours"
+    />
   </main>
 </template>
