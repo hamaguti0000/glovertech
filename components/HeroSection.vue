@@ -19,6 +19,10 @@ interface Light {
 }
 
 const canvasEl = ref<HTMLCanvasElement | null>(null)
+const sectionEl = ref<HTMLElement | null>(null)
+const lightsOffset = ref(0)
+const reduceMotion =
+  typeof window !== 'undefined' && window.matchMedia('(prefers-reduced-motion: reduce)').matches
 let lights: Light[] = []
 let rafId: number | null = null
 
@@ -114,19 +118,40 @@ function handleResize() {
   if (canvasEl.value) setupCanvas(canvasEl.value)
 }
 
+let parallaxTicking = false
+
+function updateParallax() {
+  if (sectionEl.value) {
+    const rect = sectionEl.value.getBoundingClientRect()
+    lightsOffset.value = rect.top * -0.12
+  }
+  parallaxTicking = false
+}
+
+function handleScroll() {
+  if (parallaxTicking) return
+  parallaxTicking = true
+  requestAnimationFrame(updateParallax)
+}
+
 onMounted(() => {
   if (canvasEl.value) setupCanvas(canvasEl.value)
   window.addEventListener('resize', handleResize)
+
+  if (!reduceMotion) {
+    window.addEventListener('scroll', handleScroll, { passive: true })
+  }
 })
 
 onUnmounted(() => {
   window.removeEventListener('resize', handleResize)
+  window.removeEventListener('scroll', handleScroll)
   if (rafId !== null) cancelAnimationFrame(rafId)
 })
 </script>
 
 <template>
-  <section class="border-b border-harbor-700">
+  <section ref="sectionEl" class="border-b border-harbor-700">
     <div class="section pb-16 pt-28 sm:pt-36">
       <p class="section-eyebrow">長崎 ・ AI導入 / 業務効率化支援</p>
 
@@ -151,7 +176,12 @@ onUnmounted(() => {
         style="clip-path: polygon(0% 46%, 5% 30%, 11% 44%, 18% 20%, 26% 38%, 34% 14%, 43% 32%, 52% 12%, 61% 34%, 70% 18%, 79% 40%, 88% 22%, 100% 36%, 100% 100%, 0% 100%)"
         aria-hidden="true"
       />
-      <canvas ref="canvasEl" class="absolute inset-0 h-full w-full" aria-hidden="true" />
+      <canvas
+        ref="canvasEl"
+        class="absolute inset-0 h-full w-full"
+        :style="{ transform: `translateY(${lightsOffset}px)` }"
+        aria-hidden="true"
+      />
     </div>
   </section>
 </template>
