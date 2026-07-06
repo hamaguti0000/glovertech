@@ -1,0 +1,29 @@
+name: Diagnose VPS ports
+
+on:
+  workflow_dispatch:
+
+jobs:
+  diagnose:
+    runs-on: ubuntu-latest
+    env:
+      VPS_HOST: ${{ secrets.VPS_HOST }}
+      VPS_USER: ${{ secrets.VPS_USER }}
+      VPS_PASSWORD: ${{ secrets.VPS_PASSWORD }}
+      VPS_PORT: ${{ secrets.VPS_PORT }}
+    steps:
+      - name: Install sshpass
+        run: sudo apt-get update -y && sudo apt-get install -y sshpass
+
+      - name: List listening ports and nginx sites
+        run: |
+          sshpass -p "$VPS_PASSWORD" ssh -o StrictHostKeyChecking=no -p "$VPS_PORT" "$VPS_USER@$VPS_HOST" bash -s <<'EOF'
+          echo "--- listening ports ---"
+          ss -tlnp 2>/dev/null || netstat -tlnp
+          echo "--- nginx sites-enabled ---"
+          ls -la /etc/nginx/sites-enabled/ 2>/dev/null
+          for f in /etc/nginx/sites-enabled/*; do
+            echo "== $f =="
+            cat "$f" 2>/dev/null
+          done
+          EOF
