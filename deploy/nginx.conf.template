@@ -1,0 +1,10 @@
+server {
+    listen 8080;
+    server_name _;
+    root __VPS_APP_DIR__;
+    index index.html;
+
+    location / {
+        try_files $uri $uri/ $uri.html =404;
+    }
+}
