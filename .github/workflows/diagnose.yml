@@ -20,6 +20,12 @@ jobs:
           sshpass -p "$VPS_PASSWORD" ssh -o StrictHostKeyChecking=no -p "$VPS_PORT" "$VPS_USER@$VPS_HOST" bash -s <<'EOF'
           echo "--- listening ports ---"
           ss -tlnp 2>/dev/null || netstat -tlnp
+          echo "--- ufw status ---"
+          ufw status verbose 2>&1 || echo "ufw not available"
+          echo "--- iptables rules ---"
+          iptables -L -n -v 2>&1 || echo "iptables not available (need sudo?)"
+          echo "--- firewalld ---"
+          firewall-cmd --list-all 2>&1 || echo "firewalld not available"
           echo "--- nginx sites-enabled ---"
           ls -la /etc/nginx/sites-enabled/ 2>/dev/null
           for f in /etc/nginx/sites-enabled/*; do
