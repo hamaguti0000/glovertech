@@ -9,7 +9,6 @@ defineProps<{
 <template>
   <section class="border-b border-harbor-700">
     <div class="section">
-      <p class="section-eyebrow">サービス</p>
       <h2 class="section-title">ご提供できること</h2>
       <p class="section-lead">
         相談だけで終わらせず、実際に手を動かすところまでお手伝いします。

@@ -9,7 +9,6 @@ defineProps<{
 <template>
   <section class="border-b border-harbor-700">
     <div class="section">
-      <p class="section-eyebrow">よくあるご質問</p>
       <h2 class="section-title">よくあるご質問</h2>
 
       <div class="mt-10 divide-y divide-harbor-600 border-y border-harbor-600">

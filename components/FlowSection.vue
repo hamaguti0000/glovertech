@@ -44,7 +44,6 @@ onUnmounted(() => {
 <template>
   <section class="border-b border-harbor-700">
     <div class="section">
-      <p class="section-eyebrow">進め方</p>
       <h2 class="section-title">3つのステップで進めます</h2>
       <p class="section-lead">
         無料相談とレポートまでは費用がかかりません。ご納得いただけない場合は、そこで終了して構いません。
