@@ -60,7 +60,6 @@ onUnmounted(() => {
 <template>
   <section class="border-b border-harbor-700">
     <div class="section">
-      <p class="section-eyebrow">料金</p>
       <h2 class="section-title">料金表</h2>
       <p class="section-lead">まずは無料相談から。ご納得いただいた範囲でのみ、次のステップに進みます。</p>
 

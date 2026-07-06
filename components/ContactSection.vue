@@ -49,7 +49,6 @@ async function handleSubmit() {
 <template>
   <section id="contact" class="border-b border-harbor-700">
     <div class="section max-w-2xl">
-      <p class="section-eyebrow">お問い合わせ</p>
       <h2 class="section-title">{{ heading }}</h2>
       <p class="section-lead">{{ description }}</p>
 
