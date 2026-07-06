@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { onMounted, onUnmounted, ref } from 'vue'
+import { gsap } from 'gsap'
 
 defineProps<{
   title: string
@@ -20,6 +21,10 @@ interface Light {
 
 const canvasEl = ref<HTMLCanvasElement | null>(null)
 const sectionEl = ref<HTMLElement | null>(null)
+const eyebrowEl = ref<HTMLElement | null>(null)
+const headlineEl = ref<HTMLElement | null>(null)
+const subtitleEl = ref<HTMLElement | null>(null)
+const ctaEl = ref<HTMLElement | null>(null)
 const lightsOffset = ref(0)
 const reduceMotion =
   typeof window !== 'undefined' && window.matchMedia('(prefers-reduced-motion: reduce)').matches
@@ -99,8 +104,6 @@ function setupCanvas(canvas: HTMLCanvasElement) {
 
   lights = buildLights(width, height)
 
-  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
-
   if (reduceMotion) {
     renderFrame(ctx, width, height, 0, false)
     return
@@ -140,6 +143,12 @@ onMounted(() => {
 
   if (!reduceMotion) {
     window.addEventListener('scroll', handleScroll, { passive: true })
+
+    gsap.timeline({ defaults: { ease: 'power3.out' } })
+      .from(eyebrowEl.value, { opacity: 0, y: 14, duration: 0.6 })
+      .from(headlineEl.value, { opacity: 0, y: 28, duration: 0.9 }, '-=0.35')
+      .from(subtitleEl.value, { opacity: 0, y: 18, duration: 0.7 }, '-=0.5')
+      .from(ctaEl.value, { opacity: 0, y: 14, duration: 0.6 }, '-=0.4')
   }
 })
 
@@ -153,17 +162,20 @@ onUnmounted(() => {
 <template>
   <section ref="sectionEl" class="border-b border-harbor-700">
     <div class="section pb-16 pt-28 sm:pt-36">
-      <p class="section-eyebrow">長崎 ・ AI導入 / 業務効率化支援</p>
+      <p ref="eyebrowEl" class="section-eyebrow">長崎 ・ AI導入 / 業務効率化支援</p>
 
-      <h1 class="mt-6 max-w-2xl text-4xl leading-[1.4] text-paper-100 sm:text-5xl sm:leading-[1.35]">
+      <h1
+        ref="headlineEl"
+        class="mt-6 max-w-2xl text-4xl leading-[1.4] text-paper-100 sm:text-5xl sm:leading-[1.35]"
+      >
         {{ title }}
       </h1>
 
-      <p class="section-lead">
+      <p ref="subtitleEl" class="section-lead">
         {{ subtitle }}
       </p>
 
-      <div class="mt-10">
+      <div ref="ctaEl" class="mt-10">
         <a :href="ctaHref" class="btn-primary">
           {{ ctaLabel }}
         </a>
