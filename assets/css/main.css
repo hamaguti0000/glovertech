@@ -35,7 +35,7 @@
   }
 
   .panel {
-    @apply rounded-md border border-harbor-600 bg-harbor-800/60 p-6 transition-colors duration-300 hover:border-lantern-700;
+    @apply rounded-md border border-harbor-600 bg-harbor-800/60 p-6 transition duration-300 hover:-translate-y-1 hover:border-lantern-700;
   }
 
   .btn-primary {
@@ -44,5 +44,19 @@
 
   .btn-outline {
     @apply inline-flex items-center justify-center gap-2 rounded-sm border border-harbor-600 px-8 py-4 text-base font-semibold text-paper-100 transition-colors duration-300 hover:border-lantern-700 hover:text-lantern-300;
+  }
+}
+
+@layer utilities {
+  .reveal {
+    opacity: 0;
+    transform: translateY(18px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+    transition-delay: var(--reveal-delay, 0ms);
+  }
+
+  .reveal-visible {
+    opacity: 1;
+    transform: translateY(0);
   }
 }

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { hero } from '~/data/site'
+import { hero, problems, services } from '~/data/site'
 </script>
 
 <template>
@@ -10,5 +10,7 @@ import { hero } from '~/data/site'
       :cta-label="hero.ctaLabel"
       :cta-href="hero.ctaHref"
     />
+    <ProblemsSection :problems="problems" />
+    <ServicesSection :services="services" />
   </main>
 </template>

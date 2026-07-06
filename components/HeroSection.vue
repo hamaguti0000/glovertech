@@ -8,9 +8,82 @@ defineProps<{
   ctaHref: string
 }>()
 
-const canvasEl = ref<HTMLCanvasElement | null>(null)
+interface Light {
+  x: number
+  y: number
+  r: number
+  baseOpacity: number
+  phase: number
+  speed: number
+  glow: boolean
+}
 
-function drawNightView(canvas: HTMLCanvasElement) {
+const canvasEl = ref<HTMLCanvasElement | null>(null)
+let lights: Light[] = []
+let rafId: number | null = null
+
+function buildLights(width: number, height: number) {
+  let seed = 42
+  const random = () => {
+    seed = (seed * 9301 + 49297) % 233280
+    return seed / 233280
+  }
+
+  const next: Light[] = []
+
+  // 稲佐山から望む長崎港の夜景をモチーフにした、港町の灯り
+  for (let i = 0; i < 320; i++) {
+    next.push({
+      x: random() * width,
+      y: Math.pow(random(), 1.4) * height,
+      r: random() * 1.5 + 0.4,
+      baseOpacity: random() * 0.6 + 0.2,
+      phase: random() * Math.PI * 2,
+      speed: random() * 0.6 + 0.3,
+      glow: false,
+    })
+  }
+
+  for (let i = 0; i < 16; i++) {
+    next.push({
+      x: random() * width,
+      y: Math.pow(random(), 1.4) * height,
+      r: random() * 12 + 8,
+      baseOpacity: 0.35,
+      phase: random() * Math.PI * 2,
+      speed: random() * 0.3 + 0.15,
+      glow: true,
+    })
+  }
+
+  return next
+}
+
+function renderFrame(ctx: CanvasRenderingContext2D, width: number, height: number, time: number, animate: boolean) {
+  ctx.clearRect(0, 0, width, height)
+
+  for (const light of lights) {
+    const flicker = animate ? Math.sin(time * light.speed + light.phase) * 0.35 : 0
+    const opacity = Math.min(1, Math.max(0, light.baseOpacity + flicker * light.baseOpacity))
+
+    if (light.glow) {
+      const gradient = ctx.createRadialGradient(light.x, light.y, 0, light.x, light.y, light.r)
+      gradient.addColorStop(0, `rgba(240, 200, 120, ${opacity})`)
+      gradient.addColorStop(1, 'rgba(240, 200, 120, 0)')
+      ctx.beginPath()
+      ctx.arc(light.x, light.y, light.r, 0, Math.PI * 2)
+      ctx.fillStyle = gradient
+      ctx.fill()
+    } else {
+      ctx.beginPath()
+      ctx.arc(light.x, light.y, light.r, 0, Math.PI * 2)
+      ctx.fillStyle = `rgba(240, 200, 120, ${opacity})`
+      ctx.fill()
+    }
+  }
+}
+
+function setupCanvas(canvas: HTMLCanvasElement) {
   const ctx = canvas.getContext('2d')
   if (!ctx) return
 
@@ -19,51 +92,36 @@ function drawNightView(canvas: HTMLCanvasElement) {
   canvas.width = width * dpr
   canvas.height = height * dpr
   ctx.setTransform(dpr, 0, 0, dpr, 0, 0)
-  ctx.clearRect(0, 0, width, height)
 
-  // 稲佐山から望む長崎港の夜景をモチーフにした、港町の灯り
-  let seed = 42
-  const random = () => {
-    seed = (seed * 9301 + 49297) % 233280
-    return seed / 233280
+  lights = buildLights(width, height)
+
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+
+  if (reduceMotion) {
+    renderFrame(ctx, width, height, 0, false)
+    return
   }
 
-  for (let i = 0; i < 320; i++) {
-    const x = random() * width
-    const y = Math.pow(random(), 1.4) * height
-    const r = random() * 1.5 + 0.4
-    const opacity = random() * 0.7 + 0.15
-    ctx.beginPath()
-    ctx.arc(x, y, r, 0, Math.PI * 2)
-    ctx.fillStyle = `rgba(240, 200, 120, ${opacity})`
-    ctx.fill()
+  const loop = (time: number) => {
+    renderFrame(ctx, width, height, time / 1000, true)
+    rafId = requestAnimationFrame(loop)
   }
-
-  for (let i = 0; i < 16; i++) {
-    const x = random() * width
-    const y = Math.pow(random(), 1.4) * height
-    const r = random() * 12 + 8
-    const gradient = ctx.createRadialGradient(x, y, 0, x, y, r)
-    gradient.addColorStop(0, 'rgba(240, 200, 120, 0.35)')
-    gradient.addColorStop(1, 'rgba(240, 200, 120, 0)')
-    ctx.beginPath()
-    ctx.arc(x, y, r, 0, Math.PI * 2)
-    ctx.fillStyle = gradient
-    ctx.fill()
-  }
+  rafId = requestAnimationFrame(loop)
 }
 
 function handleResize() {
-  if (canvasEl.value) drawNightView(canvasEl.value)
+  if (rafId !== null) cancelAnimationFrame(rafId)
+  if (canvasEl.value) setupCanvas(canvasEl.value)
 }
 
 onMounted(() => {
-  if (canvasEl.value) drawNightView(canvasEl.value)
+  if (canvasEl.value) setupCanvas(canvasEl.value)
   window.addEventListener('resize', handleResize)
 })
 
 onUnmounted(() => {
   window.removeEventListener('resize', handleResize)
+  if (rafId !== null) cancelAnimationFrame(rafId)
 })
 </script>
 
