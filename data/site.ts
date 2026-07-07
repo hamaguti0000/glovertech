@@ -27,8 +27,8 @@ export interface FaqItem {
 }
 
 export const siteMeta = {
-  // TODO: サイト名を差し替え
-  name: 'サイト名（準備中）',
+  // TODO: 屋号を差し替え
+  name: '【屋号】',
   title: '長崎の中小企業向けAI導入支援｜補助金活用で始める業務効率化',
   description:
     '長崎県内の中小企業・個人事業主向けにAI導入と業務効率化を伴走支援。ChatGPT等のAI活用、業務自動化、HP運用を補助金活用の提案とセットで。初回相談無料。',
@@ -182,10 +182,9 @@ export const flowSteps: FlowStep[] = [
 
 export const profile = {
   // TODO: 氏名を差し替え
-  name: '氏名（準備中）',
-  role: '長崎県在住 Webエンジニア（PHP / Laravel）',
+  name: '【氏名】',
   description:
-    '「補助金ナビ　長崎」を個人で開発・運営しています。日々の開発業務のかたわら、長崎県内の中小企業・個人事業主のAI導入や業務効率化のご相談をお受けしています。',
+    '長崎県在住のWebエンジニア（PHP / Laravel）です。『補助金ナビ 長崎』を個人で開発・運営しながら、県内の中小企業・個人事業主のAI導入や業務効率化のご相談をお受けしています。個人だからこそ、大きな会社には頼みにくい規模のご相談にも柔軟に対応できます。打ち合わせは平日夕方・土日が中心です。',
   meetingHours: '打ち合わせは平日夕方・土日に対応しています。',
 }
 
@@ -215,6 +214,11 @@ export const faqItems: FaqItem[] = [
     answer:
       '無料相談は0円、課題整理レポートは3万円です。その後の支援内容に応じて、スポット導入は5万円〜、月額サポートは3万円〜となります。詳しくは料金表をご覧ください。',
   },
+  {
+    question: '個人の方がやっているのですか？',
+    answer:
+      'はい。長崎県在住のWebエンジニアが個人で運営しています。だからこそ、費用を抑えながら小回りの利く支援ができます。『補助金ナビ 長崎』も同じ体制で開発・運営しています。',
+  },
 ]
 
 export const contact = {
@@ -227,9 +231,13 @@ export const contact = {
 export const aboutPage = {
   heading: '運営者情報',
   items: [
-    { label: '氏名', value: profile.name },
-    { label: '所在地', value: '【所在地をご記入ください】' },
-    { label: '経歴', value: '【経歴をご記入ください】' },
+    { label: '屋号', value: siteMeta.name },
+    { label: '運営者名', value: profile.name },
+    { label: '所在地', value: '長崎県【市名】' },
+    // TODO: メールアドレスを記入
+    { label: '連絡先', value: '【メールアドレスをご記入ください】' },
+    // TODO: 事業内容を記入
+    { label: '事業内容', value: '【事業内容をご記入ください】' },
   ],
   relatedSite: {
     heading: '運営サイト',
@@ -268,19 +276,26 @@ export const privacyPage = {
   businessName: '【事業者名をご記入ください】',
 }
 
+const disclosureOnRequest =
+  'お取引やお問い合わせの際に必要な場合は、ご請求いただければ遅滞なく開示いたします。'
+
 export const tokushohoPage = {
   heading: '特定商取引法に基づく表記',
   items: [
-    { label: '販売事業者名', value: '【ご記入ください】' },
-    { label: '運営責任者', value: '【ご記入ください】' },
-    { label: '所在地', value: '【ご記入ください】' },
-    { label: '電話番号', value: '【ご記入ください】' },
-    { label: 'メールアドレス', value: '【ご記入ください】' },
-    { label: '販売価格', value: '各サービスページに記載の金額（税込）' },
-    { label: '商品代金以外の必要料金', value: '【ご記入ください（交通費等があれば）】' },
-    { label: 'お支払い方法', value: '【ご記入ください】' },
-    { label: 'お支払い時期', value: '【ご記入ください】' },
-    { label: 'サービス提供時期', value: '【ご記入ください】' },
-    { label: 'キャンセル・返金について', value: '【ご記入ください】' },
+    { label: '事業者名', value: `${siteMeta.name}（${profile.name}）` },
+    { label: '所在地', value: disclosureOnRequest },
+    { label: '電話番号', value: disclosureOnRequest },
+    // TODO: メールアドレスを記入
+    { label: '連絡先', value: '【メールアドレスをご記入ください】' },
+    {
+      label: '販売価格',
+      value: `${plans.map((plan) => `${plan.name} ${plan.price}`).join('／')}`,
+    },
+    // TODO: お支払い方法・時期を記入
+    { label: '代金の支払方法・時期', value: '【お支払い方法・時期をご記入ください】' },
+    // TODO: サービス提供時期を記入
+    { label: 'サービス提供時期', value: '【提供時期をご記入ください】' },
+    // TODO: キャンセルについて記入
+    { label: 'キャンセルについて', value: '【キャンセルについてご記入ください】' },
   ],
 }

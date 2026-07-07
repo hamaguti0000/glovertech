@@ -62,7 +62,6 @@ useJsonLd(faqItems)
     <FlowSection :steps="flowSteps" :label="sectionLabels.flow" />
     <ProfileSection
       :name="profile.name"
-      :role="profile.role"
       :description="profile.description"
       :meeting-hours="profile.meetingHours"
       :label="sectionLabels.profile"
