@@ -16,6 +16,8 @@ defineProps<{
 
       <RealCostChart class="mt-6" />
 
+      <RealCostSimulator class="mt-6 max-w-2xl" />
+
       <SubsidyCards />
 
       <div class="mt-6 max-w-2xl rounded-lg border border-line bg-white p-5">
