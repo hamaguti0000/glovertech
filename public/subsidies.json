@@ -1,38 +1,38 @@
 [
   {
-    "id": "sample-1",
-    "name": "【後で記入】",
-    "org": "【後で記入】",
-    "target": "【後で記入】",
-    "rate": "【後で記入】",
-    "max": null,
+    "id": "digital-ai-hojokin-2026",
+    "name": "デジタル化・AI導入補助金2026（通常枠）",
+    "org": "中小企業庁",
+    "target": "AIを含むITツールの導入で生産性向上を目指す中小企業・小規模事業者",
+    "rate": "1/2（要件により引き上げあり）",
+    "max": 4500000,
     "status": "open",
-    "aiUse": "【後で記入】",
-    "url": "https://example.com",
-    "updatedAt": "2026-07-01"
+    "aiUse": "ChatGPT等のAIを含む業務ソフト・クラウドの導入費に使える国の代表的な制度。IT導入支援事業者を通じた申請が必要です。",
+    "url": "https://it-shien.smrj.go.jp/",
+    "updatedAt": "2026-07-07"
   },
   {
-    "id": "sample-2",
-    "name": "【後で記入】",
-    "org": "【後で記入】",
-    "target": "【後で記入】",
-    "rate": "【後で記入】",
-    "max": null,
-    "status": "upcoming",
-    "aiUse": "【後で記入】",
-    "url": "https://example.com",
-    "updatedAt": "2026-06-15"
+    "id": "nagasaki-pref-digital-2026",
+    "name": "令和8年度長崎県デジタル力向上支援事業費補助金",
+    "org": "長崎県",
+    "target": "県内に主たる事業所を置く創業1年以上の中小企業・小規模事業者等",
+    "rate": "2/3",
+    "max": 1000000,
+    "status": "open",
+    "aiUse": "AIツールを含むIT機器・デジタルツールの導入や人材育成に。受付は2026年7月31日まで（延長済み）。",
+    "url": "https://www.pref.nagasaki.jp/doc/page-721123.html",
+    "updatedAt": "2026-07-07"
   },
   {
-    "id": "sample-3",
-    "name": "【後で記入】",
-    "org": "【後で記入】",
-    "target": "【後で記入】",
-    "rate": "【後で記入】",
-    "max": null,
-    "status": "closed",
-    "aiUse": "【後で記入】",
-    "url": "https://example.com",
-    "updatedAt": "2026-05-20"
+    "id": "nagasaki-city-dx-2026",
+    "name": "令和8年度長崎市伴走型DX化支援補助金",
+    "org": "長崎市",
+    "target": "市内に本社を置き1年以上事業を営む中小企業者",
+    "rate": "1/2",
+    "max": 500000,
+    "status": "open",
+    "aiUse": "外部専門家による相談・伴走支援や研修の費用に使える制度（システム・機器の導入費は対象外）。受付は2026年9月30日まで。",
+    "url": "https://www.city.nagasaki.lg.jp/page/83459.html",
+    "updatedAt": "2026-07-07"
   }
 ]
