@@ -47,14 +47,14 @@ async function handleSubmit() {
 </script>
 
 <template>
-  <section id="contact" class="border-b border-harbor-700">
+  <section id="contact" class="border-b border-line">
     <div class="section max-w-2xl">
-      <h2 class="section-title">{{ heading }}</h2>
+      <h2 v-reveal class="section-title">{{ heading }}</h2>
       <p class="section-lead">{{ description }}</p>
 
       <form class="mt-10 space-y-6" @submit.prevent="handleSubmit">
         <div>
-          <label for="name" class="text-sm text-paper-300">お名前 <span class="text-lantern-500">*</span></label>
+          <label for="name" class="text-sm text-body">お名前 <span class="text-heading">*</span></label>
           <input
             id="name"
             v-model="name"
@@ -62,24 +62,24 @@ async function handleSubmit() {
             name="name"
             required
             :disabled="status === 'sending'"
-            class="mt-2 w-full rounded-sm border border-harbor-600 bg-harbor-800/60 px-4 py-3 text-paper-100 outline-none transition-colors focus:border-lantern-500 disabled:opacity-50"
+            class="field-input mt-2 disabled:opacity-50"
           >
         </div>
 
         <div>
-          <label for="company" class="text-sm text-paper-300">会社名</label>
+          <label for="company" class="text-sm text-body">会社名</label>
           <input
             id="company"
             v-model="company"
             type="text"
             name="company"
             :disabled="status === 'sending'"
-            class="mt-2 w-full rounded-sm border border-harbor-600 bg-harbor-800/60 px-4 py-3 text-paper-100 outline-none transition-colors focus:border-lantern-500 disabled:opacity-50"
+            class="field-input mt-2 disabled:opacity-50"
           >
         </div>
 
         <div>
-          <label for="email" class="text-sm text-paper-300">メールアドレス <span class="text-lantern-500">*</span></label>
+          <label for="email" class="text-sm text-body">メールアドレス <span class="text-heading">*</span></label>
           <input
             id="email"
             v-model="email"
@@ -87,33 +87,72 @@ async function handleSubmit() {
             name="email"
             required
             :disabled="status === 'sending'"
-            class="mt-2 w-full rounded-sm border border-harbor-600 bg-harbor-800/60 px-4 py-3 text-paper-100 outline-none transition-colors focus:border-lantern-500 disabled:opacity-50"
+            class="field-input mt-2 disabled:opacity-50"
           >
         </div>
 
         <div>
-          <label for="message" class="text-sm text-paper-300">相談内容</label>
+          <label for="message" class="text-sm text-body">相談内容</label>
           <textarea
             id="message"
             v-model="message"
             name="message"
             rows="5"
             :disabled="status === 'sending'"
-            class="mt-2 w-full rounded-sm border border-harbor-600 bg-harbor-800/60 px-4 py-3 text-paper-100 outline-none transition-colors focus:border-lantern-500 disabled:opacity-50"
+            class="field-input mt-2 disabled:opacity-50"
           />
         </div>
 
         <button type="submit" class="btn-primary w-full sm:w-auto" :disabled="status === 'sending'">
           {{ status === 'sending' ? '送信中…' : '無料相談を申し込む' }}
+          <svg class="btn-arrow h-4 w-4" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+            <path
+              d="M3 8h10M9 4l4 4-4 4"
+              stroke="currentColor"
+              stroke-width="1.5"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+          </svg>
         </button>
 
-        <p v-if="status === 'sent'" class="text-sm text-lantern-500">
+        <p v-if="status === 'sent'" class="flex items-center gap-2 text-sm text-heading">
+          <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="1.5" />
+            <path
+              d="M7 12l3 3 7-7"
+              stroke="currentColor"
+              stroke-width="1.5"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-dasharray="14"
+              stroke-dashoffset="0"
+              style="animation: draw-check 500ms cubic-bezier(0.22, 1, 0.36, 1)"
+            />
+          </svg>
           お問い合わせありがとうございます。内容を確認のうえ、ご連絡いたします。
         </p>
-        <p v-if="status === 'error'" class="text-sm text-red-400">
+        <p v-if="status === 'error'" class="text-sm text-heading">
           送信に失敗しました。お手数ですが、時間をおいて再度お試しください。
         </p>
       </form>
     </div>
   </section>
 </template>
+
+<style scoped>
+@keyframes draw-check {
+  from {
+    stroke-dashoffset: 14;
+  }
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  svg path[style] {
+    animation: none !important;
+  }
+}
+</style>
