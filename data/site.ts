@@ -27,6 +27,8 @@ export interface FaqItem {
 }
 
 export const siteMeta = {
+  // TODO: サイト名を差し替え
+  name: 'サイト名（準備中）',
   title: '長崎の中小企業向けAI導入支援｜補助金活用で始める業務効率化',
   description:
     '長崎県内の中小企業・個人事業主向けにAI導入と業務効率化を伴走支援。ChatGPT等のAI活用、業務自動化、HP運用を補助金活用の提案とセットで。初回相談無料。',
@@ -34,6 +36,31 @@ export const siteMeta = {
   url: 'https://example.com',
   ogImage: '/ogp.png',
   areaServed: '長崎県',
+}
+
+export const header = {
+  name: siteMeta.name,
+  tagline: '補助金ナビ　長崎 運営',
+  ctaLabel: '無料相談',
+  ctaHref: '/#contact',
+}
+
+export const footer = {
+  name: siteMeta.name,
+  description: '長崎の中小企業・個人事業主向けにAI導入と業務効率化を伴走支援しています。',
+  // TODO: 所在地の市名を差し替え
+  address: '所在地：長崎県【市名】',
+  links: [
+    { label: '運営者情報', href: '/about' },
+    { label: 'プライバシーポリシー', href: '/privacy' },
+    { label: '特定商取引法に基づく表記', href: '/tokushoho' },
+  ],
+  relatedSite: {
+    label: '運営サイト',
+    name: '補助金ナビ　長崎',
+    // TODO: 本番URLに差し替え
+    href: 'https://example.com',
+  },
 }
 
 export const hero = {
@@ -193,4 +220,65 @@ export const contact = {
   description: 'まずは無料相談から。下記フォームよりお気軽にお問い合わせください。',
   // TODO: FormspreeのエンドポイントIDに差し替え
   formspreeEndpoint: 'https://formspree.io/f/YOUR_FORM_ID',
+}
+
+export const aboutPage = {
+  heading: '運営者情報',
+  items: [
+    { label: '氏名', value: profile.name },
+    { label: '所在地', value: '【所在地をご記入ください】' },
+    { label: '経歴', value: '【経歴をご記入ください】' },
+  ],
+  relatedSite: {
+    heading: '運営サイト',
+    body: '【補助金ナビ　長崎の紹介文をご記入ください】',
+    name: footer.relatedSite.name,
+    href: footer.relatedSite.href,
+  },
+}
+
+export const privacyPage = {
+  heading: 'プライバシーポリシー',
+  updatedAt: '【最終更新日をご記入ください】',
+  sections: [
+    {
+      heading: '取得する情報',
+      body: 'お問い合わせフォームより、お名前・会社名・メールアドレス・相談内容をご入力いただきます。',
+    },
+    {
+      heading: '利用目的',
+      body: 'いただいた情報は、お問い合わせへの回答および無料相談のご案内のためにのみ利用します。',
+    },
+    {
+      heading: '第三者提供について',
+      body: '法令に基づく場合を除き、ご本人の同意なく第三者へ提供することはありません。',
+    },
+    {
+      heading: '保管・管理',
+      body: 'いただいた情報は適切に管理し、目的の達成に必要な範囲を超えて保管しません。',
+    },
+    {
+      heading: 'お問い合わせ窓口',
+      body: '本ポリシーに関するお問い合わせは、サイト内のお問い合わせフォームよりご連絡ください。',
+    },
+  ],
+  // TODO: 事業者名を差し替え
+  businessName: '【事業者名をご記入ください】',
+}
+
+export const tokushohoPage = {
+  heading: '特定商取引法に基づく表記',
+  items: [
+    { label: '販売事業者名', value: '【ご記入ください】' },
+    { label: '運営責任者', value: '【ご記入ください】' },
+    { label: '所在地', value: '【ご記入ください】' },
+    { label: '電話番号', value: '【ご記入ください】' },
+    { label: 'メールアドレス', value: '【ご記入ください】' },
+    { label: '販売価格', value: '各サービスページに記載の金額（税込）' },
+    { label: '商品代金以外の必要料金', value: '【ご記入ください（交通費等があれば）】' },
+    { label: 'お支払い方法', value: '【ご記入ください】' },
+    { label: 'お支払い時期', value: '【ご記入ください】' },
+    { label: 'サービス提供時期', value: '【ご記入ください】' },
+    { label: 'キャンセル・返金について', value: '【ご記入ください】' },
+  ],
 }
