@@ -50,6 +50,11 @@ useJsonLd(faqItems)
     />
     <ProblemsSection :problems="problems" :label="sectionLabels.problems" />
     <ServicesSection :services="services" :label="sectionLabels.services" />
+    <div class="border-b border-line">
+      <div class="section">
+        <SupportScopeChart />
+      </div>
+    </div>
     <SubsidySection
       :lead="subsidy.lead"
       :body="subsidy.body"
@@ -61,7 +66,6 @@ useJsonLd(faqItems)
     <ProfileSection
       :name="profile.name"
       :description="profile.description"
-      :meeting-hours="profile.meetingHours"
       :label="sectionLabels.profile"
     />
     <FaqSection :items="faqItems" :label="sectionLabels.faq" />
