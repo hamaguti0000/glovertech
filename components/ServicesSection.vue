@@ -21,13 +21,8 @@ defineProps<{
           <h3 class="text-xl">{{ service.title }}</h3>
           <p class="mt-3 text-base leading-[1.9] text-body">{{ service.description }}</p>
 
-          <ul class="mt-4 space-y-2 border-t border-line pt-4">
-            <li
-              v-for="item in service.items"
-              :key="item"
-              class="flex items-baseline gap-2 text-sm text-body"
-            >
-              <span>・</span>
+          <ul class="mt-4 list-disc space-y-2 border-t border-line pl-5 pt-4 text-sm text-body">
+            <li v-for="item in service.items" :key="item">
               {{ item }}
             </li>
           </ul>
