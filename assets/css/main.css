@@ -3,6 +3,14 @@
 @tailwind utilities;
 
 @layer base {
+  :root {
+    --navy: #223a70;
+    --yellow: #ffd338;
+    --orange: #ff7a1a;
+    --gray-text: #6b7680;
+    --gray-line: #e2e8eb;
+  }
+
   body {
     @apply bg-white font-sans text-base leading-[1.9] text-body antialiased;
   }
