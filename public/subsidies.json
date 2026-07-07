@@ -1,0 +1,38 @@
+[
+  {
+    "id": "sample-1",
+    "name": "【後で記入】",
+    "org": "【後で記入】",
+    "target": "【後で記入】",
+    "rate": "【後で記入】",
+    "max": null,
+    "status": "open",
+    "aiUse": "【後で記入】",
+    "url": "https://example.com",
+    "updatedAt": "2026-07-01"
+  },
+  {
+    "id": "sample-2",
+    "name": "【後で記入】",
+    "org": "【後で記入】",
+    "target": "【後で記入】",
+    "rate": "【後で記入】",
+    "max": null,
+    "status": "upcoming",
+    "aiUse": "【後で記入】",
+    "url": "https://example.com",
+    "updatedAt": "2026-06-15"
+  },
+  {
+    "id": "sample-3",
+    "name": "【後で記入】",
+    "org": "【後で記入】",
+    "target": "【後で記入】",
+    "rate": "【後で記入】",
+    "max": null,
+    "status": "closed",
+    "aiUse": "【後で記入】",
+    "url": "https://example.com",
+    "updatedAt": "2026-05-20"
+  }
+]
