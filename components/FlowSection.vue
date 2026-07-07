@@ -4,7 +4,10 @@ import type { FlowStep } from '~/data/site'
 
 const props = defineProps<{
   steps: FlowStep[]
+  label: string
 }>()
+
+const illustrations = ['相談している人', 'レポートを確認している人', '笑顔の人']
 
 const containerEl = ref<HTMLElement | null>(null)
 const stepEls = ref<(HTMLElement | null)[]>([])
@@ -73,6 +76,7 @@ onUnmounted(() => {
 <template>
   <section class="section-alt border-b border-line">
     <div class="section">
+      <span class="section-label">{{ label }}</span>
       <h2 v-reveal class="section-title">3つのステップで進めます</h2>
       <p class="section-lead">
         無料相談とレポートまでは費用がかかりません。ご納得いただけない場合は、そこで終了して構いません。
@@ -86,7 +90,7 @@ onUnmounted(() => {
             y1="0"
             x2="1"
             :y2="lineLength"
-            stroke="#0E5E6F"
+            stroke="#223A70"
             stroke-width="2"
             :stroke-dasharray="lineLength"
             :stroke-dashoffset="dashOffset"
@@ -108,16 +112,19 @@ onUnmounted(() => {
                 cy="14"
                 r="12"
                 fill="none"
-                stroke="#0E5E6F"
+                stroke="#223A70"
                 stroke-width="2"
                 stroke-linecap="round"
                 stroke-dasharray="75.4"
                 :stroke-dashoffset="drawn[index] ? 0 : 75.4"
                 style="transition: stroke-dashoffset 500ms cubic-bezier(0.22, 1, 0.36, 1)"
               />
-              <text x="14" y="18" text-anchor="middle" font-size="11" fill="#0E5E6F">{{ step.step }}</text>
+              <text x="14" y="18" text-anchor="middle" font-size="11" fill="#223A70">{{ step.step }}</text>
             </svg>
-            <h3 class="text-lg text-heading">{{ step.title }}</h3>
+            <div class="illustration-slot mb-4 max-w-xs">
+              イラスト差し替え予定：{{ illustrations[index] }}
+            </div>
+            <h3 class="text-lg text-navy">{{ step.title }}</h3>
             <p class="mt-2 max-w-xl text-base leading-[1.9] text-body">{{ step.description }}</p>
           </li>
         </ol>

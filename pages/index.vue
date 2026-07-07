@@ -1,5 +1,18 @@
 <script setup lang="ts">
-import { hero, problems, services, subsidy, plans, flowSteps, profile, faqItems, contact, siteMeta } from '~/data/site'
+import {
+  hero,
+  problems,
+  services,
+  subsidy,
+  plans,
+  flowSteps,
+  profile,
+  faqItems,
+  contact,
+  siteMeta,
+  stickyCta,
+  sectionLabels,
+} from '~/data/site'
 
 const ogImageUrl = `${siteMeta.url}${siteMeta.ogImage}`
 
@@ -29,31 +42,37 @@ useJsonLd(faqItems)
   <main>
     <HeroSection
       :title="hero.title"
+      :highlight="hero.highlight"
       :subtitle="hero.subtitle"
+      :badges="hero.badges"
       :cta-label="hero.ctaLabel"
       :cta-href="hero.ctaHref"
     />
-    <ProblemsSection :problems="problems" />
-    <ServicesSection :services="services" />
+    <ProblemsSection :problems="problems" :label="sectionLabels.problems" />
+    <ServicesSection :services="services" :label="sectionLabels.services" />
     <SubsidySection
       :heading="subsidy.heading"
       :lead="subsidy.lead"
       :body="subsidy.body"
       :notes="subsidy.notes"
+      :label="sectionLabels.subsidy"
     />
-    <PricingSection :plans="plans" />
-    <FlowSection :steps="flowSteps" />
+    <PricingSection :plans="plans" :label="sectionLabels.pricing" />
+    <FlowSection :steps="flowSteps" :label="sectionLabels.flow" />
     <ProfileSection
       :name="profile.name"
       :role="profile.role"
       :description="profile.description"
       :meeting-hours="profile.meetingHours"
+      :label="sectionLabels.profile"
     />
-    <FaqSection :items="faqItems" />
+    <FaqSection :items="faqItems" :label="sectionLabels.faq" />
     <ContactSection
       :heading="contact.heading"
       :description="contact.description"
       :formspree-endpoint="contact.formspreeEndpoint"
+      :label="sectionLabels.contact"
     />
   </main>
+  <StickyCta :label="stickyCta.label" :href="stickyCta.href" />
 </template>

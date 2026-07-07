@@ -11,25 +11,23 @@ export default <Partial<Config>>{
       colors: {
         surface: {
           DEFAULT: '#FFFFFF',
-          alt: '#F6F8F9',
+          alt: '#F5F8FC',
         },
-        heading: '#1A2B33',
-        body: '#4A5B63',
-        primary: {
-          DEFAULT: '#0E5E6F',
+        navy: {
+          DEFAULT: '#223A70',
         },
-        accent: {
-          DEFAULT: '#E8734A',
-          dark: '#D5643B',
+        body: '#4B5768',
+        yellow: {
+          DEFAULT: '#FFD338',
+        },
+        cta: {
+          DEFAULT: '#FF7A1A',
+          dark: '#E86A0F',
         },
         line: '#E2E8EB',
       },
       fontFamily: {
         sans: ['"Noto Sans JP"', 'system-ui', 'sans-serif'],
-      },
-      fontWeight: {
-        normal: '400',
-        bold: '700',
       },
       transitionTimingFunction: {
         reveal: 'cubic-bezier(0.22, 1, 0.36, 1)',

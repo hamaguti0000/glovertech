@@ -38,10 +38,28 @@ export const siteMeta = {
 
 export const hero = {
   title: 'AIで、その手作業をなくしませんか？',
+  highlight: '手作業',
   subtitle:
     '補助金の活用も見据えた、長崎のAI導入・業務効率化支援。相談だけで終わらせず、実装までお手伝いします。',
+  badges: ['相談無料', '30分', 'オンラインOK'],
   ctaLabel: '無料相談を申し込む（30分・オンライン）',
   ctaHref: '#contact',
+}
+
+export const stickyCta = {
+  label: '無料相談を申し込む（30分・無料）',
+  href: '#contact',
+}
+
+export const sectionLabels = {
+  problems: 'お悩み',
+  services: 'サポート内容',
+  subsidy: '補助金',
+  pricing: '料金',
+  flow: '流れ',
+  profile: '運営者',
+  faq: 'よくある質問',
+  contact: 'お問い合わせ',
 }
 
 export const problems: Problem[] = [
