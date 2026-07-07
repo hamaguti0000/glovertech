@@ -44,7 +44,7 @@ export default <Partial<Config>>{
         reveal: 'cubic-bezier(0.22, 1, 0.36, 1)',
       },
       borderRadius: {
-        lg: '0.5rem',
+        lg: '10px',
       },
     },
   },

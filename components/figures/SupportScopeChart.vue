@@ -15,7 +15,7 @@ const stages: Stage[] = [
   { title: '定着', descLines: ['使い続けられるまで', '運用をサポート'] },
 ]
 
-const scopeLabel = '私が伴走する範囲'
+const scopeLabel = '相談から定着まで、私が伴走する範囲'
 
 const ariaLabel = `支援の流れ: ${stages.map((s) => s.title).join('→')}。${scopeLabel}を示す図。`
 
@@ -48,14 +48,16 @@ const desktopSegments = computed(() =>
 )
 
 const desktopLineLength = DESKTOP_VIEWBOX_WIDTH
+const DESKTOP_VIEWBOX_HEIGHT = 104
 
 const MOBILE_VIEWBOX_WIDTH = 320
 const mobileLineX = 20
-const mobileLineTop = 20
-const mobileLineBottom = 400
+const mobileLineTop = 15
+const mobileEntrySpacing = 50
+const mobileEntryStartY = 30
+const mobileLineBottom = mobileEntryStartY + (stages.length - 1) * mobileEntrySpacing + 15
 const mobileLineLength = mobileLineBottom - mobileLineTop
-const mobileEntrySpacing = 100
-const mobileEntryStartY = 50
+const MOBILE_VIEWBOX_HEIGHT = mobileLineBottom + 15
 
 const mobileEntries = computed(() =>
   stages.map((stage, index) => ({
@@ -69,11 +71,13 @@ const { targetEl, revealed } = useRevealOnce(0.4)
 
 <template>
   <div ref="targetEl" class="w-full">
-    <div class="relative aspect-[320/420] w-full sm:aspect-[580/130]">
+    <p class="text-sm font-bold" style="color: var(--navy)">{{ scopeLabel }}</p>
+
+    <div class="relative mt-3 aspect-[320/210] w-full sm:aspect-[580/104]">
       <!-- デスクトップ: 4区間を横一列のシェブロン帯で表示 -->
       <svg
         class="absolute inset-0 hidden h-full w-full sm:block"
-        viewBox="0 0 580 130"
+        :viewBox="`0 0 ${DESKTOP_VIEWBOX_WIDTH} ${DESKTOP_VIEWBOX_HEIGHT}`"
         role="img"
         :aria-label="ariaLabel"
       >
@@ -90,9 +94,9 @@ const { targetEl, revealed } = useRevealOnce(0.4)
 
         <line
           x1="0"
-          y1="108"
+          y1="98"
           :x2="desktopLineLength"
-          y2="108"
+          y2="98"
           stroke="var(--navy)"
           stroke-width="3"
           stroke-linecap="round"
@@ -100,13 +104,12 @@ const { targetEl, revealed } = useRevealOnce(0.4)
           :style="{ strokeDashoffset: revealed ? 0 : desktopLineLength }"
           class="scope-line"
         />
-        <text x="290" y="126" text-anchor="middle" font-size="14" fill="var(--navy)">{{ scopeLabel }}</text>
       </svg>
 
       <!-- モバイル: 縦積みのタイムライン表示 -->
       <svg
         class="absolute inset-0 block h-full w-full sm:hidden"
-        :viewBox="`0 0 ${MOBILE_VIEWBOX_WIDTH} 420`"
+        :viewBox="`0 0 ${MOBILE_VIEWBOX_WIDTH} ${MOBILE_VIEWBOX_HEIGHT}`"
         role="img"
         :aria-label="ariaLabel"
       >
@@ -130,8 +133,6 @@ const { targetEl, revealed } = useRevealOnce(0.4)
             {{ item.stage.descLines.join('') }}
           </text>
         </g>
-
-        <text :x="mobileLineX" y="415" font-size="14" fill="var(--navy)">{{ scopeLabel }}</text>
       </svg>
     </div>
   </div>

@@ -24,7 +24,7 @@
 
 @layer components {
   .section {
-    @apply mx-auto max-w-6xl px-6 py-20 sm:py-24;
+    @apply mx-auto max-w-6xl px-6 py-10 sm:py-16;
   }
 
   .section-alt {
@@ -32,7 +32,7 @@
   }
 
   .section-label {
-    @apply inline-block rounded-full bg-yellow px-3 py-1 text-xs font-bold text-navy;
+    @apply inline-block rounded-lg bg-yellow px-3 py-1 text-xs font-bold text-navy;
   }
 
   .section-title {
@@ -48,7 +48,7 @@
   }
 
   .btn-cta {
-    @apply inline-flex items-center gap-2 rounded-full bg-cta px-8 py-4 text-base font-bold text-white transition-colors duration-500 ease-reveal hover:bg-cta-dark;
+    @apply inline-flex items-center gap-2 rounded-lg bg-cta px-8 py-4 text-base font-bold text-white transition-colors duration-500 ease-reveal hover:bg-cta-dark;
   }
 
   .btn-arrow {

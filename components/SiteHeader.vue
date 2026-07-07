@@ -37,7 +37,7 @@ onUnmounted(() => {
 
       <a
         :href="ctaHref"
-        class="inline-flex shrink-0 items-center gap-1 rounded-full bg-cta px-5 py-2.5 text-sm font-bold text-white transition-colors duration-500 ease-reveal hover:bg-cta-dark"
+        class="inline-flex shrink-0 items-center gap-1 rounded-lg bg-cta px-5 py-2.5 text-sm font-bold text-white transition-colors duration-500 ease-reveal hover:bg-cta-dark"
       >
         {{ ctaLabel }}
       </a>
