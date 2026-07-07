@@ -13,6 +13,8 @@ export interface Plan {
   name: string
   price: string
   description: string
+  sampleHref?: string
+  sampleLabel?: string
 }
 
 export interface FlowStep {
@@ -24,6 +26,11 @@ export interface FlowStep {
 export interface FaqItem {
   question: string
   answer: string
+}
+
+export interface ReportSampleChapter {
+  title: string
+  guide: string
 }
 
 export const siteMeta = {
@@ -146,6 +153,8 @@ export const plans: Plan[] = [
     name: '課題整理レポート',
     price: '3万円',
     description: 'ヒアリング内容をもとに、課題の整理と改善の方向性をレポートにまとめます。',
+    sampleHref: '/report-sample',
+    sampleLabel: 'レポートの見本を見る',
   },
   {
     name: 'スポット導入',
@@ -295,4 +304,35 @@ export const tokushohoPage = {
     // TODO: キャンセルについて記入
     { label: 'キャンセルについて', value: '【キャンセルについてご記入ください】' },
   ],
+}
+
+export const reportSamplePage = {
+  heading: '課題整理レポートの見本',
+  lead: '実際にお渡しする課題整理レポートの構成見本です。内容はご相談内容に応じて変わります。',
+  // TODO: 氏名・作成日を実際のレポート発行時に差し替え
+  coverTitle: '課題整理レポート',
+  nameLabel: '【後で記入】様',
+  dateLabel: '【後で記入】',
+  chapters: [
+    {
+      title: '1. 現状整理',
+      guide: 'ヒアリングした業務の流れと時間の使い方',
+    },
+    {
+      title: '2. 課題の優先順位',
+      guide: '効果と着手しやすさで並べた課題リスト',
+    },
+    {
+      title: '3. 改善の方向性',
+      guide: '課題ごとの具体的な打ち手の候補',
+    },
+    {
+      title: '4. 使えそうな補助金',
+      guide: '対象になりそうな制度と注意点',
+    },
+    {
+      title: '5. 進め方の提案',
+      guide: '最初の一歩と概算スケジュール',
+    },
+  ] satisfies ReportSampleChapter[],
 }

@@ -21,6 +21,13 @@ defineProps<{
             <span v-for="(part, i) in splitNumeric(plan.price)" :key="i" :class="part.numeric ? 'font-barlow font-bold' : ''">{{ part.text }}</span>
           </p>
           <p class="mt-3 flex-1 text-sm leading-[1.9] text-body">{{ plan.description }}</p>
+          <NuxtLink
+            v-if="plan.sampleHref"
+            :to="plan.sampleHref"
+            class="mt-3 text-sm font-bold text-navy underline underline-offset-4"
+          >
+            {{ plan.sampleLabel }} →
+          </NuxtLink>
         </article>
       </div>
     </div>
