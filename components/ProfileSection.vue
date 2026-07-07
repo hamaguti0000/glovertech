@@ -1,7 +1,6 @@
 <script setup lang="ts">
 defineProps<{
   name: string
-  role: string
   description: string
   meetingHours: string
   label: string
@@ -23,8 +22,7 @@ defineProps<{
 
         <div>
           <h2 class="text-3xl">{{ name }}</h2>
-          <p class="mt-1 text-sm text-body">{{ role }}</p>
-          <p class="mt-5 max-w-2xl text-base leading-[1.9] text-body">{{ description }}</p>
+          <p class="mt-3 max-w-2xl text-base leading-[1.9] text-body">{{ description }}</p>
           <p class="mt-5 inline-block rounded-lg border border-line px-4 py-2 text-sm text-body">
             {{ meetingHours }}
           </p>
