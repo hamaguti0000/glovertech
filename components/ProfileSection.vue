@@ -8,23 +8,23 @@ defineProps<{
 </script>
 
 <template>
-  <section class="border-b border-harbor-700">
+  <section class="border-b border-line">
     <div class="section">
-      <p class="section-eyebrow">運営者プロフィール</p>
+      <p class="text-sm font-bold text-heading">運営者プロフィール</p>
 
-      <div v-reveal class="mt-8 grid gap-10 sm:grid-cols-[auto,1fr]">
+      <div class="mt-8 grid gap-10 sm:grid-cols-[auto,1fr]">
         <div
-          class="flex h-20 w-20 items-center justify-center rounded-full border border-lantern-700 font-display text-2xl text-lantern-500"
+          class="flex h-20 w-20 items-center justify-center rounded-full border border-line text-lg text-heading"
           aria-hidden="true"
         >
           長崎
         </div>
 
         <div>
-          <h2 class="text-2xl text-paper-100">{{ name }}</h2>
-          <p class="mt-1 text-sm text-paper-300">{{ role }}</p>
-          <p class="mt-5 max-w-2xl leading-relaxed text-paper-300">{{ description }}</p>
-          <p class="mt-5 inline-block rounded-sm border border-harbor-600 px-4 py-2 font-mono text-xs text-paper-300">
+          <h2 class="text-2xl text-heading">{{ name }}</h2>
+          <p class="mt-1 text-sm text-body">{{ role }}</p>
+          <p class="mt-5 max-w-2xl text-base leading-[1.9] text-body">{{ description }}</p>
+          <p class="mt-5 inline-block rounded-lg border border-line px-4 py-2 text-sm text-body">
             {{ meetingHours }}
           </p>
         </div>

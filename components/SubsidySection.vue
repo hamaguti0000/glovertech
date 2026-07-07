@@ -8,18 +8,14 @@ defineProps<{
 </script>
 
 <template>
-  <section class="border-b border-harbor-700">
+  <section class="section-alt border-b border-line">
     <div class="section">
-      <p class="section-eyebrow">{{ heading }}</p>
-      <h2 class="section-title">{{ lead }}</h2>
+      <p class="text-sm font-bold text-heading">{{ heading }}</p>
+      <h2 v-reveal class="section-title">{{ lead }}</h2>
       <p class="section-lead">{{ body }}</p>
 
-      <div v-reveal class="mt-8 max-w-2xl rounded-md border border-harbor-600 bg-harbor-800/40 p-5">
-        <p
-          v-for="note in notes"
-          :key="note"
-          class="font-mono text-xs leading-relaxed text-paper-300"
-        >
+      <div class="mt-8 max-w-2xl rounded-lg border border-line bg-white p-5">
+        <p v-for="note in notes" :key="note" class="text-sm leading-[1.9] text-body">
           {{ note }}
         </p>
       </div>
