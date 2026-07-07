@@ -4,13 +4,15 @@ defineProps<{
   lead: string
   body: string
   notes: string[]
+  label: string
 }>()
 </script>
 
 <template>
   <section class="section-alt border-b border-line">
     <div class="section">
-      <p class="text-sm font-bold text-heading">{{ heading }}</p>
+      <span class="section-label">{{ label }}</span>
+      <p class="mt-3 text-sm font-bold text-navy">{{ heading }}</p>
       <h2 v-reveal class="section-title">{{ lead }}</h2>
       <p class="section-lead">{{ body }}</p>
 

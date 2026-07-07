@@ -7,6 +7,7 @@ const props = defineProps<{
   heading: string
   description: string
   formspreeEndpoint: string
+  label: string
 }>()
 
 const name = ref('')
@@ -49,12 +50,13 @@ async function handleSubmit() {
 <template>
   <section id="contact" class="border-b border-line">
     <div class="section max-w-2xl">
+      <span class="section-label">{{ label }}</span>
       <h2 v-reveal class="section-title">{{ heading }}</h2>
       <p class="section-lead">{{ description }}</p>
 
       <form class="mt-10 space-y-6" @submit.prevent="handleSubmit">
         <div>
-          <label for="name" class="text-sm text-body">お名前 <span class="text-heading">*</span></label>
+          <label for="name" class="text-sm text-body">お名前 <span class="text-navy">*</span></label>
           <input
             id="name"
             v-model="name"
@@ -79,7 +81,7 @@ async function handleSubmit() {
         </div>
 
         <div>
-          <label for="email" class="text-sm text-body">メールアドレス <span class="text-heading">*</span></label>
+          <label for="email" class="text-sm text-body">メールアドレス <span class="text-navy">*</span></label>
           <input
             id="email"
             v-model="email"
@@ -103,7 +105,7 @@ async function handleSubmit() {
           />
         </div>
 
-        <button type="submit" class="btn-primary w-full sm:w-auto" :disabled="status === 'sending'">
+        <button type="submit" class="btn-cta w-full sm:w-auto" :disabled="status === 'sending'">
           {{ status === 'sending' ? '送信中…' : '無料相談を申し込む' }}
           <svg class="btn-arrow h-4 w-4" viewBox="0 0 16 16" fill="none" aria-hidden="true">
             <path
@@ -116,7 +118,7 @@ async function handleSubmit() {
           </svg>
         </button>
 
-        <p v-if="status === 'sent'" class="flex items-center gap-2 text-sm text-heading">
+        <p v-if="status === 'sent'" class="flex items-center gap-2 text-sm text-navy">
           <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" aria-hidden="true">
             <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="1.5" />
             <path
@@ -132,7 +134,7 @@ async function handleSubmit() {
           </svg>
           お問い合わせありがとうございます。内容を確認のうえ、ご連絡いたします。
         </p>
-        <p v-if="status === 'error'" class="text-sm text-heading">
+        <p v-if="status === 'error'" class="text-sm text-navy">
           送信に失敗しました。お手数ですが、時間をおいて再度お試しください。
         </p>
       </form>
