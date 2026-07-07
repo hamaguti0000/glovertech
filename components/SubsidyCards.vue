@@ -49,7 +49,7 @@ onMounted(async () => {
 
 <template>
   <div>
-    <div class="mt-8 grid gap-6 sm:grid-cols-3">
+    <div class="mt-5 grid gap-6 sm:grid-cols-3">
       <article
         v-for="item in subsidies"
         :key="item.id"

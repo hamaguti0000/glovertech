@@ -14,11 +14,11 @@ defineProps<{
       <h2 v-reveal class="section-title">{{ lead }}</h2>
       <p class="section-lead">{{ body }}</p>
 
-      <RealCostChart class="mt-10" />
+      <RealCostChart class="mt-6" />
 
       <SubsidyCards />
 
-      <div class="mt-8 max-w-2xl rounded-lg border border-line bg-white p-5">
+      <div class="mt-6 max-w-2xl rounded-lg border border-line bg-white p-5">
         <p v-for="note in notes" :key="note" class="text-sm leading-[1.9] text-body">
           {{ note }}
         </p>
