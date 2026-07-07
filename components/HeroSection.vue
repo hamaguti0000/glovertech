@@ -24,7 +24,7 @@ const titleParts = computed(() => {
 <template>
   <section class="border-b border-line">
     <div class="section flex flex-col items-center py-24 text-center sm:py-32">
-      <h1 class="max-w-2xl text-3xl font-extrabold leading-snug text-navy sm:text-4xl">
+      <h1 class="max-w-2xl text-4xl leading-snug sm:text-5xl">
         {{ titleParts.before }}<span v-if="titleParts.highlight" class="marker-highlight">{{ titleParts.highlight }}</span>{{ titleParts.after }}
       </h1>
 
@@ -34,7 +34,7 @@ const titleParts = computed(() => {
 
       <div class="mt-8 flex flex-wrap items-center justify-center gap-3">
         <span v-for="badge in badges" :key="badge" class="badge-pill">
-          {{ badge }}
+          <span v-for="(part, i) in splitNumeric(badge)" :key="i" :class="part.numeric ? 'font-barlow font-bold' : ''">{{ part.text }}</span>
         </span>
       </div>
 

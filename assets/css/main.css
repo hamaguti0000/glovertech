@@ -8,7 +8,9 @@
   }
 
   h1, h2, h3, h4 {
-    @apply font-bold text-navy;
+    @apply font-extrabold;
+    color: #1a1a1a;
+    letter-spacing: -0.01em;
   }
 }
 
@@ -26,7 +28,7 @@
   }
 
   .section-title {
-    @apply mt-3 text-left text-2xl text-navy sm:text-3xl;
+    @apply mt-3 text-left text-3xl sm:text-4xl;
   }
 
   .section-lead {

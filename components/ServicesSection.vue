@@ -18,7 +18,7 @@ defineProps<{
 
       <div class="mt-10 grid gap-6 sm:grid-cols-3">
         <article v-for="service in services" :key="service.title" class="card flex flex-col">
-          <h3 class="text-lg text-navy">{{ service.title }}</h3>
+          <h3 class="text-xl">{{ service.title }}</h3>
           <p class="mt-3 text-base leading-[1.9] text-body">{{ service.description }}</p>
 
           <ul class="mt-4 space-y-2 border-t border-line pt-4">

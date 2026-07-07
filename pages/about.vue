@@ -24,7 +24,7 @@ useHead({
         </dl>
 
         <div class="mt-10 rounded-lg border border-line bg-surface-alt p-6">
-          <h2 class="text-lg text-navy">{{ aboutPage.relatedSite.heading }}</h2>
+          <h2 class="text-xl">{{ aboutPage.relatedSite.heading }}</h2>
           <p class="mt-3 text-sm leading-[1.9] text-body">{{ aboutPage.relatedSite.body }}</p>
           <a
             :href="aboutPage.relatedSite.href"

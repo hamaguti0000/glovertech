@@ -16,7 +16,7 @@ export default <Partial<Config>>{
         navy: {
           DEFAULT: '#223A70',
         },
-        body: '#4B5768',
+        body: '#333333',
         yellow: {
           DEFAULT: '#FFD338',
         },
@@ -27,7 +27,18 @@ export default <Partial<Config>>{
         line: '#E2E8EB',
       },
       fontFamily: {
-        sans: ['"Noto Sans JP"', 'system-ui', 'sans-serif'],
+        sans: [
+          '"ヒラギノ角ゴ ProN"',
+          '"Hiragino Kaku Gothic ProN"',
+          '"游ゴシック体"',
+          'YuGothic',
+          '"游ゴシック Medium"',
+          '"Yu Gothic Medium"',
+          'メイリオ',
+          'Meiryo',
+          'sans-serif',
+        ],
+        barlow: ['"Barlow Condensed"', 'sans-serif'],
       },
       transitionTimingFunction: {
         reveal: 'cubic-bezier(0.22, 1, 0.36, 1)',
