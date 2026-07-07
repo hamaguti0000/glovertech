@@ -7,9 +7,11 @@ const RATE_NUMERATOR = 2
 const RATE_DENOMINATOR = 3
 const RATE = RATE_NUMERATOR / RATE_DENOMINATOR // 補助率
 
-const costManYen = Math.round(COST / 10000)
-const subsidizedManYen = Math.round((COST * RATE) / 10000)
-const selfPayManYen = costManYen - subsidizedManYen
+const { costManYen, covered: subsidizedManYen, real: selfPayManYen } = calcRealCost(
+  COST,
+  RATE_NUMERATOR,
+  RATE_DENOMINATOR,
+)
 const rateLabel = `${RATE_NUMERATOR}/${RATE_DENOMINATOR}`
 
 const titleText = `例: 導入費用${costManYen}万円・補助率${rateLabel}の場合`
