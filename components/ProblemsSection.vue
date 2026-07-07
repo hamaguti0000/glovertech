@@ -24,7 +24,7 @@ defineProps<{
           <div class="illustration-slot mb-4">
             イラスト差し替え予定：困っている人
           </div>
-          <h3 class="text-lg text-navy">{{ problem.title }}</h3>
+          <h3 class="text-xl">{{ problem.title }}</h3>
           <p class="mt-3 text-base leading-[1.9] text-body">{{ problem.description }}</p>
         </article>
       </div>

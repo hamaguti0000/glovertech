@@ -119,12 +119,20 @@ onUnmounted(() => {
                 :stroke-dashoffset="drawn[index] ? 0 : 75.4"
                 style="transition: stroke-dashoffset 500ms cubic-bezier(0.22, 1, 0.36, 1)"
               />
-              <text x="14" y="18" text-anchor="middle" font-size="11" fill="#223A70">{{ step.step }}</text>
+              <text
+                x="14"
+                y="18"
+                text-anchor="middle"
+                font-size="12"
+                font-weight="700"
+                font-family="'Barlow Condensed', sans-serif"
+                fill="#223A70"
+              >{{ step.step }}</text>
             </svg>
             <div class="illustration-slot mb-4 max-w-xs">
               イラスト差し替え予定：{{ illustrations[index] }}
             </div>
-            <h3 class="text-lg text-navy">{{ step.title }}</h3>
+            <h3 class="text-xl">{{ step.title }}</h3>
             <p class="mt-2 max-w-xl text-base leading-[1.9] text-body">{{ step.description }}</p>
           </li>
         </ol>

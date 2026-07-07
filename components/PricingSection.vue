@@ -16,8 +16,10 @@ defineProps<{
 
       <div class="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
         <article v-for="plan in plans" :key="plan.name" class="card flex flex-col">
-          <h3 class="text-base text-navy">{{ plan.name }}</h3>
-          <p class="mt-3 text-2xl text-navy">{{ plan.price }}</p>
+          <h3 class="text-lg">{{ plan.name }}</h3>
+          <p class="mt-3 text-2xl text-navy">
+            <span v-for="(part, i) in splitNumeric(plan.price)" :key="i" :class="part.numeric ? 'font-barlow font-bold' : ''">{{ part.text }}</span>
+          </p>
           <p class="mt-3 flex-1 text-sm leading-[1.9] text-body">{{ plan.description }}</p>
         </article>
       </div>

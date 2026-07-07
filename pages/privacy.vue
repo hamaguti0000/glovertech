@@ -18,7 +18,7 @@ useHead({
 
         <div class="mt-8 space-y-8">
           <div v-for="section in privacyPage.sections" :key="section.heading">
-            <h2 class="text-lg text-navy">{{ section.heading }}</h2>
+            <h2 class="text-xl">{{ section.heading }}</h2>
             <p class="mt-2 text-sm leading-[1.9] text-body">{{ section.body }}</p>
           </div>
         </div>
