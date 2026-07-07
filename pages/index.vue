@@ -54,8 +54,6 @@ useJsonLd(faqItems)
       :lead="subsidy.lead"
       :body="subsidy.body"
       :notes="subsidy.notes"
-      :examples-heading="subsidy.examplesHeading"
-      :examples="subsidy.examples"
       :label="sectionLabels.subsidy"
     />
     <PricingSection :plans="plans" :label="sectionLabels.pricing" />
