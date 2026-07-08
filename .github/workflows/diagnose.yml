@@ -42,4 +42,15 @@ jobs:
           curl -s -o /dev/null -w "http status (www): %{http_code}\n" -H "Host: www.glovertech.jp" http://127.0.0.1/ || true
           echo "--- nginx -T (full effective config, first 300 lines) ---"
           nginx -T 2>&1 | head -300
+          echo "--- nagasaki-ai site config (base64, avoids secret masking) ---"
+          base64 -w0 /etc/nginx/sites-available/nagasaki-ai
+          echo ""
+          echo "--- certbot renewal timer ---"
+          systemctl list-timers | grep -i certbot || echo "no certbot timer found"
+          systemctl status certbot.timer --no-pager 2>&1 | head -10
+          echo "--- letsencrypt options files present? ---"
+          ls -la /etc/letsencrypt/options-ssl-nginx.conf /etc/letsencrypt/ssl-dhparams.pem 2>&1
+          echo "--- ping app dir listing (base64 to avoid masking) ---"
+          ls /var/www/ 2>&1 | base64 -w0
+          echo ""
           EOF
