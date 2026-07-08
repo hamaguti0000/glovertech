@@ -1,0 +1,40 @@
+# www → non-www リダイレクト（HTTPS）
+server {
+    server_name www.glovertech.jp;
+
+    listen [::]:443 ssl;
+    listen 443 ssl;
+    ssl_certificate /etc/letsencrypt/live/glovertech.jp/fullchain.pem;
+    ssl_certificate_key /etc/letsencrypt/live/glovertech.jp/privkey.pem;
+    include /etc/letsencrypt/options-ssl-nginx.conf;
+    ssl_dhparam /etc/letsencrypt/ssl-dhparams.pem;
+
+    return 301 https://glovertech.jp$request_uri;
+}
+
+# メインサーバー
+server {
+    server_name glovertech.jp;
+
+    root __VPS_APP_DIR__;
+    index index.html;
+
+    location / {
+        try_files $uri $uri/ $uri.html =404;
+    }
+
+    listen [::]:443 ssl;
+    listen 443 ssl;
+    ssl_certificate /etc/letsencrypt/live/glovertech.jp/fullchain.pem;
+    ssl_certificate_key /etc/letsencrypt/live/glovertech.jp/privkey.pem;
+    include /etc/letsencrypt/options-ssl-nginx.conf;
+    ssl_dhparam /etc/letsencrypt/ssl-dhparams.pem;
+}
+
+# HTTP → HTTPS リダイレクト（www込みで非wwwのhttpsへ統一）
+server {
+    listen 80;
+    listen [::]:80;
+    server_name glovertech.jp www.glovertech.jp;
+    return 301 https://glovertech.jp$request_uri;
+}
