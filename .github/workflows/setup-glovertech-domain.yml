@@ -1,0 +1,70 @@
+name: Setup glovertech.jp domain + SSL
+
+on:
+  workflow_dispatch:
+
+jobs:
+  setup-domain:
+    runs-on: ubuntu-latest
+    env:
+      VPS_HOST: ${{ secrets.VPS_HOST }}
+      VPS_USER: ${{ secrets.VPS_USER }}
+      VPS_PASSWORD: ${{ secrets.VPS_PASSWORD }}
+      VPS_PORT: ${{ secrets.VPS_PORT }}
+      VPS_APP_DIR: ${{ secrets.VPS_APP_DIR }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install sshpass
+        run: sudo apt-get update -y && sudo apt-get install -y sshpass
+
+      - name: Render bootstrap (HTTP-only) config
+        run: |
+          sed "s#__VPS_APP_DIR__#$VPS_APP_DIR#" deploy/glovertech-jp-bootstrap.conf.template > glovertech-jp-bootstrap.conf
+
+      - name: Upload and enable bootstrap config
+        run: |
+          sshpass -p "$VPS_PASSWORD" scp -o StrictHostKeyChecking=no -P "$VPS_PORT" \
+            glovertech-jp-bootstrap.conf "$VPS_USER@$VPS_HOST:/etc/nginx/sites-available/glovertech-jp"
+          sshpass -p "$VPS_PASSWORD" ssh -o StrictHostKeyChecking=no -p "$VPS_PORT" "$VPS_USER@$VPS_HOST" bash -s <<'EOF'
+          set -e
+          ln -sf /etc/nginx/sites-available/glovertech-jp /etc/nginx/sites-enabled/glovertech-jp
+          nginx -t
+          systemctl reload nginx
+          EOF
+
+      - name: Obtain Let's Encrypt certificate
+        run: |
+          sshpass -p "$VPS_PASSWORD" ssh -o StrictHostKeyChecking=no -p "$VPS_PORT" "$VPS_USER@$VPS_HOST" \
+            "APP_DIR='$VPS_APP_DIR' bash -s" <<'EOF'
+          set -e
+          certbot certonly --webroot -w "$APP_DIR" \
+            -d glovertech.jp -d www.glovertech.jp \
+            --agree-tos --non-interactive --register-unsafely-without-email \
+            --keep-until-expiring
+          EOF
+
+      - name: Render final SSL config
+        run: |
+          sed "s#__VPS_APP_DIR__#$VPS_APP_DIR#" deploy/glovertech-jp.conf.template > glovertech-jp.conf
+
+      - name: Upload final config and reload nginx
+        run: |
+          sshpass -p "$VPS_PASSWORD" scp -o StrictHostKeyChecking=no -P "$VPS_PORT" \
+            glovertech-jp.conf "$VPS_USER@$VPS_HOST:/etc/nginx/sites-available/glovertech-jp"
+          sshpass -p "$VPS_PASSWORD" ssh -o StrictHostKeyChecking=no -p "$VPS_PORT" "$VPS_USER@$VPS_HOST" bash -s <<'EOF'
+          set -e
+          nginx -t
+          systemctl reload nginx
+          EOF
+
+      - name: Verify
+        run: |
+          echo "--- http://glovertech.jp ---"
+          curl -sI http://glovertech.jp
+          echo "--- http://www.glovertech.jp ---"
+          curl -sI http://www.glovertech.jp
+          echo "--- https://www.glovertech.jp ---"
+          curl -sI https://www.glovertech.jp
+          echo "--- https://glovertech.jp ---"
+          curl -sI https://glovertech.jp

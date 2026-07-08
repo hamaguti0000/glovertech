@@ -1,0 +1,12 @@
+# 証明書取得前の一時設定。ACMEチャレンジ用にHTTPのみで配信する。
+server {
+    listen 80;
+    listen [::]:80;
+    server_name glovertech.jp www.glovertech.jp;
+    root __VPS_APP_DIR__;
+    index index.html;
+
+    location / {
+        try_files $uri $uri/ $uri.html =404;
+    }
+}
