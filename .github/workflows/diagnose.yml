@@ -32,4 +32,14 @@ jobs:
             echo "== $f =="
             cat "$f" 2>/dev/null
           done
+          echo "--- default_server search (port 80/443) ---"
+          grep -rl "default_server" /etc/nginx/sites-enabled/ 2>/dev/null
+          echo "--- certbot / letsencrypt presence ---"
+          command -v certbot && certbot --version || echo "certbot not installed"
+          ls -la /etc/letsencrypt/live/ 2>/dev/null || echo "no /etc/letsencrypt/live"
+          echo "--- curl glovertech.jp from inside VPS ---"
+          curl -s -o /dev/null -w "http status: %{http_code}\n" -H "Host: glovertech.jp" http://127.0.0.1/ || true
+          curl -s -o /dev/null -w "http status (www): %{http_code}\n" -H "Host: www.glovertech.jp" http://127.0.0.1/ || true
+          echo "--- nginx -T (full effective config, first 300 lines) ---"
+          nginx -T 2>&1 | head -300
           EOF
