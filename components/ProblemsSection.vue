@@ -5,6 +5,12 @@ defineProps<{
   problems: Problem[]
   label: string
 }>()
+
+const illustrations = [
+  { src: '/images/problem-manual-work.png', alt: '書類の山とパソコンを前に困っている人のイラスト' },
+  { src: '/images/problem-inquiries.png', alt: '電話とメールの対応に追われ困っている人のイラスト' },
+  { src: '/images/problem-ai-confusion.png', alt: 'AI活用について悩んでいる人のイラスト' },
+]
 </script>
 
 <template>
@@ -22,7 +28,14 @@ defineProps<{
           :style="{ '--reveal-delay': `${index * 100}ms` }"
         >
           <div class="illustration-slot mb-4">
-            イラスト差し替え予定：困っている人
+            <img
+              :src="illustrations[index].src"
+              :alt="illustrations[index].alt"
+              width="1254"
+              height="1254"
+              loading="lazy"
+              class="h-full w-full object-contain"
+            />
           </div>
           <h3 class="text-xl">{{ problem.title }}</h3>
           <p class="mt-3 text-base leading-[1.9] text-body">{{ problem.description }}</p>
