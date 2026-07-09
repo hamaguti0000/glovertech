@@ -53,7 +53,7 @@ export const header = {
 export const footer = {
   name: siteMeta.name,
   description: '長崎の中小企業・個人事業主向けにAI導入と業務効率化を伴走支援しています。',
-  address: '所在地：長崎県（ここに市名を記入）',
+  address: '所在地：長崎県長崎市',
   links: [
     { label: '運営者情報', href: '/about' },
     { label: 'プライバシーポリシー', href: '/privacy' },
@@ -184,7 +184,7 @@ export const flowSteps: FlowStep[] = [
 ]
 
 export const profile = {
-  name: '（ここに氏名を記入）',
+  name: '濵口翔',
   description:
     '長崎県在住のWebエンジニア（PHP / Laravel）です。『補助金ナビ 長崎』を個人で開発・運営しながら、県内の中小企業・個人事業主のAI導入や業務効率化のご相談をお受けしています。個人だからこそ、大きな会社には頼みにくい規模のご相談にも柔軟に対応できます。打ち合わせは平日夕方・土日が中心です。',
 }
@@ -234,7 +234,7 @@ export const aboutPage = {
   items: [
     { label: '屋号', value: siteMeta.name },
     { label: '運営者名', value: profile.name },
-    { label: '所在地', value: '長崎県（ここに市名を記入）' },
+    { label: '所在地', value: '長崎県長崎市' },
     // TODO: メールアドレスを記入
     { label: '連絡先', value: '【メールアドレスをご記入ください】' },
     // TODO: 事業内容を記入
