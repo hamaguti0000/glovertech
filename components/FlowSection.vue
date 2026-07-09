@@ -7,7 +7,11 @@ const props = defineProps<{
   label: string
 }>()
 
-const illustrations = ['相談している人', 'レポートを確認している人', '笑顔の人']
+const illustrations = [
+  { src: '/images/flow-consultation.png', alt: 'オンラインで相談している人のイラスト' },
+  { src: '/images/flow-report-review.png', alt: 'レポートを確認している人のイラスト' },
+  { src: '/images/flow-success.png', alt: '成果が出て喜んでいる人のイラスト' },
+]
 
 const containerEl = ref<HTMLElement | null>(null)
 const stepEls = ref<(HTMLElement | null)[]>([])
@@ -130,7 +134,14 @@ onUnmounted(() => {
               >{{ step.step }}</text>
             </svg>
             <div class="illustration-slot mb-4 max-w-xs">
-              イラスト差し替え予定：{{ illustrations[index] }}
+              <img
+                :src="illustrations[index].src"
+                :alt="illustrations[index].alt"
+                width="1254"
+                height="1254"
+                loading="lazy"
+                class="h-full w-full object-contain"
+              />
             </div>
             <h3 class="text-xl">{{ step.title }}</h3>
             <p class="mt-2 max-w-xl text-base leading-[1.9] text-body">{{ step.description }}</p>
