@@ -2,7 +2,15 @@ export default defineNuxtConfig({
   compatibilityDate: '2024-07-01',
   devtools: { enabled: true },
 
-  modules: ['@nuxtjs/tailwindcss'],
+  modules: ['@nuxtjs/tailwindcss', '@nuxtjs/sitemap'],
+
+  site: {
+    url: 'https://glovertech.jp',
+  },
+
+  sitemap: {
+    exclude: ['/report-sample'],
+  },
 
   components: [{ path: '~/components', pathPrefix: false }],
 
