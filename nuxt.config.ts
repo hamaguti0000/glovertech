@@ -30,6 +30,9 @@ export default defineNuxtConfig({
       htmlAttrs: {
         lang: 'ja',
       },
+      meta: [
+        { name: 'google-site-verification', content: 'jRny-o5A2n9yxioOzXkZpwBQUl_Afe7vHxu6kwm6VeE' },
+      ],
       link: [
         { rel: 'preconnect', href: 'https://fonts.googleapis.com' },
         { rel: 'preconnect', href: 'https://fonts.gstatic.com', crossorigin: '' },
