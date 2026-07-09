@@ -69,4 +69,25 @@ jobs:
           stat /etc/nginx/sites-available/glovertech-jp 2>&1
           echo "--- systemctl nginx status (last reload time) ---"
           systemctl show nginx --property=ActiveEnterTimestamp,ExecMainStartTimestamp 2>&1
+          echo "--- glovertech-jp site config, full content (base64, avoids secret masking) ---"
+          base64 -w0 /etc/nginx/sites-available/glovertech-jp
+          echo ""
+          echo "--- nginx.conf: open_file_cache / sendfile / cache related directives ---"
+          grep -n "open_file_cache\|sendfile\|proxy_cache\|fastcgi_cache" /etc/nginx/nginx.conf 2>&1
+          for f in /etc/nginx/conf.d/*.conf /etc/nginx/sites-enabled/*; do
+            grep -Hn "open_file_cache\|proxy_cache\|fastcgi_cache" "$f" 2>/dev/null
+          done
+          echo "--- search filesystem for any other index.html serving glovertech-like content ---"
+          find /var/www /home /root /opt -maxdepth 4 -iname "index.html" 2>/dev/null | while read -r f; do
+            if grep -q "グラバーテック\|【屋号】\|長崎の中小企業向けAI導入支援" "$f" 2>/dev/null; then
+              echo "MATCH: $f"
+              stat "$f" 2>&1 | grep Modify
+            fi
+          done
+          echo "--- repeated curl to https://glovertech.jp (5x, checking for flip-flop) ---"
+          for i in 1 2 3 4 5; do
+            curl -s https://glovertech.jp | grep -c "グラバーテック"
+          done
+          echo "--- all nginx worker/master processes with start time ---"
+          ps -eo pid,ppid,lstart,cmd | grep "[n]ginx"
           EOF
