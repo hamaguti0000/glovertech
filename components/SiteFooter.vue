@@ -34,6 +34,8 @@ const year = new Date().getFullYear()
           <p class="text-sm text-white/60">{{ relatedSite.label }}</p>
           <a
             :href="relatedSite.href"
+            target="_blank"
+            rel="noopener"
             class="mt-2 inline-block text-sm text-white underline decoration-white/40 underline-offset-4 hover:decoration-white"
           >
             {{ relatedSite.name }}
