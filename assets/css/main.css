@@ -73,7 +73,7 @@
   }
 
   .illustration-slot {
-    @apply flex aspect-[4/3] w-full items-center justify-center rounded-lg border border-dashed border-navy/25 bg-surface-alt text-xs text-body;
+    @apply flex aspect-[4/3] w-full items-center justify-center rounded-lg bg-white text-xs text-body;
   }
 }
 

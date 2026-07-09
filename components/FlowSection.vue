@@ -8,9 +8,9 @@ const props = defineProps<{
 }>()
 
 const illustrations = [
-  { src: '/images/flow-consultation.png', alt: 'オンラインで相談している人のイラスト' },
-  { src: '/images/flow-report-review.png', alt: 'レポートを確認している人のイラスト' },
-  { src: '/images/flow-success.png', alt: '成果が出て喜んでいる人のイラスト' },
+  { src: '/images/flow-consultation.png', alt: 'オンラインで相談している人のイラスト', width: 1254, height: 832 },
+  { src: '/images/flow-report-review.png', alt: 'レポートを確認している人のイラスト', width: 1254, height: 954 },
+  { src: '/images/flow-success.png', alt: '成果が出て喜んでいる人のイラスト', width: 1254, height: 1028 },
 ]
 
 const containerEl = ref<HTMLElement | null>(null)
@@ -137,8 +137,8 @@ onUnmounted(() => {
               <img
                 :src="illustrations[index].src"
                 :alt="illustrations[index].alt"
-                width="1254"
-                height="1254"
+                :width="illustrations[index].width"
+                :height="illustrations[index].height"
                 loading="lazy"
                 class="h-full w-full object-contain"
               />
