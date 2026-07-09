@@ -53,4 +53,20 @@ jobs:
           echo "--- ping app dir listing (base64 to avoid masking) ---"
           ls /var/www/ 2>&1 | base64 -w0
           echo ""
+          echo "--- deployed index.html: mtime / size ---"
+          APP_DIR=$(grep -oP '(?<=root ).*(?=;)' /etc/nginx/sites-available/nagasaki-ai)
+          stat "$APP_DIR/index.html" 2>&1
+          echo "--- deployed index.html: placeholder / replaced text counts (server-local file, no network) ---"
+          grep -c "グラバーテック" "$APP_DIR/index.html" || echo "0"
+          echo "残存【】件数:"
+          grep -o "【[^】]*】" "$APP_DIR/index.html" | sort | uniq -c || echo "0件"
+          echo "--- curl https://glovertech.jp from inside VPS (server-local network path) ---"
+          echo "グラバーテック件数:"
+          curl -s https://glovertech.jp | grep -c "グラバーテック"
+          echo "残存【】:"
+          curl -s https://glovertech.jp | grep -o "【[^】]*】" | sort | uniq -c
+          echo "--- nginx access to glovertech-jp: last reload / config mtime ---"
+          stat /etc/nginx/sites-available/glovertech-jp 2>&1
+          echo "--- systemctl nginx status (last reload time) ---"
+          systemctl show nginx --property=ActiveEnterTimestamp,ExecMainStartTimestamp 2>&1
           EOF
