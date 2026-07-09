@@ -39,8 +39,7 @@ export const siteMeta = {
   title: '長崎の中小企業向けAI導入支援｜補助金活用で始める業務効率化',
   description:
     '長崎県内の中小企業・個人事業主向けにAI導入と業務効率化を伴走支援。ChatGPT等のAI活用、業務自動化、HP運用を補助金活用の提案とセットで。初回相談無料。',
-  // TODO: 本番ドメインに差し替え
-  url: 'https://example.com',
+  url: 'https://glovertech.jp',
   ogImage: '/ogp.png',
   areaServed: '長崎県',
 }
