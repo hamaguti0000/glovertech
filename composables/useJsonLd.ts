@@ -8,6 +8,8 @@ export function useJsonLd(faqItems: FaqItem[]) {
     description: siteMeta.description,
     url: siteMeta.url,
     areaServed: siteMeta.areaServed,
+    logo: `${siteMeta.url}/images/logo-mark.svg`,
+    image: `${siteMeta.url}/images/logo-mark.svg`,
   }
 
   const faqPage = {
