@@ -1,3 +1,20 @@
+import { siteMeta } from './data/site'
+
+const gaScripts = siteMeta.gaMeasurementId
+  ? [
+      {
+        src: `https://www.googletagmanager.com/gtag/js?id=${siteMeta.gaMeasurementId}`,
+        async: true,
+      },
+      {
+        innerHTML: `window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', '${siteMeta.gaMeasurementId}');`,
+      },
+    ]
+  : []
+
 export default defineNuxtConfig({
   compatibilityDate: '2024-07-01',
   devtools: { enabled: true },
@@ -45,6 +62,7 @@ export default defineNuxtConfig({
           href: 'https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@700&display=swap',
         },
       ],
+      script: gaScripts,
     },
   },
 })

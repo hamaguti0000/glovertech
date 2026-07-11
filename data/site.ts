@@ -41,6 +41,8 @@ export const siteMeta = {
   url: 'https://glovertech.jp',
   ogImage: '/ogp.png',
   areaServed: '長崎県',
+  // Google アナリティクス4の測定ID（G-XXXXXXXXXX）。未設定なら計測タグを出力しない。
+  gaMeasurementId: '',
 }
 
 export const header = {
