@@ -24,7 +24,12 @@ jobs:
           yes | ufw delete allow 4000/tcp 2>&1 || echo "no matching rule / ufw not available"
           echo "--- ufw status after ---"
           ufw status verbose 2>&1 || echo "ufw not available"
-          echo "--- ss -tlnp for port 4000 ---"
+          echo "--- ss -tlnp for port 4000 (before restart) ---"
+          ss -tlnp 2>/dev/null | grep 4000 || echo "nothing listening on 4000 per ss"
+          echo "--- restarting nginx to force rebind to 127.0.0.1:4000 ---"
+          nginx -t && systemctl restart nginx
+          sleep 1
+          echo "--- ss -tlnp for port 4000 (after restart) ---"
           ss -tlnp 2>/dev/null | grep 4000 || echo "nothing listening on 4000 per ss"
           EOF
 
