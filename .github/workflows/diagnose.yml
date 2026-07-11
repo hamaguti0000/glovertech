@@ -15,6 +15,28 @@ jobs:
       - name: Install sshpass
         run: sudo apt-get update -y && sudo apt-get install -y sshpass
 
+      - name: Remove stale ufw rule for port 4000
+        run: |
+          sshpass -p "$VPS_PASSWORD" ssh -o StrictHostKeyChecking=no -p "$VPS_PORT" "$VPS_USER@$VPS_HOST" bash -s <<'EOF'
+          echo "--- ufw status before ---"
+          ufw status verbose 2>&1 || echo "ufw not available"
+          echo "--- deleting ufw allow 4000/tcp (idempotent) ---"
+          yes | ufw delete allow 4000/tcp 2>&1 || echo "no matching rule / ufw not available"
+          echo "--- ufw status after ---"
+          ufw status verbose 2>&1 || echo "ufw not available"
+          echo "--- ss -tlnp for port 4000 ---"
+          ss -tlnp 2>/dev/null | grep 4000 || echo "nothing listening on 4000 per ss"
+          EOF
+
+      - name: Check external reachability of port 4000 (from GitHub runner, outside the VPS)
+        run: |
+          echo "--- http://glovertech.jp:4000/ ---"
+          curl -s -o /dev/null -w "http_code=%{http_code} time=%{time_total}s\n" --max-time 8 http://glovertech.jp:4000/ || echo "connection failed (expected if blocked)"
+          echo "--- http://133.117.74.212:4000/ ---"
+          curl -s -o /dev/null -w "http_code=%{http_code} time=%{time_total}s\n" --max-time 8 http://133.117.74.212:4000/ || echo "connection failed (expected if blocked)"
+          echo "--- https://glovertech.jp/ (should still work via proxy_pass) ---"
+          curl -s -o /dev/null -w "http_code=%{http_code}\n" --max-time 8 https://glovertech.jp/
+
       - name: List listening ports and nginx sites
         run: |
           sshpass -p "$VPS_PASSWORD" ssh -o StrictHostKeyChecking=no -p "$VPS_PORT" "$VPS_USER@$VPS_HOST" bash -s <<'EOF'
