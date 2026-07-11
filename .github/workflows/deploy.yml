@@ -56,5 +56,4 @@ jobs:
           ln -sf /etc/nginx/sites-available/nagasaki-ai /etc/nginx/sites-enabled/nagasaki-ai
           nginx -t
           systemctl reload nginx
-          command -v ufw >/dev/null && ufw allow 4000/tcp || true
           EOF
