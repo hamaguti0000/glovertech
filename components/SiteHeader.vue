@@ -30,9 +30,12 @@ onUnmounted(() => {
     :class="scrolled ? 'shadow-md' : 'shadow-none'"
   >
     <div class="mx-auto flex max-w-6xl items-center justify-between px-6 py-3">
-      <NuxtLink to="/" class="leading-tight">
-        <span class="block text-lg font-bold text-navy">{{ name }}</span>
-        <span class="block text-xs text-body">{{ tagline }}</span>
+      <NuxtLink to="/" class="flex items-center gap-2.5 leading-tight">
+        <img src="/images/logo-mark.svg" alt="" width="36" height="36" class="h-9 w-9 shrink-0" />
+        <span>
+          <span class="block text-lg font-bold text-navy">{{ name }}</span>
+          <span class="block text-xs text-body">{{ tagline }}</span>
+        </span>
       </NuxtLink>
 
       <a
