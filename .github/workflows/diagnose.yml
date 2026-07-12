@@ -37,8 +37,8 @@ jobs:
         run: |
           echo "--- http://glovertech.jp:4000/ ---"
           curl -s -o /dev/null -w "http_code=%{http_code} time=%{time_total}s\n" --max-time 8 http://glovertech.jp:4000/ || echo "connection failed (expected if blocked)"
-          echo "--- http://133.117.74.212:4000/ ---"
-          curl -s -o /dev/null -w "http_code=%{http_code} time=%{time_total}s\n" --max-time 8 http://133.117.74.212:4000/ || echo "connection failed (expected if blocked)"
+          echo "--- http://$VPS_HOST:4000/ ---"
+          curl -s -o /dev/null -w "http_code=%{http_code} time=%{time_total}s\n" --max-time 8 "http://$VPS_HOST:4000/" || echo "connection failed (expected if blocked)"
           echo "--- https://glovertech.jp/ (should still work via proxy_pass) ---"
           curl -s -o /dev/null -w "http_code=%{http_code}\n" --max-time 8 https://glovertech.jp/
 
