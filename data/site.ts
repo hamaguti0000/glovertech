@@ -227,8 +227,7 @@ export const faqItems: FaqItem[] = [
 export const contact = {
   heading: 'お問い合わせ',
   description: 'まずは無料相談から。下記フォームよりお気軽にお問い合わせください。',
-  // TODO: FormspreeのエンドポイントIDに差し替え
-  formspreeEndpoint: 'https://formspree.io/f/YOUR_FORM_ID',
+  formspreeEndpoint: 'https://formspree.io/f/mbdnrarj',
 }
 
 export const aboutPage = {
