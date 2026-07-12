@@ -1,0 +1,14 @@
+server {
+    listen 127.0.0.1:4000;
+    server_name _;
+    root __VPS_APP_DIR__;
+    index index.html;
+    # リバースプロキシ配下のため、末尾スラッシュ補完等の自動リダイレクトに
+    # このサーバー自身のポート番号(:4000)を含めない。
+    port_in_redirect off;
+
+    location / {
+        add_header Cache-Control "no-cache";
+        try_files $uri $uri/ $uri.html =404;
+    }
+}

@@ -1,0 +1,59 @@
+name: Deploy to VPS
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    env:
+      VPS_HOST: ${{ secrets.VPS_HOST }}
+      VPS_USER: ${{ secrets.VPS_USER }}
+      VPS_PASSWORD: ${{ secrets.VPS_PASSWORD }}
+      VPS_PORT: ${{ secrets.VPS_PORT }}
+      VPS_APP_DIR: ${{ secrets.VPS_APP_DIR }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - run: npm ci
+      - run: npm run generate
+
+      - name: Install sshpass
+        run: sudo apt-get update -y && sudo apt-get install -y sshpass
+
+      - name: Prepare remote directory
+        run: |
+          sshpass -p "$VPS_PASSWORD" ssh -o StrictHostKeyChecking=no -p "$VPS_PORT" "$VPS_USER@$VPS_HOST" bash -s <<EOF
+          mkdir -p "$VPS_APP_DIR"
+          EOF
+
+      - name: Upload static files
+        run: |
+          sshpass -p "$VPS_PASSWORD" rsync -avz --delete \
+            -e "ssh -o StrictHostKeyChecking=no -p $VPS_PORT" \
+            .output/public/ "$VPS_USER@$VPS_HOST:$VPS_APP_DIR/"
+
+      - name: Render nginx config
+        run: |
+          sed "s#__VPS_APP_DIR__#$VPS_APP_DIR#" deploy/nginx.conf.template > nagasaki-ai.nginx.conf
+
+      - name: Upload nginx config
+        run: |
+          sshpass -p "$VPS_PASSWORD" scp -o StrictHostKeyChecking=no -P "$VPS_PORT" \
+            nagasaki-ai.nginx.conf "$VPS_USER@$VPS_HOST:/etc/nginx/sites-available/nagasaki-ai"
+
+      - name: Enable site and reload nginx
+        run: |
+          sshpass -p "$VPS_PASSWORD" ssh -o StrictHostKeyChecking=no -p "$VPS_PORT" "$VPS_USER@$VPS_HOST" bash -s <<'EOF'
+          command -v nginx >/dev/null || (apt-get update -y && apt-get install -y nginx)
+          ln -sf /etc/nginx/sites-available/nagasaki-ai /etc/nginx/sites-enabled/nagasaki-ai
+          nginx -t
+          systemctl reload nginx
+          EOF

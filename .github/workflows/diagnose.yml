@@ -1,0 +1,120 @@
+name: Diagnose VPS ports
+
+on:
+  workflow_dispatch:
+
+jobs:
+  diagnose:
+    runs-on: ubuntu-latest
+    env:
+      VPS_HOST: ${{ secrets.VPS_HOST }}
+      VPS_USER: ${{ secrets.VPS_USER }}
+      VPS_PASSWORD: ${{ secrets.VPS_PASSWORD }}
+      VPS_PORT: ${{ secrets.VPS_PORT }}
+    steps:
+      - name: Install sshpass
+        run: sudo apt-get update -y && sudo apt-get install -y sshpass
+
+      - name: Remove stale ufw rule for port 4000
+        run: |
+          sshpass -p "$VPS_PASSWORD" ssh -o StrictHostKeyChecking=no -p "$VPS_PORT" "$VPS_USER@$VPS_HOST" bash -s <<'EOF'
+          echo "--- ufw status before ---"
+          ufw status verbose 2>&1 || echo "ufw not available"
+          echo "--- deleting ufw allow 4000/tcp (idempotent) ---"
+          yes | ufw delete allow 4000/tcp 2>&1 || echo "no matching rule / ufw not available"
+          echo "--- ufw status after ---"
+          ufw status verbose 2>&1 || echo "ufw not available"
+          echo "--- ss -tlnp for port 4000 (before restart) ---"
+          ss -tlnp 2>/dev/null | grep 4000 || echo "nothing listening on 4000 per ss"
+          echo "--- restarting nginx to force rebind to 127.0.0.1:4000 ---"
+          nginx -t && systemctl restart nginx
+          sleep 1
+          echo "--- ss -tlnp for port 4000 (after restart) ---"
+          ss -tlnp 2>/dev/null | grep 4000 || echo "nothing listening on 4000 per ss"
+          EOF
+
+      - name: Check external reachability of port 4000 (from GitHub runner, outside the VPS)
+        run: |
+          echo "--- http://glovertech.jp:4000/ ---"
+          curl -s -o /dev/null -w "http_code=%{http_code} time=%{time_total}s\n" --max-time 8 http://glovertech.jp:4000/ || echo "connection failed (expected if blocked)"
+          echo "--- http://$VPS_HOST:4000/ ---"
+          curl -s -o /dev/null -w "http_code=%{http_code} time=%{time_total}s\n" --max-time 8 "http://$VPS_HOST:4000/" || echo "connection failed (expected if blocked)"
+          echo "--- https://glovertech.jp/ (should still work via proxy_pass) ---"
+          curl -s -o /dev/null -w "http_code=%{http_code}\n" --max-time 8 https://glovertech.jp/
+
+      - name: List listening ports and nginx sites
+        run: |
+          sshpass -p "$VPS_PASSWORD" ssh -o StrictHostKeyChecking=no -p "$VPS_PORT" "$VPS_USER@$VPS_HOST" bash -s <<'EOF'
+          echo "--- listening ports ---"
+          ss -tlnp 2>/dev/null || netstat -tlnp
+          echo "--- ufw status ---"
+          ufw status verbose 2>&1 || echo "ufw not available"
+          echo "--- iptables rules ---"
+          iptables -L -n -v 2>&1 || echo "iptables not available (need sudo?)"
+          echo "--- firewalld ---"
+          firewall-cmd --list-all 2>&1 || echo "firewalld not available"
+          echo "--- nginx sites-enabled ---"
+          ls -la /etc/nginx/sites-enabled/ 2>/dev/null
+          for f in /etc/nginx/sites-enabled/*; do
+            echo "== $f =="
+            cat "$f" 2>/dev/null
+          done
+          echo "--- default_server search (port 80/443) ---"
+          grep -rl "default_server" /etc/nginx/sites-enabled/ 2>/dev/null
+          echo "--- certbot / letsencrypt presence ---"
+          command -v certbot && certbot --version || echo "certbot not installed"
+          ls -la /etc/letsencrypt/live/ 2>/dev/null || echo "no /etc/letsencrypt/live"
+          echo "--- curl glovertech.jp from inside VPS ---"
+          curl -s -o /dev/null -w "http status: %{http_code}\n" -H "Host: glovertech.jp" http://127.0.0.1/ || true
+          curl -s -o /dev/null -w "http status (www): %{http_code}\n" -H "Host: www.glovertech.jp" http://127.0.0.1/ || true
+          echo "--- nginx -T (full effective config, first 300 lines) ---"
+          nginx -T 2>&1 | head -300
+          echo "--- nagasaki-ai site config (base64, avoids secret masking) ---"
+          base64 -w0 /etc/nginx/sites-available/nagasaki-ai
+          echo ""
+          echo "--- certbot renewal timer ---"
+          systemctl list-timers | grep -i certbot || echo "no certbot timer found"
+          systemctl status certbot.timer --no-pager 2>&1 | head -10
+          echo "--- letsencrypt options files present? ---"
+          ls -la /etc/letsencrypt/options-ssl-nginx.conf /etc/letsencrypt/ssl-dhparams.pem 2>&1
+          echo "--- ping app dir listing (base64 to avoid masking) ---"
+          ls /var/www/ 2>&1 | base64 -w0
+          echo ""
+          echo "--- deployed index.html: mtime / size ---"
+          APP_DIR=$(grep -oP '(?<=root ).*(?=;)' /etc/nginx/sites-available/nagasaki-ai)
+          stat "$APP_DIR/index.html" 2>&1
+          echo "--- deployed index.html: placeholder / replaced text counts (server-local file, no network) ---"
+          grep -c "グラバーテック" "$APP_DIR/index.html" || echo "0"
+          echo "残存【】件数:"
+          grep -o "【[^】]*】" "$APP_DIR/index.html" | sort | uniq -c || echo "0件"
+          echo "--- curl https://glovertech.jp from inside VPS (server-local network path) ---"
+          echo "グラバーテック件数:"
+          curl -s https://glovertech.jp | grep -c "グラバーテック"
+          echo "残存【】:"
+          curl -s https://glovertech.jp | grep -o "【[^】]*】" | sort | uniq -c
+          echo "--- nginx access to glovertech-jp: last reload / config mtime ---"
+          stat /etc/nginx/sites-available/glovertech-jp 2>&1
+          echo "--- systemctl nginx status (last reload time) ---"
+          systemctl show nginx --property=ActiveEnterTimestamp,ExecMainStartTimestamp 2>&1
+          echo "--- glovertech-jp site config, full content (base64, avoids secret masking) ---"
+          base64 -w0 /etc/nginx/sites-available/glovertech-jp
+          echo ""
+          echo "--- nginx.conf: open_file_cache / sendfile / cache related directives ---"
+          grep -n "open_file_cache\|sendfile\|proxy_cache\|fastcgi_cache" /etc/nginx/nginx.conf 2>&1
+          for f in /etc/nginx/conf.d/*.conf /etc/nginx/sites-enabled/*; do
+            grep -Hn "open_file_cache\|proxy_cache\|fastcgi_cache" "$f" 2>/dev/null
+          done
+          echo "--- search filesystem for any other index.html serving glovertech-like content ---"
+          find /var/www /home /root /opt -maxdepth 4 -iname "index.html" 2>/dev/null | while read -r f; do
+            if grep -q "グラバーテック\|【屋号】\|長崎の中小企業向けAI導入支援" "$f" 2>/dev/null; then
+              echo "MATCH: $f"
+              stat "$f" 2>&1 | grep Modify
+            fi
+          done
+          echo "--- repeated curl to https://glovertech.jp (5x, checking for flip-flop) ---"
+          for i in 1 2 3 4 5; do
+            curl -s https://glovertech.jp | grep -c "グラバーテック"
+          done
+          echo "--- all nginx worker/master processes with start time ---"
+          ps -eo pid,ppid,lstart,cmd | grep "[n]ginx"
+          EOF

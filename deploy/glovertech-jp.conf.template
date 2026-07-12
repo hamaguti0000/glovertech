@@ -1,0 +1,44 @@
+# www → non-www リダイレクト（HTTPS）
+server {
+    server_name www.glovertech.jp;
+
+    listen [::]:443 ssl;
+    listen 443 ssl;
+    ssl_certificate /etc/letsencrypt/live/glovertech.jp/fullchain.pem;
+    ssl_certificate_key /etc/letsencrypt/live/glovertech.jp/privkey.pem;
+    include /etc/letsencrypt/options-ssl-nginx.conf;
+    ssl_dhparam /etc/letsencrypt/ssl-dhparams.pem;
+
+    return 301 https://glovertech.jp$request_uri;
+}
+
+# メインサーバー（port 4000のnagasaki-aiへプロキシし、配信内容を一元化する）
+server {
+    server_name glovertech.jp;
+
+    location / {
+        proxy_pass http://127.0.0.1:4000;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+        # upstream(port 4000)がディレクトリ末尾スラッシュ補完のため自前で発行する
+        # 301のLocationがhttpスキームになってしまう(自身がhttpで待ち受けているため)ので書き換える。
+        proxy_redirect http://glovertech.jp/ https://glovertech.jp/;
+    }
+
+    listen [::]:443 ssl;
+    listen 443 ssl;
+    ssl_certificate /etc/letsencrypt/live/glovertech.jp/fullchain.pem;
+    ssl_certificate_key /etc/letsencrypt/live/glovertech.jp/privkey.pem;
+    include /etc/letsencrypt/options-ssl-nginx.conf;
+    ssl_dhparam /etc/letsencrypt/ssl-dhparams.pem;
+}
+
+# HTTP → HTTPS リダイレクト（www込みで非wwwのhttpsへ統一）
+server {
+    listen 80;
+    listen [::]:80;
+    server_name glovertech.jp www.glovertech.jp;
+    return 301 https://glovertech.jp$request_uri;
+}
