@@ -57,6 +57,7 @@ export const footer = {
   description: '長崎の中小企業・個人事業主向けにAI導入と業務効率化を伴走支援しています。',
   address: '所在地：長崎県長崎市',
   links: [
+    { label: 'コラム', href: '/articles' },
     { label: '運営者情報', href: '/about' },
     { label: 'プライバシーポリシー', href: '/privacy' },
     { label: '特定商取引法に基づく表記', href: '/tokushoho' },

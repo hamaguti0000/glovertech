@@ -40,6 +40,9 @@ export default defineNuxtConfig({
 
   nitro: {
     preset: 'static',
+    prerender: {
+      routes: ['/articles', '/articles/chatgpt-how-to', '/articles/ai-subsidy-search', '/articles/subsidy-application-flow'],
+    },
   },
 
   app: {
