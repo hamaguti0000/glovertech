@@ -1,6 +1,28 @@
+export type ArticleIconName =
+  | 'mail'
+  | 'notes'
+  | 'faq'
+  | 'megaphone'
+  | 'browser'
+  | 'chat'
+  | 'edit'
+  | 'refresh'
+  | 'lock'
+  | 'eye'
+  | 'search'
+  | 'layers'
+  | 'calendar'
+  | 'checklist'
+  | 'send'
+  | 'clock'
+  | 'check'
+  | 'warning'
+  | 'receipt'
+
 export interface ArticleStep {
   title: string
   description: string
+  icon?: ArticleIconName
 }
 
 export interface ArticleSection {
@@ -8,7 +30,7 @@ export interface ArticleSection {
   body: string[]
   steps?: ArticleStep[]
   note?: string
-  diagram?: 'chatgpt-mechanism'
+  diagram?: 'chatgpt-mechanism' | 'subsidy-layers' | 'application-timeline'
 }
 
 export interface Article {
@@ -48,21 +70,25 @@ export const articles: Article[] = [
             title: 'メール・お客様への返信文のたたき台作成',
             description:
               '「取引先への納期遅延のお詫びメールを、丁寧な言葉で書いて」のように頼むと、たたき台を数秒で作成できます。そのまま使わず、内容を確認・修正してから送るのが基本です。',
+            icon: 'mail',
           },
           {
             title: '議事録・打ち合わせメモの要約',
             description:
               '長い会議の書き起こしやメモを貼り付けて「要点を3つにまとめて」と頼むと、素早く整理できます。',
+            icon: 'notes',
           },
           {
             title: 'よくある質問（FAQ）への回答文の下書き',
             description:
               'お客様からよく聞かれる質問と回答の方向性を伝えると、Webサイトやチラシに使える文章の形に整えてくれます。',
+            icon: 'faq',
           },
           {
             title: 'SNS投稿文・チラシの文章案',
             description:
               '伝えたい内容の箇条書きを渡すと、SNS向けの短い文章やチラシのキャッチコピー案をいくつも出してくれます。',
+            icon: 'megaphone',
           },
         ],
       },
@@ -74,20 +100,24 @@ export const articles: Article[] = [
             title: 'アカウントを作る',
             description:
               '公式サイト（chat.openai.com）にアクセスし、メールアドレスまたはGoogleアカウントで登録します。無料版でも十分に使えます。',
+            icon: 'browser',
           },
           {
             title: '新しいチャットを開く',
             description: '画面左上あたりの「新しいチャット」から会話をスタートします。',
+            icon: 'chat',
           },
           {
             title: '具体的にお願いする',
             description:
               '「メールを書いて」だけでなく「〇〇という状況で、△△な相手に、丁寧な言葉で、3行程度で」のように条件を添えると、求めている答えに近づきます。',
+            icon: 'edit',
           },
           {
             title: '出力を確認し、直してもらう',
             description:
               '一発で完璧な答えは出ません。「もっと短く」「もっとカジュアルに」と会話を続けて、少しずつ理想の形に近づけていくのが基本の使い方です。',
+            icon: 'refresh',
           },
         ],
       },
@@ -99,16 +129,19 @@ export const articles: Article[] = [
             title: '個人情報・機密情報は入力しない',
             description:
               '取引先の個人情報や、社外秘の数字などは入力しないようにしましょう。入力した内容が今後の学習に使われる設定になっている場合があります。',
+            icon: 'lock',
           },
           {
             title: '「学習に使わせない」設定にしておく',
             description:
               'ChatGPTの画面右上のアイコン →「設定」→「データコントロール」と進むと、「すべての人のためにモデルを改善する（Improve the model for everyone）」という項目があります。これをオフにしておくと、以降の会話内容がAIの学習に使われなくなります。1回限りの会話を誰にも残したくない場合は、「一時的なチャット（Temporary Chat）」機能を使うと、その会話は履歴にも学習にも残りません。事務所のパソコンでは、まずこの設定を確認しておくと安心です。',
+            icon: 'eye',
           },
           {
             title: '出力内容は必ず人の目で確認する',
             description:
               '前述の通り、もっともらしい間違いを含むことがあります。特に金額・日付・法律や制度に関する内容は、そのまま使わず必ず事実確認をしてください。',
+            icon: 'check',
           },
         ],
         note: 'どのAIツールを、どの業務に、どう使うのが自社に合っているか分からない場合は、無料相談でご相談ください。実際の業務内容をお聞きしたうえで、具体的な使い方を一緒に考えます。',
@@ -132,22 +165,26 @@ export const articles: Article[] = [
       },
       {
         heading: '探し方の基本ステップ',
+        diagram: 'subsidy-layers',
         body: [],
         steps: [
           {
             title: '対象になりそうな取り組みを言葉にする',
             description:
               '「ChatGPTを使って問い合わせ対応を効率化したい」「会計ソフトを導入して経理を自動化したい」など、やりたいことを具体的にしておくと、制度を探しやすくなります。',
+            icon: 'edit',
           },
           {
             title: '国・県・市の制度を順番に確認する',
             description:
               '国の制度（IT導入補助金など）、長崎県の制度、長崎市など市町村の制度は、それぞれ別の窓口・別のサイトで公募されています。',
+            icon: 'layers',
           },
           {
             title: '公募期間を確認する',
             description:
               '多くの補助金は「事業実施前」の申請が原則で、既に契約・発注してしまった後は対象外になることが一般的です。使えそうな制度を見つけたら、着手前に公募期間と要件を確認してください。',
+            icon: 'calendar',
           },
         ],
       },
@@ -177,35 +214,42 @@ export const articles: Article[] = [
     sections: [
       {
         heading: '補助金申請の一般的な流れ',
+        diagram: 'application-timeline',
         body: ['制度によって細部は異なりますが、多くの補助金は次のような流れで進みます。'],
         steps: [
           {
             title: '公募要領を確認する',
             description:
               '対象者・対象経費・補助率・上限額・公募期間を確認します。この時点で自社が対象になるかを見極めます。',
+            icon: 'search',
           },
           {
             title: '必要書類を準備する',
             description:
               '事業計画書、見積書、決算書など、制度ごとに求められる書類が異なります。準備に時間がかかるため、早めの着手が重要です。',
+            icon: 'notes',
           },
           {
             title: '申請する',
             description: '多くの制度は電子申請システム（jGrantsなど）または郵送での申請になります。',
+            icon: 'send',
           },
           {
             title: '審査・交付決定を待つ',
             description:
               '審査には数週間〜数ヶ月かかることがあります。交付決定の通知が届くまでは、対象の取り組みに着手できない制度が多い点に注意が必要です。',
+            icon: 'clock',
           },
           {
             title: '事業を実施する',
             description: '交付決定後、公募要領で定められた期間内に取り組みを実施します。',
+            icon: 'check',
           },
           {
             title: '実績報告をする',
             description:
               '領収書や納品書などの証拠書類とあわせて、実施内容を報告します。この報告をもって、初めて補助金が支払われます。',
+            icon: 'receipt',
           },
         ],
       },
@@ -217,16 +261,19 @@ export const articles: Article[] = [
             title: '交付決定前に発注・契約してしまう',
             description:
               '「早く始めたい」という気持ちから、交付決定の前に発注や契約をしてしまうと、多くの制度で補助対象外になります。必ず交付決定の通知を待ってから動きましょう。',
+            icon: 'warning',
           },
           {
             title: '証拠書類を残していない',
             description:
               '実績報告には、見積書・発注書・納品書・領収書・振込明細など多くの書類が必要です。事業実施中から、いつ・何のために・いくら使ったかが分かる形で書類を保管しておくことが大切です。',
+            icon: 'warning',
           },
           {
             title: '対象経費の範囲を勘違いする',
             description:
               '「AI導入にかかった費用」といっても、ツールの利用料は対象でも、それを使うためのパソコン購入費は対象外、というように、細かい線引きがある制度が多くあります。公募要領の対象経費欄を必ず確認してください。',
+            icon: 'warning',
           },
         ],
         note: '申請書類の作成代行は行っておりませんが、無料相談では「自社の取り組みが対象になりそうか」「何を準備すればよいか」の整理をお手伝いできます。',

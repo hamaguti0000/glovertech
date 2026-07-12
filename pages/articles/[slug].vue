@@ -53,6 +53,8 @@ useHead({
             <h2 class="text-2xl text-navy">{{ section.heading }}</h2>
 
             <ChatGptMechanismDiagram v-if="section.diagram === 'chatgpt-mechanism'" />
+            <SubsidyLayersDiagram v-else-if="section.diagram === 'subsidy-layers'" />
+            <ApplicationTimelineDiagram v-else-if="section.diagram === 'application-timeline'" />
 
             <p
               v-for="(paragraph, index) in section.body"
