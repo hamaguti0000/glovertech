@@ -69,6 +69,7 @@ useJsonLd(faqItems)
       :label="sectionLabels.profile"
     />
     <FaqSection :items="faqItems" :label="sectionLabels.faq" />
+    <ColumnSection />
     <ContactSection
       :heading="contact.heading"
       :description="contact.description"

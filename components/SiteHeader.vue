@@ -38,12 +38,21 @@ onUnmounted(() => {
         </span>
       </NuxtLink>
 
-      <a
-        :href="ctaHref"
-        class="inline-flex shrink-0 items-center gap-1 rounded-lg bg-cta px-5 py-2.5 text-sm font-bold text-white transition-colors duration-500 ease-reveal hover:bg-cta-dark"
-      >
-        {{ ctaLabel }}
-      </a>
+      <div class="flex shrink-0 items-center gap-5">
+        <NuxtLink
+          to="/articles"
+          class="hidden text-sm font-bold text-navy hover:underline sm:inline-block"
+        >
+          コラム
+        </NuxtLink>
+
+        <a
+          :href="ctaHref"
+          class="inline-flex items-center gap-1 rounded-lg bg-cta px-5 py-2.5 text-sm font-bold text-white transition-colors duration-500 ease-reveal hover:bg-cta-dark"
+        >
+          {{ ctaLabel }}
+        </a>
+      </div>
     </div>
   </header>
 </template>
