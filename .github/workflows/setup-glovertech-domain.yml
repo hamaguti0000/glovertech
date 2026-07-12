@@ -9,14 +9,17 @@ jobs:
     env:
       VPS_HOST: ${{ secrets.VPS_HOST }}
       VPS_USER: ${{ secrets.VPS_USER }}
-      VPS_PASSWORD: ${{ secrets.VPS_PASSWORD }}
       VPS_PORT: ${{ secrets.VPS_PORT }}
       VPS_APP_DIR: ${{ secrets.VPS_APP_DIR }}
+      SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
     steps:
       - uses: actions/checkout@v4
 
-      - name: Install sshpass
-        run: sudo apt-get update -y && sudo apt-get install -y sshpass
+      - name: Set up SSH key
+        run: |
+          install -m 600 -D /dev/null ~/.ssh/id_ed25519
+          echo "$SSH_PRIVATE_KEY" > ~/.ssh/id_ed25519
+          ssh-keyscan -p "$VPS_PORT" "$VPS_HOST" >> ~/.ssh/known_hosts 2>/dev/null
 
       - name: Render bootstrap (HTTP-only) config
         run: |
@@ -24,9 +27,9 @@ jobs:
 
       - name: Upload and enable bootstrap config
         run: |
-          sshpass -p "$VPS_PASSWORD" scp -o StrictHostKeyChecking=no -P "$VPS_PORT" \
+          scp -P "$VPS_PORT" \
             glovertech-jp-bootstrap.conf "$VPS_USER@$VPS_HOST:/etc/nginx/sites-available/glovertech-jp"
-          sshpass -p "$VPS_PASSWORD" ssh -o StrictHostKeyChecking=no -p "$VPS_PORT" "$VPS_USER@$VPS_HOST" bash -s <<'EOF'
+          ssh -p "$VPS_PORT" "$VPS_USER@$VPS_HOST" bash -s <<'EOF'
           set -e
           ln -sf /etc/nginx/sites-available/glovertech-jp /etc/nginx/sites-enabled/glovertech-jp
           nginx -t
@@ -35,7 +38,7 @@ jobs:
 
       - name: Obtain Let's Encrypt certificate
         run: |
-          sshpass -p "$VPS_PASSWORD" ssh -o StrictHostKeyChecking=no -p "$VPS_PORT" "$VPS_USER@$VPS_HOST" \
+          ssh -p "$VPS_PORT" "$VPS_USER@$VPS_HOST" \
             "APP_DIR='$VPS_APP_DIR' bash -s" <<'EOF'
           set -e
           certbot certonly --webroot -w "$APP_DIR" \
@@ -50,9 +53,9 @@ jobs:
 
       - name: Upload final config and reload nginx
         run: |
-          sshpass -p "$VPS_PASSWORD" scp -o StrictHostKeyChecking=no -P "$VPS_PORT" \
+          scp -P "$VPS_PORT" \
             glovertech-jp.conf "$VPS_USER@$VPS_HOST:/etc/nginx/sites-available/glovertech-jp"
-          sshpass -p "$VPS_PASSWORD" ssh -o StrictHostKeyChecking=no -p "$VPS_PORT" "$VPS_USER@$VPS_HOST" bash -s <<'EOF'
+          ssh -p "$VPS_PORT" "$VPS_USER@$VPS_HOST" bash -s <<'EOF'
           set -e
           nginx -t
           systemctl reload nginx
