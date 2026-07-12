@@ -22,6 +22,9 @@ server {
         proxy_set_header X-Real-IP $remote_addr;
         proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
         proxy_set_header X-Forwarded-Proto $scheme;
+        # upstream(port 4000)がディレクトリ末尾スラッシュ補完のため自前で発行する
+        # 301のLocationに内部ポート(:4000)とhttpスキームを含めてしまうため書き換える。
+        proxy_redirect http://glovertech.jp:4000/ https://glovertech.jp/;
     }
 
     listen [::]:443 ssl;
