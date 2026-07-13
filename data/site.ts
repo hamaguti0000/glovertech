@@ -33,6 +33,16 @@ export interface ReportSampleChapter {
   guide: string
 }
 
+export interface WorkItem {
+  title: string
+  category: string
+  summary: string
+  stack: string[]
+  points: string[]
+  href?: string
+  hrefLabel?: string
+}
+
 export const siteMeta = {
   name: 'グラバーテック',
   title: '長崎の中小企業向けAI導入支援｜補助金活用で始める業務効率化',
@@ -57,6 +67,7 @@ export const footer = {
   description: '長崎の中小企業・個人事業主向けにAI導入と業務効率化を伴走支援しています。',
   address: '所在地：長崎県長崎市',
   links: [
+    { label: '実績', href: '/works' },
     { label: 'コラム', href: '/articles' },
     { label: '運営者情報', href: '/about' },
     { label: 'プライバシーポリシー', href: '/privacy' },
@@ -332,4 +343,45 @@ export const reportSamplePage = {
       guide: '最初の一歩と概算スケジュール',
     },
   ] satisfies ReportSampleChapter[],
+}
+
+export const worksPage = {
+  heading: '実績',
+  lead: 'これまでに開発・運営してきたサービス・サイトの一部をご紹介します。クライアント様の案件は屋号を伏せた形で掲載しています。',
+  items: [
+    {
+      title: '補助金ナビ　長崎',
+      category: '自社サービス',
+      summary:
+        '長崎・佐賀・熊本の中小企業・個人事業主向けに、補助金・助成金の情報を毎日更新して届ける検索サイト。個人で企画・開発・運営し、3県への展開まで行いました。',
+      stack: ['PHP', 'Laravel', 'Filament', 'MySQL'],
+      points: ['マルチテナント構成で3地域に展開', '公開中の補助金情報を日々更新・管理'],
+      href: footer.relatedSite.href,
+      hrefLabel: 'サイトを見る',
+    },
+    {
+      title: '和洋菓子店のホームページ＋商品管理システム',
+      category: 'クライアント案件（長崎県内）',
+      summary:
+        '老舗和洋菓子店向けに、ブランドの世界観を再現したホームページと、店主自身が商品・お知らせ・写真を更新できる管理画面をセットで開発しました。',
+      stack: ['TypeScript', 'Next.js', 'Prisma', 'PostgreSQL', 'Docker'],
+      points: ['商品・お知らせ・FAQ・写真をノーコードで更新できる管理画面', '本番サーバーの構築・運用まで一貫して担当'],
+    },
+    {
+      title: '結婚式の招待・出欠管理サイト',
+      category: 'クライアント案件（長崎県内）',
+      summary:
+        '新郎新婦の結婚式向けに、招待状代わりとなる特設サイトを開発。ゲストの出欠回答やプロフィール紹介、写真掲載などの機能を実装しました。',
+      stack: ['PHP', 'Laravel'],
+      points: ['ゲストの出欠管理・写真アップロード機能', 'スマートフォンからのHEIC画像アップロードにも対応'],
+    },
+    {
+      title: '接骨院のホームページ',
+      category: 'クライアント案件（長崎県内）',
+      summary:
+        '交通事故治療を専門とする接骨院向けに、フルスクラッチのWordPressテーマを開発。院の運営担当者が管理画面から診療時間や案内文をノーコードで更新できる設計にしました。',
+      stack: ['WordPress', 'PHP'],
+      points: ['カスタマイザーで診療時間・院名などをノーコード編集可能', '交通事故・むちうち治療に特化した案内ページを構成'],
+    },
+  ] satisfies WorkItem[],
 }
