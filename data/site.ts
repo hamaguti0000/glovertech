@@ -35,6 +35,7 @@ export interface ReportSampleChapter {
 
 export interface WorkItem {
   title: string
+  type: 'self' | 'client'
   category: string
   summary: string
   stack: string[]
@@ -347,10 +348,12 @@ export const reportSamplePage = {
 
 export const worksPage = {
   heading: '実績',
+  homeLead: '自社サービスの開発・運営から、長崎県内の店舗・個人事業主向けの受託開発まで。',
   lead: 'これまでに開発・運営してきたサービス・サイトの一部をご紹介します。クライアント様の案件は屋号を伏せた形で掲載しています。',
   items: [
     {
       title: '補助金ナビ　長崎',
+      type: 'self',
       category: '自社サービス',
       summary:
         '長崎・佐賀・熊本の中小企業・個人事業主向けに、補助金・助成金の情報を毎日更新して届ける検索サイト。個人で企画・開発・運営し、3県への展開まで行いました。',
@@ -361,6 +364,7 @@ export const worksPage = {
     },
     {
       title: '和洋菓子店のホームページ＋商品管理システム',
+      type: 'client',
       category: 'クライアント案件（長崎県内）',
       summary:
         '老舗和洋菓子店向けに、ブランドの世界観を再現したホームページと、店主自身が商品・お知らせ・写真を更新できる管理画面をセットで開発しました。',
@@ -369,6 +373,7 @@ export const worksPage = {
     },
     {
       title: '結婚式の招待・出欠管理サイト',
+      type: 'client',
       category: 'クライアント案件（長崎県内）',
       summary:
         '新郎新婦の結婚式向けに、招待状代わりとなる特設サイトを開発。ゲストの出欠回答やプロフィール紹介、写真掲載などの機能を実装しました。',
@@ -377,6 +382,7 @@ export const worksPage = {
     },
     {
       title: '接骨院のホームページ',
+      type: 'client',
       category: 'クライアント案件（長崎県内）',
       summary:
         '交通事故治療を専門とする接骨院向けに、フルスクラッチのWordPressテーマを開発。院の運営担当者が管理画面から診療時間や案内文をノーコードで更新できる設計にしました。',
