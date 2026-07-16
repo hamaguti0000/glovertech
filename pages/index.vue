@@ -3,8 +3,10 @@ import {
   hero,
   problems,
   services,
+  servicesFootnote,
   subsidy,
   plans,
+  pricingNote,
   flowSteps,
   profile,
   faqItems,
@@ -49,7 +51,7 @@ useJsonLd(faqItems)
       :cta-href="hero.ctaHref"
     />
     <ProblemsSection :problems="problems" :label="sectionLabels.problems" />
-    <ServicesSection :services="services" :label="sectionLabels.services" />
+    <ServicesSection :services="services" :label="sectionLabels.services" :footnote="servicesFootnote" />
     <div class="border-b border-line">
       <div class="section">
         <SupportScopeChart />
@@ -61,7 +63,7 @@ useJsonLd(faqItems)
       :notes="subsidy.notes"
       :label="sectionLabels.subsidy"
     />
-    <PricingSection :plans="plans" :label="sectionLabels.pricing" />
+    <PricingSection :plans="plans" :label="sectionLabels.pricing" :note="pricingNote" />
     <FlowSection :steps="flowSteps" :label="sectionLabels.flow" />
     <ProfileSection
       :name="profile.name"

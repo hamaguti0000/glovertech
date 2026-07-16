@@ -43,6 +43,7 @@ export default defineNuxtConfig({
     prerender: {
       routes: [
         '/works',
+        '/services',
         '/articles',
         '/articles/chatgpt-how-to',
         '/articles/ai-subsidy-search',

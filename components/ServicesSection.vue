@@ -4,6 +4,7 @@ import type { Service } from '~/data/site'
 defineProps<{
   services: Service[]
   label: string
+  footnote: string
 }>()
 </script>
 
@@ -26,8 +27,16 @@ defineProps<{
               {{ item }}
             </li>
           </ul>
+
+          <NuxtLink to="/services" class="mt-4 text-sm font-bold text-navy underline underline-offset-4">
+            詳しく見る →
+          </NuxtLink>
         </article>
       </div>
+
+      <p class="mt-6 text-sm leading-[1.9] text-body">
+        {{ footnote }}
+      </p>
     </div>
   </section>
 </template>

@@ -39,7 +39,14 @@ onUnmounted(() => {
       </NuxtLink>
 
       <div class="flex shrink-0 items-center gap-3 sm:gap-5">
-        <NuxtLink to="/works" class="inline-block text-sm font-bold text-navy hover:underline">
+        <NuxtLink to="/services" class="inline-block text-sm font-bold text-navy hover:underline">
+          サービス
+        </NuxtLink>
+
+        <NuxtLink
+          to="/works"
+          class="hidden text-sm font-bold text-navy hover:underline sm:inline-block"
+        >
           実績
         </NuxtLink>
 

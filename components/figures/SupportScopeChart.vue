@@ -9,13 +9,13 @@ interface Stage {
 // 文言は指定のまま。descLinesは表示上の改行位置のみを分割したもの
 // (連結すると元の文言と完全に一致する)
 const stages: Stage[] = [
-  { title: '相談', descLines: ['現状の困りごとを', '整理'] },
-  { title: '補助金の確認', descLines: ['使えそうな制度を', '一緒に確認'] },
-  { title: '導入', descLines: ['ツール設定・', '自動化の実装'] },
-  { title: '定着', descLines: ['使い続けられるまで', '運用をサポート'] },
+  { title: '無料相談', descLines: ['現状の困りごとを', '確認'] },
+  { title: 'AI業務診断', descLines: ['反復業務を整理し', '1業務を提案'] },
+  { title: '1業務パイロット', descLines: ['1つの業務で', '効果を検証'] },
+  { title: '運用・改善', descLines: ['使い続けられるまで', '運用をサポート'] },
 ]
 
-const scopeLabel = '相談から定着まで、私が伴走する範囲'
+const scopeLabel = '相談から運用・改善まで、私が伴走する範囲'
 
 const ariaLabel = `支援の流れ: ${stages.map((s) => s.title).join('→')}。${scopeLabel}を示す図。`
 

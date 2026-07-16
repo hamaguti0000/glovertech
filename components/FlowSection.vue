@@ -83,7 +83,7 @@ onUnmounted(() => {
       <span class="section-label">{{ label }}</span>
       <h2 v-reveal class="section-title">3つのステップで進めます</h2>
       <p class="section-lead">
-        無料相談とレポートまでは費用がかかりません。ご納得いただけない場合は、そこで終了して構いません。
+        無料相談までは費用がかかりません。ご納得いただいた場合のみ、有料のAI業務診断へ進みます。各段階で終了いただいて構いません。
       </p>
 
       <div ref="containerEl" class="relative mt-14 pl-10">
