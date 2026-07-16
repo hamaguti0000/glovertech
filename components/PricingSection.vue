@@ -4,6 +4,7 @@ import type { Plan } from '~/data/site'
 defineProps<{
   plans: Plan[]
   label: string
+  note: string
 }>()
 </script>
 
@@ -30,6 +31,10 @@ defineProps<{
           </NuxtLink>
         </article>
       </div>
+
+      <p class="mt-6 max-w-2xl text-sm leading-[1.9] text-body">
+        {{ note }}
+      </p>
     </div>
   </section>
 </template>
