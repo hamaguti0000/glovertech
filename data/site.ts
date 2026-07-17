@@ -31,6 +31,7 @@ export interface FaqItem {
 export interface ReportSampleChapter {
   title: string
   guide: string
+  sample: string
 }
 
 export interface WorkItem {
@@ -42,6 +43,12 @@ export interface WorkItem {
   points: string[]
   href?: string
   hrefLabel?: string
+}
+
+export interface InfoItem {
+  label: string
+  value: string
+  href?: string
 }
 
 export const siteMeta = {
@@ -214,6 +221,14 @@ export const profile = {
     '長崎県在住のWebエンジニア（PHP / Laravel）です。『補助金ナビ 長崎』を個人で開発・運営しながら、県内の中小企業・個人事業主のAI導入や業務効率化のご相談をお受けしています。個人だからこそ、大きな会社には頼みにくい規模のご相談にも柔軟に対応できます。打ち合わせは平日夕方・土日が中心です。',
 }
 
+// 特定商取引法ページ・プライバシーポリシー等、事業者を正式に示す箇所で共通利用する表記
+export const businessEntityName = `${siteMeta.name}（運営責任者：${profile.name}）`
+
+export const contactFormNotice = {
+  value: 'お問い合わせは、サイト内のお問い合わせフォームをご利用ください。',
+  href: '/#contact',
+}
+
 export const faqItems: FaqItem[] = [
   {
     question: '平日日中の対応は可能ですか？',
@@ -284,14 +299,16 @@ export const aboutPage = {
     { label: '屋号', value: siteMeta.name },
     { label: '運営者名', value: profile.name },
     { label: '所在地', value: '長崎県長崎市' },
-    // TODO: メールアドレスを記入
-    { label: '連絡先', value: '【メールアドレスをご記入ください】' },
-    // TODO: 事業内容を記入
-    { label: '事業内容', value: '【事業内容をご記入ください】' },
-  ],
+    { label: '連絡先', value: contactFormNotice.value, href: contactFormNotice.href },
+    {
+      label: '事業内容',
+      value:
+        '中小企業・個人事業主向けのAI導入支援、業務診断・業務効率化、Webサイト制作・IT運用支援、補助金情報サイトの運営',
+    },
+  ] satisfies InfoItem[],
   relatedSite: {
     heading: '運営サイト',
-    body: '【補助金ナビ　長崎の紹介文をご記入ください】',
+    body: '長崎県内の事業者向けに、国・県・市町の補助金・助成金情報を分かりやすく届ける情報サイトです。',
     name: footer.relatedSite.name,
     href: footer.relatedSite.href,
   },
@@ -299,7 +316,9 @@ export const aboutPage = {
 
 export const privacyPage = {
   heading: 'プライバシーポリシー',
-  updatedAt: '【最終更新日をご記入ください】',
+  updatedAt: '2026年7月17日',
+  intro:
+    'グラバーテック（以下『当方』といいます。）は、本ウェブサイトにおける利用者の個人情報の取扱いについて、以下のとおりプライバシーポリシーを定めます。',
   sections: [
     {
       heading: '取得する情報',
@@ -308,6 +327,10 @@ export const privacyPage = {
     {
       heading: '利用目的',
       body: 'いただいた情報は、お問い合わせへの回答および無料相談のご案内のためにのみ利用します。',
+    },
+    {
+      heading: '外部サービスの利用',
+      body: '当サイトのお問い合わせフォームでは、入力内容の送信および管理のためFormspreeを利用しています。入力された情報は、問い合わせへの対応に必要な範囲で同サービスへ送信されます。',
     },
     {
       heading: '第三者提供について',
@@ -322,61 +345,85 @@ export const privacyPage = {
       body: '本ポリシーに関するお問い合わせは、サイト内のお問い合わせフォームよりご連絡ください。',
     },
   ],
-  // TODO: 事業者名を差し替え
-  businessName: '【事業者名をご記入ください】',
+  businessName: businessEntityName,
 }
-
-const disclosureOnRequest =
-  'お取引やお問い合わせの際に必要な場合は、ご請求いただければ遅滞なく開示いたします。'
 
 export const tokushohoPage = {
   heading: '特定商取引法に基づく表記',
   items: [
-    { label: '事業者名', value: `${siteMeta.name}（${profile.name}）` },
-    { label: '所在地', value: disclosureOnRequest },
-    { label: '電話番号', value: disclosureOnRequest },
-    // TODO: メールアドレスを記入
-    { label: '連絡先', value: '【メールアドレスをご記入ください】' },
+    { label: '事業者名', value: businessEntityName },
+    {
+      label: '所在地',
+      value:
+        '長崎県長崎市。所在地の詳細は、法令に基づき請求があった場合、遅滞なく開示いたします。開示請求は、サイト内のお問い合わせフォームからお願いいたします。',
+    },
+    {
+      label: '電話番号',
+      value:
+        '電話番号は、法令に基づき請求があった場合、遅滞なく開示いたします。開示請求は、サイト内のお問い合わせフォームからお願いいたします。',
+    },
+    { label: '連絡先', value: contactFormNotice.value, href: contactFormNotice.href },
     {
       label: '販売価格',
       value: `${plans.map((plan) => `${plan.name} ${plan.price}`).join('／')}`,
     },
-    // TODO: お支払い方法・時期を記入
-    { label: '代金の支払方法・時期', value: '【お支払い方法・時期をご記入ください】' },
-    // TODO: サービス提供時期を記入
-    { label: 'サービス提供時期', value: '【提供時期をご記入ください】' },
-    // TODO: キャンセルについて記入
-    { label: 'キャンセルについて', value: '【キャンセルについてご記入ください】' },
-  ],
+    {
+      label: '代金の支払方法・時期',
+      value:
+        '銀行振込。正式なお申し込み後に請求書を発行します。AI業務診断および1業務パイロットは、原則としてサービス開始前にお支払いいただきます。運用・改善などの月額サービスは、初月分を開始前に、翌月以降は請求書に記載した期日までにお支払いいただきます。個別に支払条件を定めた場合は、見積書または契約書の内容を優先します。振込手数料は、お客様のご負担となります。',
+    },
+    {
+      label: 'サービス提供時期',
+      value:
+        'お申し込み内容と入金を確認後、日程を調整し、原則として14日以内にサービスを開始します。具体的な開始日、提供期間および納期は、見積書または契約書で個別にお知らせします。無料相談は、お申し込み後に日程を調整して実施します。',
+    },
+    {
+      label: 'キャンセルについて',
+      value:
+        '無料相談は、事前にご連絡いただくことでキャンセルまたは日程変更が可能です。有料サービスは、サービス開始前のキャンセルであれば、振込手数料を差し引いた金額を返金します。サービス開始後は、実施済みの作業、作成済みの成果物および既に発生した費用に相当する金額を差し引き、未実施分がある場合に限り返金します。個別にキャンセル・返金条件を定めた場合は、見積書または契約書の内容を優先します。月額サービスの解約は、翌月分の請求が発生する前までにご連絡ください。既に提供を開始した期間の料金は、原則として日割り返金を行いません。',
+    },
+  ] satisfies InfoItem[],
 }
 
 export const reportSamplePage = {
   heading: 'AI業務診断レポートの見本',
   lead: '実際にお渡しするAI業務診断レポートの構成見本です。内容はヒアリング内容に応じて変わります。',
-  // TODO: 氏名・作成日を実際のレポート発行時に差し替え
+  disclaimer:
+    '本資料は、AI業務診断の内容を説明するために作成した架空のサンプルです。掲載している事業者、業務内容、作業時間および効果試算は、実在する企業の診断結果・導入実績ではありません。',
   coverTitle: 'AI業務診断',
-  nameLabel: '【後で記入】様',
-  dateLabel: '【後で記入】',
+  targetLabel: 'サンプル事業者（架空）',
+  authorLabel: 'グラバーテック',
+  dateLabel: '2026年7月17日',
   chapters: [
     {
       title: '1. 現状整理',
       guide: 'ヒアリングした業務の流れと反復業務一覧',
+      sample:
+        '実際のAI業務診断では、ヒアリング内容をもとに、日常的に発生している業務、担当者、作業時間、発生頻度、ミスや手戻りなどを整理します。',
     },
     {
       title: '2. AI化の優先順位',
       guide: '人間が担当する部分とAIに任せられる候補、優先順位',
+      sample:
+        '整理した業務について、削減できそうな時間、導入の難しさ、機密情報の有無、人による判断の必要性などを確認し、最初に試す業務の優先順位を決めます。',
     },
     {
       title: '3. 改善の方向性',
       guide: '最初に試す1業務の提案と費用対効果の仮説',
+      sample:
+        '優先する業務について、入力する情報、AIが行う下準備、出力する内容、人が確認・判断する部分を整理し、安全に試せる進め方を提案します。',
     },
     {
       title: '4. 使えそうな補助金',
       guide: '対象になりそうな制度と注意点',
+      sample:
+        '診断時点で利用できる可能性がある補助金・支援制度を確認し、参考情報としてご案内します。制度の利用や採択を保証するものではなく、申請代行は行いません。',
     },
     {
       title: '5. 進め方の提案',
       guide: '1業務パイロットへの進め方と概算スケジュール',
+      sample:
+        '最初の1業務について、対象範囲、実施期間、確認する効果、運用方法を整理し、1業務パイロットとして試す場合の進め方を提案します。',
     },
   ] satisfies ReportSampleChapter[],
 }

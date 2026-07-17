@@ -3,7 +3,7 @@ import { reportSamplePage, siteMeta } from '~/data/site'
 
 useHead({
   title: `${reportSamplePage.heading}｜${siteMeta.name}`,
-  // TODO: レポートの中身を実データに差し替えたらnoindexを外す
+  // 実在企業の診断結果ではない架空のサンプルのため、検索結果には表示しない
   meta: [{ name: 'robots', content: 'noindex' }],
 })
 </script>
@@ -15,18 +15,26 @@ useHead({
         <h1 class="section-title">{{ reportSamplePage.heading }}</h1>
         <p class="section-lead">{{ reportSamplePage.lead }}</p>
 
+        <div class="mt-6 rounded-lg border border-line bg-surface-alt p-5 text-sm leading-[1.9] text-body">
+          {{ reportSamplePage.disclaimer }}
+        </div>
+
         <div class="mt-10 overflow-hidden rounded-lg border border-line bg-white">
           <div class="border-b border-line p-6 sm:p-8">
             <p class="text-sm text-body">{{ reportSamplePage.coverTitle }}</p>
-            <h2 class="mt-2 text-2xl">{{ reportSamplePage.nameLabel }}</h2>
-            <p class="mt-3 text-sm text-body">作成日: {{ reportSamplePage.dateLabel }}</p>
+            <p class="mt-4 text-xs font-bold text-navy">対象事業者</p>
+            <h2 class="text-2xl">{{ reportSamplePage.targetLabel }}</h2>
+            <div class="mt-4 flex flex-wrap gap-x-6 gap-y-1 text-sm text-body">
+              <p>作成者：{{ reportSamplePage.authorLabel }}</p>
+              <p>作成日：{{ reportSamplePage.dateLabel }}</p>
+            </div>
           </div>
 
           <div class="divide-y divide-line">
             <div v-for="chapter in reportSamplePage.chapters" :key="chapter.title" class="p-6 sm:p-8">
               <h3 class="text-lg">{{ chapter.title }}</h3>
               <p class="mt-1 text-xs" style="color: var(--gray-text)">{{ chapter.guide }}</p>
-              <p class="mt-4 text-sm leading-[1.9] text-body">【後で記入】</p>
+              <p class="mt-4 text-sm leading-[1.9] text-body">{{ chapter.sample }}</p>
             </div>
           </div>
         </div>

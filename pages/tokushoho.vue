@@ -27,7 +27,16 @@ useHead({
             class="grid gap-1 py-4 sm:grid-cols-[10rem,1fr] sm:gap-4"
           >
             <dt class="text-sm font-bold text-navy">{{ item.label }}</dt>
-            <dd class="text-sm leading-[1.9] text-body">{{ item.value }}</dd>
+            <dd class="text-sm leading-[1.9] text-body">
+              <NuxtLink
+                v-if="item.href"
+                :to="item.href"
+                class="font-bold text-navy underline underline-offset-4"
+              >
+                {{ item.value }}
+              </NuxtLink>
+              <template v-else>{{ item.value }}</template>
+            </dd>
           </div>
         </dl>
       </div>
