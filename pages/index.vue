@@ -1,18 +1,14 @@
 <script setup lang="ts">
 import {
   hero,
-  problems,
+  aboutIntro,
   services,
   servicesFootnote,
-  subsidy,
-  plans,
-  pricingNote,
   flowSteps,
+  worksPage,
   profile,
-  faqItems,
-  contact,
+  topContact,
   siteMeta,
-  stickyCta,
   sectionLabels,
 } from '~/data/site'
 
@@ -30,6 +26,8 @@ useSocialMeta({
 })
 
 useProfessionalServiceJsonLd()
+
+const worksTeaserItems = worksPage.items.slice(0, 3)
 </script>
 
 <template>
@@ -38,38 +36,30 @@ useProfessionalServiceJsonLd()
       :title="hero.title"
       :highlight="hero.highlight"
       :subtitle="hero.subtitle"
-      :badges="hero.badges"
       :cta-label="hero.ctaLabel"
       :cta-href="hero.ctaHref"
     />
-    <ProblemsSection :problems="problems" :label="sectionLabels.problems" />
-    <ServicesSection :services="services" :label="sectionLabels.services" :footnote="servicesFootnote" />
-    <div class="border-b border-line">
-      <div class="section">
-        <SupportScopeChart />
-      </div>
-    </div>
-    <SubsidySection
-      :lead="subsidy.lead"
-      :body="subsidy.body"
-      :notes="subsidy.notes"
-      :label="sectionLabels.subsidy"
+    <AboutIntroSection
+      :label="sectionLabels.about"
+      :body="aboutIntro.body"
+      :link-label="aboutIntro.linkLabel"
+      :link-href="aboutIntro.linkHref"
     />
-    <PricingSection :plans="plans" :label="sectionLabels.pricing" :note="pricingNote" />
+    <ServicesSection :services="services" :label="sectionLabels.services" :footnote="servicesFootnote" />
     <FlowSection :steps="flowSteps" :label="sectionLabels.flow" />
+    <WorksTeaser :items="worksTeaserItems" :label="sectionLabels.works" :lead="worksPage.homeLead" />
+    <ColumnSection alt />
     <ProfileSection
       :name="profile.name"
       :description="profile.description"
       :label="sectionLabels.profile"
     />
-    <FaqSection :items="faqItems" :label="sectionLabels.faq" />
-    <ColumnSection />
-    <ContactSection
-      :heading="contact.heading"
-      :description="contact.description"
-      :formspree-endpoint="contact.formspreeEndpoint"
+    <TopContactSection
+      :heading="topContact.heading"
+      :lead="topContact.lead"
+      :cta-label="topContact.ctaLabel"
+      :cta-href="topContact.ctaHref"
       :label="sectionLabels.contact"
     />
   </main>
-  <StickyCta :label="stickyCta.label" :href="stickyCta.href" />
 </template>

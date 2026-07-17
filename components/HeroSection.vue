@@ -5,7 +5,6 @@ const props = defineProps<{
   title: string
   highlight: string
   subtitle: string
-  badges: string[]
   ctaLabel: string
   ctaHref: string
 }>()
@@ -48,13 +47,7 @@ const highlightSegments = computed(() => {
         {{ subtitle }}
       </p>
 
-      <div class="mt-8 flex flex-wrap items-center justify-center gap-3">
-        <span v-for="badge in badges" :key="badge" class="badge-pill">
-          <span v-for="(part, i) in splitNumeric(badge)" :key="i" :class="part.numeric ? 'font-barlow font-bold' : ''">{{ part.text }}</span>
-        </span>
-      </div>
-
-      <a id="hero-cta" :href="ctaHref" class="btn-cta mt-8">
+      <NuxtLink id="hero-cta" :to="ctaHref" class="btn-cta mt-8">
         {{ ctaLabel }}
         <svg class="btn-arrow h-4 w-4" viewBox="0 0 16 16" fill="none" aria-hidden="true">
           <path
@@ -65,7 +58,7 @@ const highlightSegments = computed(() => {
             stroke-linejoin="round"
           />
         </svg>
-      </a>
+      </NuxtLink>
     </div>
   </section>
 </template>

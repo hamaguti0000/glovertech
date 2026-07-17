@@ -1,9 +1,11 @@
 <script setup lang="ts">
 import { articles } from '~/data/articles'
+
+withDefaults(defineProps<{ alt?: boolean }>(), { alt: false })
 </script>
 
 <template>
-  <section class="border-b border-line">
+  <section class="border-b border-line" :class="{ 'section-alt': alt }">
     <div class="section">
       <span class="section-label">コラム</span>
       <h2 v-reveal class="section-title">AI活用・補助金のお役立ち情報</h2>
