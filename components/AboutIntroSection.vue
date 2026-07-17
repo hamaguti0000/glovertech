@@ -13,12 +13,7 @@ defineProps<{
       <span class="section-label">{{ label }}</span>
 
       <div class="mt-8 grid gap-10 sm:grid-cols-[auto,1fr]">
-        <div
-          class="flex h-20 w-20 items-center justify-center rounded-full border border-line bg-surface-alt"
-          aria-hidden="true"
-        >
-          <img src="/images/logo-mark.svg" alt="" width="40" height="40" class="h-10 w-10" />
-        </div>
+        <LogoPulse :size="112" />
 
         <div class="max-w-2xl">
           <h2 v-reveal class="text-3xl">グラバーテックについて</h2>
