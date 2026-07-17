@@ -1,6 +1,8 @@
 <script setup lang="ts">
 import { worksPage, siteMeta } from '~/data/site'
 
+const canonical = `${siteMeta.url}/works`
+
 useHead({
   title: `${worksPage.heading}｜${siteMeta.name}`,
   meta: [
@@ -9,7 +11,14 @@ useHead({
       content: worksPage.lead,
     },
   ],
-  link: [{ rel: 'canonical', href: `${siteMeta.url}/works` }],
+  link: [{ rel: 'canonical', href: canonical }],
+})
+
+useSocialMeta({
+  title: `${worksPage.heading}｜${siteMeta.name}`,
+  description: worksPage.lead,
+  url: canonical,
+  type: 'website',
 })
 
 const selfItems = worksPage.items.filter((item) => item.type === 'self')
@@ -88,6 +97,13 @@ const clientItems = worksPage.items.filter((item) => item.type === 'client')
             </article>
           </div>
         </div>
+
+        <p class="mt-12 text-sm leading-[1.9] text-body">
+          ここでご紹介した開発実績とは別に、AI導入支援サービスも行っています。
+          <NuxtLink to="/services" class="font-bold text-navy underline underline-offset-4">
+            グラバーテックのAI導入支援サービスを見る →
+          </NuxtLink>
+        </p>
       </div>
     </section>
   </main>

@@ -2,15 +2,21 @@
 import { articles } from '~/data/articles'
 import { siteMeta } from '~/data/site'
 
+const articlesTitle = `コラム｜${siteMeta.name}`
+const articlesDescription = 'AI活用や補助金について、長崎の中小企業・個人事業主向けに分かりやすく解説するコラムです。'
+const canonical = `${siteMeta.url}/articles`
+
 useHead({
-  title: `コラム｜${siteMeta.name}`,
-  meta: [
-    {
-      name: 'description',
-      content: 'AI活用や補助金について、長崎の中小企業・個人事業主向けに分かりやすく解説するコラムです。',
-    },
-  ],
-  link: [{ rel: 'canonical', href: `${siteMeta.url}/articles` }],
+  title: articlesTitle,
+  meta: [{ name: 'description', content: articlesDescription }],
+  link: [{ rel: 'canonical', href: canonical }],
+})
+
+useSocialMeta({
+  title: articlesTitle,
+  description: articlesDescription,
+  url: canonical,
+  type: 'website',
 })
 </script>
 

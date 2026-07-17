@@ -2,6 +2,7 @@
 import { faqItems, sectionLabels, siteMeta } from '~/data/site'
 import {
   aiCompanyVision,
+  articlesCrossLink,
   diagnosis,
   freeConsultation,
   operation,
@@ -10,21 +11,43 @@ import {
   roleSplit,
   securityPrinciples,
   servicesHero,
+  servicesPageMeta,
   summaryCta,
+  worksCrossLink,
 } from '~/data/services'
 
 const canonical = `${siteMeta.url}/services`
 
 useHead({
-  title: `サービス内容と料金｜長崎のAI導入支援｜${siteMeta.name}`,
-  meta: [
+  title: servicesPageMeta.title,
+  meta: [{ name: 'description', content: servicesPageMeta.description }],
+  link: [{ rel: 'canonical', href: canonical }],
+  script: [
     {
-      name: 'description',
-      content:
-        '無料相談からAI業務診断、1業務パイロット、運用・改善まで。長崎県内の中小企業・個人事業主向けに、効果を確かめながら進めるAI導入支援の内容と料金をご案内します。',
+      type: 'application/ld+json',
+      innerHTML: JSON.stringify({
+        '@context': 'https://schema.org',
+        '@type': 'Service',
+        name: 'AI業務診断・1業務パイロット',
+        description: servicesPageMeta.description,
+        serviceType: 'AI導入支援',
+        provider: {
+          '@type': 'ProfessionalService',
+          name: siteMeta.name,
+          url: siteMeta.url,
+        },
+        areaServed: '長崎県',
+        url: canonical,
+      }),
     },
   ],
-  link: [{ rel: 'canonical', href: canonical }],
+})
+
+useSocialMeta({
+  title: servicesPageMeta.title,
+  description: servicesPageMeta.description,
+  url: canonical,
+  type: 'website',
 })
 </script>
 
@@ -88,7 +111,7 @@ useHead({
     </section>
 
     <!-- 4. AI業務診断 -->
-    <section class="section-alt border-b border-line">
+    <section id="diagnosis" class="section-alt border-b border-line scroll-mt-24">
       <div class="section max-w-2xl">
         <span class="section-label">{{ diagnosis.eyebrow }}</span>
         <h2 v-reveal class="section-title">{{ diagnosis.title }}</h2>
@@ -99,6 +122,8 @@ useHead({
             :class="part.numeric ? 'font-barlow font-bold' : ''"
           >{{ part.text }}</span>
         </p>
+
+        <p class="mt-4 text-base leading-[1.9] text-body">{{ diagnosis.intro }}</p>
 
         <div class="mt-8">
           <h3 class="text-lg">標準範囲</h3>
@@ -137,11 +162,18 @@ useHead({
         >
           {{ diagnosis.sampleLabel }} →
         </NuxtLink>
+
+        <p class="mt-6 text-sm leading-[1.9] text-body">
+          {{ articlesCrossLink.text }}
+          <NuxtLink :to="articlesCrossLink.href" class="font-bold text-navy underline underline-offset-4">
+            {{ articlesCrossLink.label }} →
+          </NuxtLink>
+        </p>
       </div>
     </section>
 
     <!-- 5. 1業務パイロット -->
-    <section class="border-b border-line">
+    <section id="pilot" class="border-b border-line scroll-mt-24">
       <div class="section max-w-2xl">
         <span class="section-label">{{ pilot.eyebrow }}</span>
         <h2 v-reveal class="section-title">{{ pilot.title }}</h2>
@@ -177,11 +209,18 @@ useHead({
         <p class="mt-6 rounded-lg border border-line bg-surface-alt p-5 text-sm leading-[1.9] text-body">
           {{ pilot.note }}
         </p>
+
+        <p class="mt-6 text-sm leading-[1.9] text-body">
+          {{ worksCrossLink.text }}
+          <NuxtLink :to="worksCrossLink.href" class="font-bold text-navy underline underline-offset-4">
+            {{ worksCrossLink.label }} →
+          </NuxtLink>
+        </p>
       </div>
     </section>
 
     <!-- 6. 運用・改善 -->
-    <section class="section-alt border-b border-line">
+    <section id="support" class="section-alt border-b border-line scroll-mt-24">
       <div class="section max-w-2xl">
         <span class="section-label">{{ operation.eyebrow }}</span>
         <h2 v-reveal class="section-title">{{ operation.title }}</h2>

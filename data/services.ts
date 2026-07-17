@@ -12,6 +12,12 @@ export interface StageDetail {
   note: string
 }
 
+export const servicesPageMeta = {
+  title: 'AI業務診断・1業務パイロット｜サービス内容｜グラバーテック',
+  description:
+    '長崎県内の中小企業・個人事業主向けに、反復業務をヒアリングで整理するAI業務診断から、1業務だけの試験導入、導入後の改善までをご案内します。料金・期間・成果物、人とAIの役割分担も掲載しています。',
+}
+
 export const servicesHero = {
   label: 'サービス',
   title: 'AIを増やすのではなく、人の価値を増やす。',
@@ -47,6 +53,8 @@ export const diagnosis = {
   eyebrow: 'STEP 1',
   title: 'AI業務診断',
   price: '3万円〜',
+  intro:
+    'フォームに回答して結果を表示する簡易診断ではなく、実際の仕事の流れを聞き取り、反復業務と作業時間を整理するヒアリング型の診断です。',
   scope: [
     'ヒアリング60〜90分',
     '対象は1部署または3人まで（個人事業主は本人1人を対象として利用可能）',
@@ -84,9 +92,15 @@ export const diagnosis = {
   sampleLabel: 'レポートの見本を見る',
 }
 
+export const articlesCrossLink = {
+  text: 'AI活用の基礎から知りたい方は、ChatGPTの使い方ガイドもあわせてご覧ください。',
+  href: '/articles/chatgpt-how-to',
+  label: 'ChatGPTの使い方ガイドを見る',
+}
+
 export const pilot = {
   eyebrow: 'STEP 2',
-  title: '1業務パイロット',
+  title: '1業務パイロット（1つの業務だけで行う試験導入）',
   price: '10万円〜',
   duration: '2〜4週間',
   conditions: [
@@ -107,6 +121,12 @@ export const pilot = {
     '毎月の報告資料の下書きを作る',
   ],
   note: '標準料金には個別開発を含みません。必要な場合は、内容を確認したうえで別途お見積りします。',
+}
+
+export const worksCrossLink = {
+  text: '類似の開発・運用実績は、制作・開発実績のページでご覧いただけます。',
+  href: '/works',
+  label: '制作・開発実績を見る',
 }
 
 export const operation = {

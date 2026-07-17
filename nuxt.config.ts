@@ -26,7 +26,7 @@ export default defineNuxtConfig({
   },
 
   sitemap: {
-    exclude: ['/report-sample'],
+    exclude: ['/report-sample', '/privacy', '/tokushoho'],
   },
 
   components: [{ path: '~/components', pathPrefix: false }],

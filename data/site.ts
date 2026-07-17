@@ -46,9 +46,9 @@ export interface WorkItem {
 
 export const siteMeta = {
   name: 'グラバーテック',
-  title: '長崎の中小企業向けAI導入支援｜反復業務を1つから改善｜グラバーテック',
+  title: '長崎の中小企業向けAI導入支援｜グラバーテック',
   description:
-    '長崎県内の中小企業・個人事業主向けに、反復業務の診断、1業務パイロット、導入後の改善を支援します。AIを増やすのではなく、人が本来の仕事に集中できる状態を、効果を測りながらつくります。',
+    '長崎県内の中小企業・個人事業主向けに、反復業務の整理、AI業務診断、1業務からの試験導入、導入後の改善を支援します。',
   url: 'https://glovertech.jp',
   ogImage: '/ogp.png',
   areaServed: '長崎県',

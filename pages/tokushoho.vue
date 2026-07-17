@@ -3,6 +3,14 @@ import { tokushohoPage, siteMeta } from '~/data/site'
 
 useHead({
   title: `${tokushohoPage.heading}｜${siteMeta.name}`,
+  meta: [
+    {
+      name: 'description',
+      content: 'グラバーテックの特定商取引法に基づく表記です。料金や連絡先などの詳細を掲載しています。',
+    },
+    { name: 'robots', content: 'noindex,follow' },
+  ],
+  link: [{ rel: 'canonical', href: `${siteMeta.url}/tokushoho` }],
 })
 </script>
 

@@ -10,6 +10,7 @@ if (!article) {
 }
 
 const canonical = `${siteMeta.url}/articles/${article.slug}`
+const ogImageUrl = `${siteMeta.url}${siteMeta.ogImage}`
 
 useHead({
   title: `${article.title}｜${siteMeta.name}`,
@@ -19,6 +20,13 @@ useHead({
     { property: 'og:title', content: article.title },
     { property: 'og:description', content: article.description },
     { property: 'og:url', content: canonical },
+    { property: 'og:image', content: ogImageUrl },
+    { property: 'og:site_name', content: siteMeta.name },
+    { property: 'og:locale', content: 'ja_JP' },
+    { name: 'twitter:card', content: 'summary_large_image' },
+    { name: 'twitter:title', content: article.title },
+    { name: 'twitter:description', content: article.description },
+    { name: 'twitter:image', content: ogImageUrl },
   ],
   link: [{ rel: 'canonical', href: canonical }],
 })
@@ -71,6 +79,12 @@ useHead({
             </div>
           </div>
         </div>
+
+        <p v-if="article.showServicesLink" class="mt-10 text-sm leading-[1.9] text-body">
+          <NuxtLink to="/services" class="font-bold text-navy underline underline-offset-4">
+            AI業務診断と1業務パイロットの内容を見る →
+          </NuxtLink>
+        </p>
 
         <div class="mt-14 border-t border-line pt-10">
           <a href="/#contact" class="btn-cta inline-flex">

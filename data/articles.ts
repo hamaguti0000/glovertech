@@ -40,6 +40,7 @@ export interface Article {
   publishedAt: string
   category: string
   sections: ArticleSection[]
+  showServicesLink?: boolean
 }
 
 export const articles: Article[] = [
@@ -50,6 +51,7 @@ export const articles: Article[] = [
       'ChatGPTがどういう仕組みで動いているのかという基礎知識から、実際の始め方、業務での使い道、使うときの注意点までをまとめました。初めてAIツールに触れる方向けの入門記事です。',
     publishedAt: '2026-07-12',
     category: 'AI活用',
+    showServicesLink: true,
     sections: [
       {
         heading: 'そもそもChatGPTは何をしているのか',
@@ -155,6 +157,7 @@ export const articles: Article[] = [
       'AI導入やIT化に使える補助金を、どこで・どう探せばいいのかを解説します。長崎県内で実際に確認できている制度もあわせて紹介します。',
     publishedAt: '2026-07-12',
     category: '補助金',
+    showServicesLink: true,
     sections: [
       {
         heading: '補助金探しが難しい3つの理由',
