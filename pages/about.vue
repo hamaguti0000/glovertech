@@ -7,11 +7,7 @@ const canonical = `${siteMeta.url}/about`
 
 useHead({
   title: aboutTitle,
-  meta: [
-    { name: 'description', content: aboutDescription },
-    // TODO: 運営者情報(連絡先・事業内容)の入力が完了し次第、noindexを解除する
-    { name: 'robots', content: 'noindex,follow' },
-  ],
+  meta: [{ name: 'description', content: aboutDescription }],
   link: [{ rel: 'canonical', href: canonical }],
 })
 
@@ -36,7 +32,16 @@ useSocialMeta({
             class="grid gap-1 py-4 sm:grid-cols-[8rem,1fr] sm:gap-4"
           >
             <dt class="text-sm font-bold text-navy">{{ item.label }}</dt>
-            <dd class="text-sm leading-[1.9] text-body">{{ item.value }}</dd>
+            <dd class="text-sm leading-[1.9] text-body">
+              <NuxtLink
+                v-if="item.href"
+                :to="item.href"
+                class="font-bold text-navy underline underline-offset-4"
+              >
+                {{ item.value }}
+              </NuxtLink>
+              <template v-else>{{ item.value }}</template>
+            </dd>
           </div>
         </dl>
 

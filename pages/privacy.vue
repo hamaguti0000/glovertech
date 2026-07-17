@@ -21,7 +21,7 @@ useHead({
         <h1 class="section-title">{{ privacyPage.heading }}</h1>
         <p class="mt-2 text-sm text-body">最終更新日：{{ privacyPage.updatedAt }}</p>
         <p class="mt-4 text-sm leading-[1.9] text-body">
-          {{ privacyPage.businessName }}（以下「当方」）は、本サイトのお問い合わせフォームを通じて取得する個人情報を、以下の方針に基づき適切に取り扱います。
+          {{ privacyPage.intro }}
         </p>
 
         <div class="mt-8 space-y-8">

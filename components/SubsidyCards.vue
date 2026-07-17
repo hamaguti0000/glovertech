@@ -36,8 +36,7 @@ const latestUpdatedAt = computed(() => {
   return list.reduce((latest, item) => (item.updatedAt > latest ? item.updatedAt : latest), list[0].updatedAt)
 })
 
-function formatMax(max: number | null) {
-  if (max === null) return '【後で記入】'
+function formatMax(max: number) {
   return `${max.toLocaleString('ja-JP')}円`
 }
 </script>
@@ -75,7 +74,7 @@ function formatMax(max: number | null) {
                 :class="part.numeric ? 'font-barlow font-bold' : ''"
               >{{ part.text }}</span>
             </p>
-            <p class="text-2xl">
+            <p v-if="item.max !== null" class="text-2xl">
               <span
                 v-for="(part, i) in splitNumeric(formatMax(item.max))"
                 :key="i"
