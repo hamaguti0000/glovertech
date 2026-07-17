@@ -9,6 +9,11 @@ if (!article) {
   throw createError({ statusCode: 404, statusMessage: 'Article not found' })
 }
 
+const relatedArticles = articles
+  .filter((item) => item.category === article.category && item.slug !== article.slug)
+  .sort((a, b) => (a.publishedAt < b.publishedAt ? 1 : -1))
+  .slice(0, 3)
+
 const canonical = `${siteMeta.url}/articles/${article.slug}`
 const ogImageUrl = `${siteMeta.url}${siteMeta.ogImage}`
 
@@ -85,6 +90,18 @@ useHead({
             AI業務診断と1業務パイロットの内容を見る →
           </NuxtLink>
         </p>
+
+        <div v-if="relatedArticles.length" class="mt-14 border-t border-line pt-10">
+          <h2 class="text-lg text-navy">関連記事</h2>
+          <ul class="mt-4 divide-y divide-line border-y border-line">
+            <li v-for="related in relatedArticles" :key="related.slug" class="py-4">
+              <NuxtLink :to="`/articles/${related.slug}`" class="group block">
+                <span class="section-label">{{ related.category }}</span>
+                <h3 class="mt-1 text-base text-navy group-hover:underline">{{ related.title }}</h3>
+              </NuxtLink>
+            </li>
+          </ul>
+        </div>
 
         <div class="mt-14 border-t border-line pt-10">
           <NuxtLink to="/contact" class="btn-cta inline-flex">
