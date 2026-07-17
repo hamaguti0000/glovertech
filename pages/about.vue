@@ -2,7 +2,8 @@
 import { aboutPage, siteMeta } from '~/data/site'
 
 const aboutTitle = `${aboutPage.heading}｜${siteMeta.name}`
-const aboutDescription = 'グラバーテックの運営者情報です。屋号・運営者名・所在地・運営サイトなどを掲載しています。'
+const aboutDescription =
+  '長崎県在住のWebエンジニアが個人で運営。屋号・運営者名・所在地・関連サイトなど、グラバーテックの運営者情報を掲載しています。'
 const canonical = `${siteMeta.url}/about`
 
 useHead({
