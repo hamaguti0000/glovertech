@@ -16,7 +16,13 @@ defineProps<{
       <p class="section-lead">{{ lead }}</p>
 
       <div class="mt-10 grid gap-6 sm:grid-cols-3">
-        <article v-for="item in items" :key="item.title" class="card flex flex-col">
+        <article
+          v-for="(item, index) in items"
+          :key="item.title"
+          v-reveal
+          class="card flex flex-col"
+          :style="{ '--reveal-delay': `${index * 100}ms` }"
+        >
           <span class="section-label w-fit bg-surface-alt text-body">{{ item.category }}</span>
           <h3 class="mt-3 text-lg text-navy">{{ item.title }}</h3>
           <p class="mt-3 text-sm leading-[1.9] text-body">{{ item.summary }}</p>
