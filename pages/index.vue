@@ -29,7 +29,7 @@ useSocialMeta({
   type: 'website',
 })
 
-useJsonLd(faqItems)
+useProfessionalServiceJsonLd()
 </script>
 
 <template>

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { faqItems, sectionLabels, siteMeta } from '~/data/site'
+import { faqItems, plans, pricingNote, sectionLabels, siteMeta } from '~/data/site'
 import {
   aiCompanyVision,
   articlesCrossLink,
@@ -49,6 +49,8 @@ useSocialMeta({
   url: canonical,
   type: 'website',
 })
+
+useFaqPageJsonLd(faqItems)
 </script>
 
 <template>
@@ -262,6 +264,8 @@ useSocialMeta({
         </NuxtLink>
       </div>
     </section>
+
+    <PricingSection :plans="plans" :label="sectionLabels.pricing" :note="pricingNote" />
 
     <!-- 8. AI秘書・AIカンパニーのビジョン -->
     <section class="section-alt border-b border-line">
