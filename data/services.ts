@@ -13,7 +13,7 @@ export interface StageDetail {
 }
 
 export const servicesPageMeta = {
-  title: 'AI業務診断・1業務パイロット｜サービス内容｜グラバーテック',
+  title: '長崎のAI業務診断・1業務パイロット｜グラバーテック',
   description:
     '長崎県内の中小企業・個人事業主向けに、反復業務をヒアリングで整理するAI業務診断から、1業務だけの試験導入、導入後の改善までをご案内します。料金・期間・成果物、人とAIの役割分担も掲載しています。',
 }

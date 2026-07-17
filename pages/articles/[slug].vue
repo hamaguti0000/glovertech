@@ -16,20 +16,21 @@ const relatedArticles = articles
 
 const canonical = `${siteMeta.url}/articles/${article.slug}`
 const ogImageUrl = `${siteMeta.url}${siteMeta.ogImage}`
+const pageTitle = article.seoTitle ?? article.title
 
 useHead({
-  title: `${article.title}｜${siteMeta.name}`,
+  title: `${pageTitle}｜${siteMeta.name}`,
   meta: [
     { name: 'description', content: article.description },
     { property: 'og:type', content: 'article' },
-    { property: 'og:title', content: article.title },
+    { property: 'og:title', content: pageTitle },
     { property: 'og:description', content: article.description },
     { property: 'og:url', content: canonical },
     { property: 'og:image', content: ogImageUrl },
     { property: 'og:site_name', content: siteMeta.name },
     { property: 'og:locale', content: 'ja_JP' },
     { name: 'twitter:card', content: 'summary_large_image' },
-    { name: 'twitter:title', content: article.title },
+    { name: 'twitter:title', content: pageTitle },
     { name: 'twitter:description', content: article.description },
     { name: 'twitter:image', content: ogImageUrl },
   ],
