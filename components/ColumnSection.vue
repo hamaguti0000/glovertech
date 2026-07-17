@@ -1,15 +1,22 @@
 <script setup lang="ts">
 import { articles } from '~/data/articles'
+
+withDefaults(defineProps<{ alt?: boolean }>(), { alt: false })
 </script>
 
 <template>
-  <section class="border-b border-line">
+  <section class="border-b border-line" :class="{ 'section-alt': alt }">
     <div class="section">
       <span class="section-label">コラム</span>
       <h2 v-reveal class="section-title">AI活用・補助金のお役立ち情報</h2>
 
       <ul class="mt-10 grid gap-6 sm:grid-cols-3">
-        <li v-for="article in articles" :key="article.slug">
+        <li
+          v-for="(article, index) in articles"
+          :key="article.slug"
+          v-reveal
+          :style="{ '--reveal-delay': `${index * 100}ms` }"
+        >
           <NuxtLink
             :to="`/articles/${article.slug}`"
             class="group block h-full rounded-lg border border-line bg-white p-6 transition-colors duration-300 hover:border-navy"

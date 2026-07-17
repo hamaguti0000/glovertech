@@ -25,7 +25,13 @@ const cardLinks = [
       </p>
 
       <div class="mt-10 grid gap-6 sm:grid-cols-3">
-        <article v-for="(service, index) in services" :key="service.title" class="card flex flex-col">
+        <article
+          v-for="(service, index) in services"
+          :key="service.title"
+          v-reveal
+          class="card flex flex-col"
+          :style="{ '--reveal-delay': `${index * 100}ms` }"
+        >
           <h3 class="text-xl">{{ service.title }}</h3>
           <p class="mt-3 text-base leading-[1.9] text-body">{{ service.description }}</p>
 

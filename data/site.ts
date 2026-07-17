@@ -51,6 +51,7 @@ export interface InfoItem {
   href?: string
 }
 
+
 export const siteMeta = {
   name: 'グラバーテック',
   title: '長崎の中小企業向けAI導入支援｜グラバーテック',
@@ -96,7 +97,16 @@ export const hero = {
     '補助金の活用も見据えた、長崎のAI導入・業務効率化支援。相談だけで終わらせず、実装までお手伝いします。',
   badges: ['相談無料', '30分', 'オンラインOK'],
   ctaLabel: '無料相談を申し込む（30分・オンライン）',
-  ctaHref: '#contact',
+  ctaHref: '/contact',
+}
+
+export const aboutIntro = {
+  body: [
+    '長崎の中小企業・個人事業主向けにAI導入と業務効率化を伴走支援しています。',
+    '長崎県在住のWebエンジニアが個人で『補助金ナビ 長崎』を開発・運営しながら、県内の中小企業・個人事業主のAI導入や業務効率化のご相談をお受けしています。個人だからこそ、大きな会社には頼みにくい規模のご相談にも柔軟に対応できます。',
+  ],
+  linkLabel: '運営者情報を見る',
+  linkHref: '/about',
 }
 
 export const stickyCta = {
@@ -113,6 +123,8 @@ export const sectionLabels = {
   profile: '運営者',
   faq: 'よくある質問',
   contact: 'お問い合わせ',
+  about: '会社について',
+  works: '実績',
 }
 
 export const problems: Problem[] = [
@@ -308,6 +320,13 @@ export const contactPage = {
     '原則として3営業日以内に返信します。現在は個人で運営しているため、内容によってはご返信までお時間をいただく場合があります。',
   salesNote:
     '本フォームは、AI導入・業務改善・Web制作に関するご相談を対象としています。営業・勧誘を目的としたご連絡はご遠慮ください。',
+}
+
+export const topContact = {
+  heading: 'お問い合わせ',
+  lead: contactPage.consultationNote,
+  ctaLabel: '無料相談を申し込む',
+  ctaHref: '/contact',
 }
 
 export const aboutPage = {
