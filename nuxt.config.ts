@@ -44,6 +44,7 @@ export default defineNuxtConfig({
       routes: [
         '/works',
         '/services',
+        '/contact',
         '/articles',
         '/articles/chatgpt-how-to',
         '/articles/ai-subsidy-search',

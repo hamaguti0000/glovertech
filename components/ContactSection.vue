@@ -13,6 +13,7 @@ const props = defineProps<{
 const name = ref('')
 const company = ref('')
 const email = ref('')
+const inquiryType = ref('')
 const message = ref('')
 const status = ref<SubmitStatus>('idle')
 
@@ -30,6 +31,7 @@ async function handleSubmit() {
         name: name.value,
         company: company.value,
         email: email.value,
+        inquiryType: inquiryType.value,
         message: message.value,
       }),
     })
@@ -40,6 +42,7 @@ async function handleSubmit() {
     name.value = ''
     company.value = ''
     email.value = ''
+    inquiryType.value = ''
     message.value = ''
   } catch {
     status.value = 'error'
@@ -94,6 +97,23 @@ async function handleSubmit() {
         </div>
 
         <div>
+          <label for="inquiryType" class="text-sm text-body">相談種別 <span class="text-navy">*</span></label>
+          <select
+            id="inquiryType"
+            v-model="inquiryType"
+            name="inquiryType"
+            required
+            :disabled="status === 'sending'"
+            class="field-input mt-2 disabled:opacity-50"
+          >
+            <option value="" disabled>相談種別を選択してください</option>
+            <option value="無料相談を希望">無料相談を希望</option>
+            <option value="Web制作・IT運用について相談">Web制作・IT運用について相談</option>
+            <option value="その他のお問い合わせ">その他のお問い合わせ</option>
+          </select>
+        </div>
+
+        <div>
           <label for="message" class="text-sm text-body">相談内容</label>
           <textarea
             id="message"
@@ -106,7 +126,7 @@ async function handleSubmit() {
         </div>
 
         <button type="submit" class="btn-cta w-full sm:w-auto" :disabled="status === 'sending'">
-          {{ status === 'sending' ? '送信中…' : '無料相談を申し込む' }}
+          {{ status === 'sending' ? '送信中…' : '送信する' }}
           <svg class="btn-arrow h-4 w-4" viewBox="0 0 16 16" fill="none" aria-hidden="true">
             <path
               d="M3 8h10M9 4l4 4-4 4"
