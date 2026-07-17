@@ -36,6 +36,12 @@ useHead({
   link: [{ rel: 'canonical', href: canonical }],
 })
 
+useBreadcrumbJsonLd([
+  { name: 'ホーム', url: siteMeta.url },
+  { name: 'コラム', url: `${siteMeta.url}/articles` },
+  { name: article.title, url: canonical },
+])
+
 useHead({
   script: [
     {

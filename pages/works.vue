@@ -23,6 +23,11 @@ useSocialMeta({
 
 const selfItems = worksPage.items.filter((item) => item.type === 'self')
 const clientItems = worksPage.items.filter((item) => item.type === 'client')
+
+useBreadcrumbJsonLd([
+  { name: 'ホーム', url: siteMeta.url },
+  { name: worksPage.heading, url: canonical },
+])
 </script>
 
 <template>
