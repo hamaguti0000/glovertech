@@ -40,7 +40,7 @@ useHead({
         </div>
 
         <div class="mt-10">
-          <a href="/#contact" class="btn-cta inline-flex">
+          <NuxtLink to="/contact" class="btn-cta inline-flex">
             無料相談を申し込む
             <svg class="btn-arrow h-4 w-4" viewBox="0 0 16 16" fill="none" aria-hidden="true">
               <path
@@ -51,7 +51,7 @@ useHead({
                 stroke-linejoin="round"
               />
             </svg>
-          </a>
+          </NuxtLink>
         </div>
       </div>
     </section>

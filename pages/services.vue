@@ -248,7 +248,7 @@ useSocialMeta({
         <h2 v-reveal class="section-title">{{ summaryCta.heading }}</h2>
         <p class="section-lead">{{ summaryCta.body }}</p>
 
-        <a href="/#contact" class="btn-cta mt-8 inline-flex">
+        <NuxtLink to="/contact" class="btn-cta mt-8 inline-flex">
           無料相談を申し込む
           <svg class="btn-arrow h-4 w-4" viewBox="0 0 16 16" fill="none" aria-hidden="true">
             <path
@@ -259,7 +259,7 @@ useSocialMeta({
               stroke-linejoin="round"
             />
           </svg>
-        </a>
+        </NuxtLink>
       </div>
     </section>
 
@@ -322,7 +322,7 @@ useSocialMeta({
           無料相談だけで終了いただいても構いません。ご納得いただいた場合のみ、次の段階へ進みます。
         </p>
 
-        <a href="/#contact" class="btn-cta mt-8 inline-flex">
+        <NuxtLink to="/contact" class="btn-cta mt-8 inline-flex">
           無料相談を申し込む
           <svg class="btn-arrow h-4 w-4" viewBox="0 0 16 16" fill="none" aria-hidden="true">
             <path
@@ -333,7 +333,7 @@ useSocialMeta({
               stroke-linejoin="round"
             />
           </svg>
-        </a>
+        </NuxtLink>
       </div>
     </section>
   </main>

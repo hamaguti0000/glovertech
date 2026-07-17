@@ -67,7 +67,7 @@ export const header = {
   name: siteMeta.name,
   tagline: '補助金ナビ　長崎 運営',
   ctaLabel: '無料相談',
-  ctaHref: '/#contact',
+  ctaHref: '/contact',
 }
 
 export const footer = {
@@ -226,7 +226,7 @@ export const businessEntityName = `${siteMeta.name}（運営責任者：${profil
 
 export const contactFormNotice = {
   value: 'お問い合わせは、サイト内のお問い合わせフォームをご利用ください。',
-  href: '/#contact',
+  href: '/contact',
 }
 
 export const faqItems: FaqItem[] = [
@@ -291,6 +291,23 @@ export const contact = {
   heading: 'お問い合わせ',
   description: 'まずは無料相談から。下記フォームよりお気軽にお問い合わせください。',
   formspreeEndpoint: 'https://formspree.io/f/mbdnrarj',
+}
+
+export const contactPage = {
+  title: `お問い合わせ｜${siteMeta.name}`,
+  description: '長崎県内の中小企業・個人事業主向けに、AI導入・業務改善・Web制作のご相談を承ります。',
+  heading: 'お問い合わせ',
+  lead: 'AI導入・業務改善やWeb制作について、まずはお気軽にご相談ください。',
+  consultationNote:
+    '現状の課題や困りごとをお聞きします。この時点で費用はかかりません。無料相談だけで終了いただいても構いません。',
+  formHeading: '問い合わせフォーム',
+  formLabel: 'フォーム',
+  formLead: '必要事項をご入力のうえ、送信してください。',
+  usageNote: 'いただいた情報は、お問い合わせへの回答および無料相談のご案内のために利用します。',
+  replyNote:
+    '原則として3営業日以内に返信します。現在は個人で運営しているため、内容によってはご返信までお時間をいただく場合があります。',
+  salesNote:
+    '本フォームは、AI導入・業務改善・Web制作に関するご相談を対象としています。営業・勧誘を目的としたご連絡はご遠慮ください。',
 }
 
 export const aboutPage = {
