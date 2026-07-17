@@ -7,9 +7,9 @@ defineProps<{
 }>()
 
 const illustrations = [
-  { src: '/images/problem-manual-work.png', alt: '書類の山とパソコンを前に困っている人のイラスト', width: 1254, height: 973 },
-  { src: '/images/problem-inquiries.png', alt: '電話とメールの対応に追われ困っている人のイラスト', width: 1254, height: 935 },
-  { src: '/images/problem-ai-confusion.png', alt: 'AI活用について悩んでいる人のイラスト', width: 1254, height: 886 },
+  { src: '/images/problem-manual-work.webp', alt: '書類の山とパソコンを前に困っている人のイラスト', width: 1254, height: 973 },
+  { src: '/images/problem-inquiries.webp', alt: '電話とメールの対応に追われ困っている人のイラスト', width: 1254, height: 935 },
+  { src: '/images/problem-ai-confusion.webp', alt: 'AI活用について悩んでいる人のイラスト', width: 1254, height: 886 },
 ]
 </script>
 

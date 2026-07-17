@@ -3,6 +3,14 @@ import { privacyPage, siteMeta } from '~/data/site'
 
 useHead({
   title: `${privacyPage.heading}｜${siteMeta.name}`,
+  meta: [
+    {
+      name: 'description',
+      content: 'グラバーテックのプライバシーポリシーです。お問い合わせフォームで取得する情報の取り扱い方針を掲載しています。',
+    },
+    { name: 'robots', content: 'noindex,follow' },
+  ],
+  link: [{ rel: 'canonical', href: `${siteMeta.url}/privacy` }],
 })
 </script>
 
