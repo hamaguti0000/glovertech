@@ -7,7 +7,19 @@ export function useProfessionalServiceJsonLd() {
     name: siteMeta.title,
     description: siteMeta.description,
     url: siteMeta.url,
-    areaServed: siteMeta.areaServed,
+    areaServed: [
+      { '@type': 'City', name: '長崎市' },
+      { '@type': 'City', name: '佐世保市' },
+      { '@type': 'City', name: '諫早市' },
+      { '@type': 'City', name: '大村市' },
+      { '@type': 'AdministrativeArea', name: siteMeta.areaServed },
+    ],
+    address: {
+      '@type': 'PostalAddress',
+      addressLocality: '長崎市',
+      addressRegion: '長崎県',
+      addressCountry: 'JP',
+    },
     logo: `${siteMeta.url}/images/logo-mark.svg`,
     image: `${siteMeta.url}/images/logo-mark.svg`,
   }
