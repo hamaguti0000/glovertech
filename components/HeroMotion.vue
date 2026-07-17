@@ -25,7 +25,9 @@ let animationStart = 0
 
 const COLORS = ['#223A70', '#223A70', '#223A70', '#FF7A1A', '#FFD338']
 const DURATION = 1400
+const LOOP_DURATION = 2600
 const EASE = (t: number) => 1 - (1 - t) ** 3
+const EASE_IN_OUT = (t: number) => (t < 0.5 ? 2 * t * t : 1 - (-2 * t + 2) ** 2 / 2)
 
 // 正規化座標(0〜1)によるチェックマークの経路。散らばった点がここへ収束する
 const CHECK_PATH: [number, number][] = [
@@ -42,6 +44,37 @@ const CHECK_PATH: [number, number][] = [
   [0.78, 0.22],
   [0.84, 0.16],
 ]
+
+let pathPoints: { x: number; y: number }[] = []
+let cumulativeLengths: number[] = []
+let totalLength = 0
+
+function buildPath() {
+  pathPoints = CHECK_PATH.map(([nx, ny]) => ({ x: nx * size, y: ny * size }))
+  cumulativeLengths = [0]
+  totalLength = 0
+  for (let i = 1; i < pathPoints.length; i++) {
+    const dx = pathPoints[i].x - pathPoints[i - 1].x
+    const dy = pathPoints[i].y - pathPoints[i - 1].y
+    totalLength += Math.hypot(dx, dy)
+    cumulativeLengths.push(totalLength)
+  }
+}
+
+// t(0〜1)に応じて経路上の座標を線形補間で返す
+function pointOnPath(t: number) {
+  const target = t * totalLength
+  for (let i = 1; i < pathPoints.length; i++) {
+    if (target <= cumulativeLengths[i]) {
+      const segLength = cumulativeLengths[i] - cumulativeLengths[i - 1]
+      const segT = segLength === 0 ? 0 : (target - cumulativeLengths[i - 1]) / segLength
+      const a = pathPoints[i - 1]
+      const b = pathPoints[i]
+      return { x: a.x + (b.x - a.x) * segT, y: a.y + (b.y - a.y) * segT }
+    }
+  }
+  return pathPoints[pathPoints.length - 1]
+}
 
 function buildNodes() {
   nodes = CHECK_PATH.map(([nx, ny], i) => {
@@ -90,6 +123,24 @@ function draw(elapsed: number, reduceMotion: boolean) {
     ctx!.arc(x, y, node.radius, 0, Math.PI * 2)
     ctx!.fill()
   })
+
+  if (t >= 1 && !reduceMotion && totalLength > 0) drawTravelingDot(elapsed - DURATION)
+}
+
+// 収束後、チェックの線の上を光る点が行き来し続ける演出
+function drawTravelingDot(loopElapsed: number) {
+  const cycle = loopElapsed % (LOOP_DURATION * 2)
+  const rawT = cycle <= LOOP_DURATION ? cycle / LOOP_DURATION : 2 - cycle / LOOP_DURATION
+  const pathT = EASE_IN_OUT(Math.min(Math.max(rawT, 0), 1))
+
+  for (let echo = 3; echo >= 0; echo--) {
+    const echoT = Math.min(Math.max(pathT - echo * 0.025, 0), 1)
+    const { x, y } = pointOnPath(echoT)
+    ctx!.beginPath()
+    ctx!.fillStyle = echo === 0 ? '#FF7A1A' : `rgba(255, 122, 26, ${0.28 - echo * 0.07})`
+    ctx!.arc(x, y, echo === 0 ? 5 : 5 - echo, 0, Math.PI * 2)
+    ctx!.fill()
+  }
 }
 
 function resize() {
@@ -101,6 +152,7 @@ function resize() {
   canvas.height = size * dpr
   ctx = canvas.getContext('2d')
   ctx?.scale(dpr, dpr)
+  buildPath()
   buildNodes()
 
   // canvasの幅/高さを設定するとビットマップと変形行列がリセットされるため、
