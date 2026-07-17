@@ -47,8 +47,6 @@ const highlightSegments = computed(() => {
         {{ subtitle }}
       </p>
 
-      <HeroMotion class="mt-8 w-40 sm:w-48" />
-
       <NuxtLink id="hero-cta" :to="ctaHref" class="btn-cta mt-8">
         {{ ctaLabel }}
         <svg class="btn-arrow h-4 w-4" viewBox="0 0 16 16" fill="none" aria-hidden="true">
