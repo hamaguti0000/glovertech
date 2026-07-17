@@ -1,8 +1,25 @@
 <script setup lang="ts">
 import { aboutPage, siteMeta } from '~/data/site'
 
+const aboutTitle = `${aboutPage.heading}｜${siteMeta.name}`
+const aboutDescription = 'グラバーテックの運営者情報です。屋号・運営者名・所在地・運営サイトなどを掲載しています。'
+const canonical = `${siteMeta.url}/about`
+
 useHead({
-  title: `${aboutPage.heading}｜${siteMeta.name}`,
+  title: aboutTitle,
+  meta: [
+    { name: 'description', content: aboutDescription },
+    // TODO: 運営者情報(連絡先・事業内容)の入力が完了し次第、noindexを解除する
+    { name: 'robots', content: 'noindex,follow' },
+  ],
+  link: [{ rel: 'canonical', href: canonical }],
+})
+
+useSocialMeta({
+  title: aboutTitle,
+  description: aboutDescription,
+  url: canonical,
+  type: 'website',
 })
 </script>
 
@@ -33,6 +50,12 @@ useHead({
             {{ aboutPage.relatedSite.name }}
           </a>
         </div>
+
+        <p class="mt-10 text-sm leading-[1.9] text-body">
+          <NuxtLink to="/services" class="font-bold text-navy underline underline-offset-4">
+            AI導入支援サービスの内容はこちら →
+          </NuxtLink>
+        </p>
       </div>
     </section>
   </main>

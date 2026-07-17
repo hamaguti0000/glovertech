@@ -16,25 +16,17 @@ import {
   sectionLabels,
 } from '~/data/site'
 
-const ogImageUrl = `${siteMeta.url}${siteMeta.ogImage}`
-
 useHead({
   title: siteMeta.title,
-  meta: [
-    { name: 'description', content: siteMeta.description },
-    { property: 'og:type', content: 'website' },
-    { property: 'og:site_name', content: siteMeta.title },
-    { property: 'og:title', content: siteMeta.title },
-    { property: 'og:description', content: siteMeta.description },
-    { property: 'og:url', content: siteMeta.url },
-    { property: 'og:image', content: ogImageUrl },
-    { property: 'og:locale', content: 'ja_JP' },
-    { name: 'twitter:card', content: 'summary_large_image' },
-    { name: 'twitter:title', content: siteMeta.title },
-    { name: 'twitter:description', content: siteMeta.description },
-    { name: 'twitter:image', content: ogImageUrl },
-  ],
+  meta: [{ name: 'description', content: siteMeta.description }],
   link: [{ rel: 'canonical', href: siteMeta.url }],
+})
+
+useSocialMeta({
+  title: siteMeta.title,
+  description: siteMeta.description,
+  url: siteMeta.url,
+  type: 'website',
 })
 
 useJsonLd(faqItems)
