@@ -7,7 +7,11 @@ const canonical = `${siteMeta.url}/about`
 
 useHead({
   title: aboutTitle,
-  meta: [{ name: 'description', content: aboutDescription }],
+  meta: [
+    { name: 'description', content: aboutDescription },
+    // TODO: 運営者情報(連絡先・事業内容)の入力が完了し次第、noindexを解除する
+    { name: 'robots', content: 'noindex,follow' },
+  ],
   link: [{ rel: 'canonical', href: canonical }],
 })
 

@@ -26,7 +26,8 @@ export default defineNuxtConfig({
   },
 
   sitemap: {
-    exclude: ['/report-sample', '/privacy', '/tokushoho'],
+    // /aboutは運営者情報(連絡先・事業内容)の入力が完了するまでの一時的な除外
+    exclude: ['/report-sample', '/privacy', '/tokushoho', '/about'],
   },
 
   components: [{ path: '~/components', pathPrefix: false }],
