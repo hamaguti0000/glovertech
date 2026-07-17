@@ -17,6 +17,11 @@ useSocialMeta({
   url: canonical,
   type: 'website',
 })
+
+useBreadcrumbJsonLd([
+  { name: 'ホーム', url: siteMeta.url },
+  { name: aboutPage.heading, url: canonical },
+])
 </script>
 
 <template>

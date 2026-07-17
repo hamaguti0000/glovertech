@@ -51,6 +51,11 @@ useSocialMeta({
 })
 
 useFaqPageJsonLd(faqItems)
+
+useBreadcrumbJsonLd([
+  { name: 'ホーム', url: siteMeta.url },
+  { name: 'サービス', url: canonical },
+])
 </script>
 
 <template>
