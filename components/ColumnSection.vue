@@ -5,8 +5,11 @@ withDefaults(defineProps<{ alt?: boolean }>(), { alt: false })
 </script>
 
 <template>
-  <section class="border-b border-line" :class="{ 'section-alt': alt }">
-    <div class="section">
+  <section class="relative overflow-hidden border-b border-line" :class="{ 'section-alt': alt }">
+    <div class="pointer-events-none absolute inset-0" aria-hidden="true">
+      <div class="absolute -bottom-32 -left-24 h-[420px] w-[420px] rounded-full bg-gold/[0.16] blur-3xl" />
+    </div>
+    <div class="section relative">
       <span class="section-label">コラム</span>
       <h2 v-reveal class="section-title">AI活用・補助金のお役立ち情報</h2>
 
