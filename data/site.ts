@@ -61,7 +61,7 @@ export const siteMeta = {
   ogImage: '/ogp.png',
   areaServed: '長崎県',
   // Google アナリティクス4の測定ID（G-XXXXXXXXXX）。未設定なら計測タグを出力しない。
-  gaMeasurementId: '',
+  gaMeasurementId: 'G-DSTBH2HWCD',
 }
 
 export const header = {
