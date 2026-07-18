@@ -38,12 +38,14 @@ useBreadcrumbJsonLd([
         <p class="section-lead">{{ worksPage.lead }}</p>
 
         <div class="mt-10">
-          <h2 class="text-sm font-bold text-body">自社サービス</h2>
+          <h2 class="text-sm font-bold tracking-wide text-gold">自社サービス</h2>
 
           <article
-            v-for="item in selfItems"
+            v-for="(item, index) in selfItems"
             :key="item.title"
+            v-reveal
             class="card mt-4 flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between"
+            :style="{ '--reveal-delay': `${index * 100}ms` }"
           >
             <div>
               <span class="section-label">{{ item.category }}</span>
@@ -70,18 +72,33 @@ useBreadcrumbJsonLd([
               :href="item.href"
               target="_blank"
               rel="noopener"
-              class="inline-flex shrink-0 items-center gap-1 rounded-lg bg-cta px-5 py-2.5 text-sm font-bold text-white transition-colors duration-500 ease-reveal hover:bg-cta-dark"
+              class="btn-cta shrink-0 px-5 py-2.5 text-sm"
             >
               {{ item.hrefLabel }}
+              <svg class="btn-arrow h-4 w-4" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+                <path
+                  d="M3 8h10M9 4l4 4-4 4"
+                  stroke="currentColor"
+                  stroke-width="1.5"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>
             </a>
           </article>
         </div>
 
         <div class="mt-12">
-          <h2 class="text-sm font-bold text-body">クライアント案件</h2>
+          <h2 class="text-sm font-bold tracking-wide text-gold">クライアント案件</h2>
 
           <div class="mt-4 grid gap-6 sm:grid-cols-3">
-            <article v-for="item in clientItems" :key="item.title" class="card flex flex-col">
+            <article
+              v-for="(item, index) in clientItems"
+              :key="item.title"
+              v-reveal
+              class="card flex flex-col"
+              :style="{ '--reveal-delay': `${index * 100}ms` }"
+            >
               <span class="section-label w-fit bg-surface-alt text-body">{{ item.category }}</span>
               <h3 class="mt-3 text-lg text-navy">{{ item.title }}</h3>
               <p class="mt-3 text-sm leading-[1.9] text-body">{{ item.summary }}</p>
