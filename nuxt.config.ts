@@ -75,7 +75,7 @@ export default defineNuxtConfig({
         { rel: 'preconnect', href: 'https://fonts.gstatic.com', crossorigin: '' },
         {
           rel: 'stylesheet',
-          href: 'https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@700&display=swap',
+          href: 'https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@700&family=Noto+Serif+JP:wght@600;700&display=swap',
         },
       ],
       script: gaScripts,

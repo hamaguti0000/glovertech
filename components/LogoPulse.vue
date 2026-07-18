@@ -5,7 +5,7 @@ withDefaults(defineProps<{ size?: number }>(), { size: 80 })
 <template>
   <div class="relative inline-flex shrink-0 items-center justify-center" :style="{ width: `${size}px`, height: `${size}px` }">
     <span class="pulse-ring pulse-ring--navy absolute inset-0 rounded-full" aria-hidden="true" />
-    <span class="pulse-ring pulse-ring--yellow absolute inset-0 rounded-full" aria-hidden="true" />
+    <span class="pulse-ring pulse-ring--gold absolute inset-0 rounded-full" aria-hidden="true" />
     <div class="relative flex h-full w-full items-center justify-center rounded-full border border-line bg-surface-alt">
       <img src="/images/logo-mark.svg" alt="" class="h-1/2 w-1/2" />
     </div>
@@ -18,11 +18,11 @@ withDefaults(defineProps<{ size?: number }>(), { size: 80 })
 }
 
 .pulse-ring--navy {
-  border: 2px solid rgba(34, 58, 112, 0.35);
+  border: 2px solid rgba(20, 33, 61, 0.35);
 }
 
-.pulse-ring--yellow {
-  border: 2px solid rgba(255, 211, 56, 0.6);
+.pulse-ring--gold {
+  border: 2px solid rgba(192, 138, 46, 0.6);
   animation-delay: 1.3s;
 }
 

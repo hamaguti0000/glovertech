@@ -1,5 +1,6 @@
 <script setup lang="ts">
-import { nextTick, onMounted, onUnmounted, ref } from 'vue'
+import { onMounted, onUnmounted, ref } from 'vue'
+import type { ScrollTrigger } from 'gsap/ScrollTrigger'
 import type { FlowStep } from '~/data/site'
 
 const props = defineProps<{
@@ -15,49 +16,23 @@ const illustrations = [
 
 const containerEl = ref<HTMLElement | null>(null)
 const stepEls = ref<(HTMLElement | null)[]>([])
+const lineEl = ref<SVGLineElement | null>(null)
 const lineLength = ref(0)
 const dashOffset = ref(0)
-const stepFractions = ref<number[]>(props.steps.map(() => 0))
 const drawn = ref<boolean[]>(props.steps.map(() => false))
-const reduceMotion =
-  typeof window !== 'undefined' && window.matchMedia('(prefers-reduced-motion: reduce)').matches
-let ticking = false
-
-function measure() {
-  if (!containerEl.value) return
-  lineLength.value = containerEl.value.offsetHeight
-  stepFractions.value = stepEls.value.map((el) => {
-    if (!el || !containerEl.value || containerEl.value.offsetHeight === 0) return 0
-    return el.offsetTop / containerEl.value.offsetHeight
-  })
-}
-
-function updateProgress() {
-  if (containerEl.value) {
-    const rect = containerEl.value.getBoundingClientRect()
-    const start = window.innerHeight * 0.85
-    const progress = Math.min(Math.max((start - rect.top) / rect.height, 0), 1)
-    dashOffset.value = lineLength.value * (1 - progress)
-    stepFractions.value.forEach((fraction, i) => {
-      if (progress >= fraction - 0.02) drawn.value[i] = true
-    })
-  }
-  ticking = false
-}
-
-function handleScroll() {
-  if (ticking) return
-  ticking = true
-  requestAnimationFrame(updateProgress)
-}
 
 function setStepEl(el: unknown, index: number) {
   stepEls.value[index] = el as HTMLElement | null
 }
 
+let progressTrigger: ScrollTrigger | null = null
+let stepTriggers: ScrollTrigger[] = []
+
 onMounted(async () => {
-  await nextTick()
-  measure()
+  if (typeof window === 'undefined' || !containerEl.value) return
+
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+  lineLength.value = containerEl.value.offsetHeight
 
   if (reduceMotion) {
     dashOffset.value = 0
@@ -66,14 +41,43 @@ onMounted(async () => {
   }
 
   dashOffset.value = lineLength.value
-  window.addEventListener('scroll', handleScroll, { passive: true })
-  window.addEventListener('resize', measure)
-  updateProgress()
+
+  const { gsap } = await import('gsap')
+  const { ScrollTrigger } = await import('gsap/ScrollTrigger')
+  gsap.registerPlugin(ScrollTrigger)
+
+  if (!containerEl.value) return
+
+  progressTrigger = ScrollTrigger.create({
+    trigger: containerEl.value,
+    start: 'top 85%',
+    end: 'bottom 85%',
+    scrub: 0.6,
+    onRefresh: () => {
+      if (containerEl.value) lineLength.value = containerEl.value.offsetHeight
+    },
+    onUpdate: (self) => {
+      dashOffset.value = lineLength.value * (1 - self.progress)
+    },
+  })
+
+  stepTriggers = stepEls.value
+    .map((el, i) => {
+      if (!el) return null
+      return ScrollTrigger.create({
+        trigger: el,
+        start: 'top 85%',
+        onEnter: () => {
+          drawn.value[i] = true
+        },
+      })
+    })
+    .filter((t): t is ScrollTrigger => t !== null)
 })
 
 onUnmounted(() => {
-  window.removeEventListener('scroll', handleScroll)
-  window.removeEventListener('resize', measure)
+  progressTrigger?.kill()
+  stepTriggers.forEach((t) => t.kill())
 })
 </script>
 
@@ -88,17 +92,17 @@ onUnmounted(() => {
 
       <div ref="containerEl" class="relative mt-14 pl-10">
         <svg class="absolute left-0 top-0 h-full w-6 overflow-visible" aria-hidden="true">
-          <line x1="1" y1="0" x2="1" :y2="lineLength" stroke="#E2E8EB" stroke-width="2" />
+          <line x1="1" y1="0" x2="1" :y2="lineLength" stroke="#E4E0D6" stroke-width="2" />
           <line
+            ref="lineEl"
             x1="1"
             y1="0"
             x2="1"
             :y2="lineLength"
-            stroke="#223A70"
+            stroke="#14213D"
             stroke-width="2"
             :stroke-dasharray="lineLength"
             :stroke-dashoffset="dashOffset"
-            style="transition: stroke-dashoffset 200ms linear"
           />
         </svg>
 
@@ -110,18 +114,18 @@ onUnmounted(() => {
             class="relative"
           >
             <svg class="absolute -left-10 top-0 h-7 w-7" viewBox="0 0 28 28" aria-hidden="true">
-              <circle cx="14" cy="14" r="12" fill="white" stroke="#E2E8EB" stroke-width="2" />
+              <circle cx="14" cy="14" r="12" fill="white" stroke="#E4E0D6" stroke-width="2" />
               <circle
                 cx="14"
                 cy="14"
                 r="12"
                 fill="none"
-                stroke="#223A70"
+                stroke="#C08A2E"
                 stroke-width="2"
                 stroke-linecap="round"
                 stroke-dasharray="75.4"
                 :stroke-dashoffset="drawn[index] ? 0 : 75.4"
-                style="transition: stroke-dashoffset 500ms cubic-bezier(0.22, 1, 0.36, 1)"
+                style="transition: stroke-dashoffset 600ms cubic-bezier(0.22, 1, 0.36, 1)"
               />
               <text
                 x="14"
@@ -130,7 +134,7 @@ onUnmounted(() => {
                 font-size="12"
                 font-weight="700"
                 font-family="'Barlow Condensed', sans-serif"
-                fill="#223A70"
+                fill="#14213D"
               >{{ step.step }}</text>
             </svg>
             <div class="illustration-slot mb-4 max-w-xs">
