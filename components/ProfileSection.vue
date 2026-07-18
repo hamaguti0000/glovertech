@@ -20,7 +20,7 @@ defineProps<{
         </div>
 
         <div>
-          <h2 class="text-3xl">{{ name }}</h2>
+          <h2 v-reveal class="text-3xl">{{ name }}</h2>
           <p class="mt-3 max-w-2xl text-base leading-[1.9] text-body">{{ description }}</p>
         </div>
       </div>
