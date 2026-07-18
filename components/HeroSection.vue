@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed } from 'vue'
+import { computed, onMounted, ref } from 'vue'
 
 const props = defineProps<{
   title: string
@@ -8,6 +8,23 @@ const props = defineProps<{
   ctaLabel: string
   ctaHref: string
 }>()
+
+const frameRectEl = ref<SVGRectElement | null>(null)
+
+onMounted(async () => {
+  if (typeof window === 'undefined' || !frameRectEl.value) return
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
+
+  const length = frameRectEl.value.getTotalLength()
+  const { gsap } = await import('gsap')
+  gsap.set(frameRectEl.value, { strokeDasharray: length, strokeDashoffset: length })
+  gsap.to(frameRectEl.value, {
+    strokeDashoffset: 0,
+    duration: 1.3,
+    delay: 0.35,
+    ease: 'power2.inOut',
+  })
+})
 
 const titleParts = computed(() => {
   const index = props.title.indexOf(props.highlight)
@@ -31,35 +48,63 @@ const highlightSegments = computed(() => {
 </script>
 
 <style scoped>
-.hero-copy {
-  animation: hero-fade-in 700ms cubic-bezier(0.22, 1, 0.36, 1) both;
+.hero-anim {
+  opacity: 0;
+  animation: hero-fade-in 700ms cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+.hero-anim-1 {
+  animation-delay: 0ms;
+}
+
+.hero-anim-2 {
+  animation-delay: 140ms;
+}
+
+.hero-anim-3 {
+  animation-delay: 280ms;
+}
+
+.hero-anim-4 {
+  animation-delay: 200ms;
 }
 
 .hero-visual {
-  animation: hero-fade-in 700ms cubic-bezier(0.22, 1, 0.36, 1) 150ms both;
   background: linear-gradient(155deg, #1d2c52 0%, #14213d 55%, #0f1830 100%);
 }
 
 .hero-visual-glow {
   position: absolute;
   inset: 0;
+  opacity: 0;
   background: radial-gradient(circle at 28% 22%, rgba(192, 138, 46, 0.32), transparent 55%);
+  animation: hero-glow-in 900ms cubic-bezier(0.22, 1, 0.36, 1) 150ms forwards;
 }
 
-.hero-visual-frame {
+.hero-visual-frame-svg {
   position: absolute;
-  left: 12%;
-  right: 12%;
-  top: 14%;
-  bottom: 14%;
-  border: 1px solid rgba(192, 138, 46, 0.35);
+  inset: 0;
+  height: 100%;
+  width: 100%;
 }
 
 .hero-visual-logo {
   position: absolute;
   top: 50%;
   left: 50%;
-  transform: translate(-50%, -50%);
+  opacity: 0;
+  animation: hero-logo-in 700ms cubic-bezier(0.22, 1, 0.36, 1) 400ms forwards;
+}
+
+@keyframes hero-logo-in {
+  from {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0.85);
+  }
+  to {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+  }
 }
 
 @keyframes hero-fade-in {
@@ -73,10 +118,35 @@ const highlightSegments = computed(() => {
   }
 }
 
+@keyframes hero-glow-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
-  .hero-copy,
-  .hero-visual {
+  .hero-anim {
     animation: none;
+    opacity: 1;
+  }
+
+  .hero-visual-glow {
+    animation: none;
+    opacity: 1;
+  }
+
+  .hero-visual-frame-rect {
+    animation: none;
+    stroke-dashoffset: 0;
+  }
+
+  .hero-visual-logo {
+    animation: none;
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
   }
 }
 </style>
@@ -85,7 +155,9 @@ const highlightSegments = computed(() => {
   <section class="overflow-hidden border-b border-line">
     <div class="section grid items-center gap-10 py-16 sm:py-20 lg:grid-cols-[1.05fr_0.95fr] lg:gap-16 lg:py-20">
       <div class="hero-copy">
-        <h1 class="max-w-2xl font-serif text-4xl leading-snug sm:text-5xl [word-break:keep-all] [overflow-wrap:break-word]">
+        <h1
+          class="hero-anim hero-anim-1 max-w-2xl font-serif text-4xl leading-snug sm:text-5xl [word-break:keep-all] [overflow-wrap:break-word]"
+        >
           {{ titleParts.before }}<wbr /><span
             v-if="titleParts.highlight"
             class="marker-highlight"
@@ -95,11 +167,11 @@ const highlightSegments = computed(() => {
           >{{ seg }}<wbr v-if="i < highlightSegments.length - 1" /></template></span>{{ titleParts.after }}
         </h1>
 
-        <p class="mt-6 max-w-xl text-base leading-[1.9] text-body">
+        <p class="hero-anim hero-anim-2 mt-6 max-w-xl text-base leading-[1.9] text-body">
           {{ subtitle }}
         </p>
 
-        <NuxtLink id="hero-cta" v-magnetic :to="ctaHref" class="btn-cta mt-8">
+        <NuxtLink id="hero-cta" :to="ctaHref" class="hero-anim hero-anim-3 btn-cta mt-8">
           {{ ctaLabel }}
           <svg class="btn-arrow h-4 w-4" viewBox="0 0 16 16" fill="none" aria-hidden="true">
             <path
@@ -113,9 +185,21 @@ const highlightSegments = computed(() => {
         </NuxtLink>
       </div>
 
-      <div class="hero-visual relative aspect-[4/3] overflow-hidden rounded-md lg:aspect-[5/4]">
+      <div class="hero-anim hero-anim-4 hero-visual relative aspect-[4/3] overflow-hidden rounded-md lg:aspect-[5/4]">
         <div class="hero-visual-glow" aria-hidden="true" />
-        <div class="hero-visual-frame" aria-hidden="true" />
+        <svg class="hero-visual-frame-svg" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
+          <rect
+            ref="frameRectEl"
+            class="hero-visual-frame-rect"
+            x="12"
+            y="14"
+            width="76"
+            height="72"
+            fill="none"
+            stroke="rgba(192, 138, 46, 0.45)"
+            stroke-width="0.4"
+          />
+        </svg>
         <LogoPulse class="hero-visual-logo" :size="128" />
       </div>
     </div>

@@ -24,6 +24,7 @@ const illustrations = [
           v-for="(problem, index) in problems"
           :key="problem.title"
           v-reveal
+          v-tilt
           class="card"
           :style="{ '--reveal-delay': `${index * 100}ms` }"
         >

@@ -37,6 +37,11 @@ useBreadcrumbJsonLd([
         <h1 class="section-title">{{ worksPage.heading }}</h1>
         <p class="section-lead">{{ worksPage.lead }}</p>
 
+        <div class="mt-8 flex flex-wrap gap-10 border-y border-line py-6">
+          <CountUpStat :value="3" suffix="県" label="展開エリア(補助金ナビ 長崎)" />
+          <CountUpStat :value="worksPage.items.length" suffix="件" label="開発・運営したサービス" />
+        </div>
+
         <div class="mt-10">
           <h2 class="text-sm font-bold tracking-wide text-gold">自社サービス</h2>
 
@@ -44,6 +49,7 @@ useBreadcrumbJsonLd([
             v-for="(item, index) in selfItems"
             :key="item.title"
             v-reveal
+            v-tilt
             class="card mt-4 flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between"
             :style="{ '--reveal-delay': `${index * 100}ms` }"
           >
@@ -96,6 +102,7 @@ useBreadcrumbJsonLd([
               v-for="(item, index) in clientItems"
               :key="item.title"
               v-reveal
+              v-tilt
               class="card flex flex-col"
               :style="{ '--reveal-delay': `${index * 100}ms` }"
             >
