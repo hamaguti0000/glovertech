@@ -25,8 +25,8 @@ const statusLabel: Record<Subsidy['status'], string> = {
 }
 
 const statusClass: Record<Subsidy['status'], string> = {
-  open: 'bg-cta text-white',
-  upcoming: 'bg-navy text-white',
+  open: 'bg-gold text-white',
+  upcoming: 'border border-navy/30 bg-white text-navy',
   closed: 'bg-line text-body',
 }
 

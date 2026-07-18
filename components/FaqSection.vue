@@ -15,12 +15,13 @@ defineProps<{
 
       <div class="mt-10 divide-y divide-line border-y border-line">
         <details v-for="item in items" :key="item.question" class="group py-5">
-          <summary class="flex cursor-pointer list-none items-center justify-between gap-4 text-navy">
+          <summary
+            class="flex cursor-pointer list-none items-center justify-between gap-4 text-navy transition-colors duration-300 hover:text-gold"
+          >
             <span class="text-lg">{{ item.question }}</span>
-            <span class="shrink-0 text-xl text-body group-open:hidden" aria-hidden="true">+</span>
-            <span class="hidden shrink-0 text-xl text-body group-open:inline" aria-hidden="true">−</span>
+            <span class="faq-icon shrink-0 text-2xl text-gold" aria-hidden="true">+</span>
           </summary>
-          <p class="mt-4 max-w-2xl text-base leading-[1.9] text-body">
+          <p class="faq-answer mt-4 max-w-2xl text-base leading-[1.9] text-body">
             {{ item.answer }}
           </p>
         </details>
@@ -32,5 +33,38 @@ defineProps<{
 <style scoped>
 summary::-webkit-details-marker {
   display: none;
+}
+
+.faq-icon {
+  display: inline-block;
+  transition: transform 300ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.group[open] .faq-icon {
+  transform: rotate(45deg);
+}
+
+.faq-answer {
+  animation: faq-answer-in 350ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@keyframes faq-answer-in {
+  from {
+    opacity: 0;
+    transform: translateY(-6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .faq-icon {
+    transition: none;
+  }
+  .faq-answer {
+    animation: none;
+  }
 }
 </style>
