@@ -70,14 +70,16 @@ const highlightSegments = computed(() => {
 }
 
 .hero-visual {
-  background: linear-gradient(155deg, #1d2c52 0%, #14213d 55%, #0f1830 100%);
+  background: linear-gradient(160deg, #223969 0%, #172647 42%, #0d1526 100%);
 }
 
 .hero-visual-glow {
   position: absolute;
   inset: 0;
   opacity: 0;
-  background: radial-gradient(circle at 28% 22%, rgba(192, 138, 46, 0.32), transparent 55%);
+  background:
+    radial-gradient(circle at 50% 46%, rgba(192, 138, 46, 0.22), transparent 62%),
+    radial-gradient(circle at 22% 18%, rgba(192, 138, 46, 0.28), transparent 45%);
   animation: hero-glow-in 900ms cubic-bezier(0.22, 1, 0.36, 1) 150ms forwards;
 }
 
@@ -202,7 +204,7 @@ const highlightSegments = computed(() => {
             stroke-width="0.4"
           />
         </svg>
-        <LogoPulse class="hero-visual-logo" :size="128" />
+        <LogoPulse class="hero-visual-logo" :size="220" />
       </div>
     </div>
   </section>

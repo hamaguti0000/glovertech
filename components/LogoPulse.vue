@@ -6,7 +6,9 @@ withDefaults(defineProps<{ size?: number }>(), { size: 80 })
   <div class="relative inline-flex shrink-0 items-center justify-center" :style="{ width: `${size}px`, height: `${size}px` }">
     <span class="pulse-ring pulse-ring--navy absolute inset-0 rounded-full" aria-hidden="true" />
     <span class="pulse-ring pulse-ring--gold absolute inset-0 rounded-full" aria-hidden="true" />
-    <div class="relative flex h-full w-full items-center justify-center rounded-full border border-line bg-surface-alt">
+    <div
+      class="relative flex h-full w-full items-center justify-center rounded-full border border-gold/25 bg-white/95 shadow-[0_24px_60px_-18px_rgba(20,33,61,0.5),inset_0_1px_0_rgba(255,255,255,0.7)] backdrop-blur-sm"
+    >
       <img src="/images/logo-mark.svg" alt="" class="h-1/2 w-1/2" />
     </div>
   </div>
