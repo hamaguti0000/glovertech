@@ -14,70 +14,45 @@ const illustrations = [
   { src: '/images/flow-success.webp', alt: '成果が出て喜んでいる人のイラスト', width: 1254, height: 1028 },
 ]
 
-const containerEl = ref<HTMLElement | null>(null)
-const stepEls = ref<(HTMLElement | null)[]>([])
-const lineEl = ref<SVGLineElement | null>(null)
-const lineLength = ref(0)
-const dashOffset = ref(0)
-const drawn = ref<boolean[]>(props.steps.map(() => false))
+const cardEls = ref<(HTMLElement | null)[]>([])
 
-function setStepEl(el: unknown, index: number) {
-  stepEls.value[index] = el as HTMLElement | null
+function setCardEl(el: unknown, index: number) {
+  cardEls.value[index] = el as HTMLElement | null
 }
 
-let progressTrigger: ScrollTrigger | null = null
-let stepTriggers: ScrollTrigger[] = []
+let triggers: ScrollTrigger[] = []
 
 onMounted(async () => {
-  if (typeof window === 'undefined' || !containerEl.value) return
-
-  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
-  lineLength.value = containerEl.value.offsetHeight
-
-  if (reduceMotion) {
-    dashOffset.value = 0
-    drawn.value = props.steps.map(() => true)
-    return
-  }
-
-  dashOffset.value = lineLength.value
+  if (typeof window === 'undefined') return
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
 
   const { gsap } = await import('gsap')
   const { ScrollTrigger } = await import('gsap/ScrollTrigger')
   gsap.registerPlugin(ScrollTrigger)
 
-  if (!containerEl.value) return
+  const cards = cardEls.value.filter((el): el is HTMLElement => el !== null)
 
-  progressTrigger = ScrollTrigger.create({
-    trigger: containerEl.value,
-    start: 'top 85%',
-    end: 'bottom 85%',
-    scrub: 0.6,
-    onRefresh: () => {
-      if (containerEl.value) lineLength.value = containerEl.value.offsetHeight
-    },
-    onUpdate: (self) => {
-      dashOffset.value = lineLength.value * (1 - self.progress)
-    },
-  })
-
-  stepTriggers = stepEls.value
-    .map((el, i) => {
-      if (!el) return null
-      return ScrollTrigger.create({
-        trigger: el,
-        start: 'top 85%',
-        onEnter: () => {
-          drawn.value[i] = true
+  cards.forEach((card, i) => {
+    if (i === cards.length - 1) return
+    triggers.push(
+      ScrollTrigger.create({
+        trigger: cards[i + 1],
+        start: 'top bottom',
+        end: 'top center',
+        scrub: true,
+        onUpdate: (self) => {
+          gsap.set(card, {
+            scale: 1 - self.progress * 0.05,
+            opacity: 1 - self.progress * 0.7,
+          })
         },
-      })
-    })
-    .filter((t): t is ScrollTrigger => t !== null)
+      }),
+    )
+  })
 })
 
 onUnmounted(() => {
-  progressTrigger?.kill()
-  stepTriggers.forEach((t) => t.kill())
+  triggers.forEach((t) => t.kill())
 })
 </script>
 
@@ -90,54 +65,16 @@ onUnmounted(() => {
         無料相談までは費用がかかりません。ご納得いただいた場合のみ、有料のAI業務診断へ進みます。各段階で終了いただいて構いません。
       </p>
 
-      <div ref="containerEl" class="relative mt-14 pl-10">
-        <svg class="absolute left-0 top-0 h-full w-6 overflow-visible" aria-hidden="true">
-          <line x1="1" y1="0" x2="1" :y2="lineLength" stroke="#E4E0D6" stroke-width="2" />
-          <line
-            ref="lineEl"
-            x1="1"
-            y1="0"
-            x2="1"
-            :y2="lineLength"
-            stroke="#14213D"
-            stroke-width="2"
-            :stroke-dasharray="lineLength"
-            :stroke-dashoffset="dashOffset"
-          />
-        </svg>
-
-        <ol class="space-y-10">
-          <li
-            v-for="(step, index) in steps"
-            :key="step.step"
-            :ref="(el) => setStepEl(el, index)"
-            class="relative"
-          >
-            <svg class="absolute -left-10 top-0 h-7 w-7" viewBox="0 0 28 28" aria-hidden="true">
-              <circle cx="14" cy="14" r="12" fill="white" stroke="#E4E0D6" stroke-width="2" />
-              <circle
-                cx="14"
-                cy="14"
-                r="12"
-                fill="none"
-                stroke="#C08A2E"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-dasharray="75.4"
-                :stroke-dashoffset="drawn[index] ? 0 : 75.4"
-                style="transition: stroke-dashoffset 600ms cubic-bezier(0.22, 1, 0.36, 1)"
-              />
-              <text
-                x="14"
-                y="18"
-                text-anchor="middle"
-                font-size="12"
-                font-weight="700"
-                font-family="'Barlow Condensed', sans-serif"
-                fill="#14213D"
-              >{{ step.step }}</text>
-            </svg>
-            <div class="illustration-slot mb-4 max-w-xs">
+      <div class="mt-14 space-y-6">
+        <div
+          v-for="(step, index) in steps"
+          :key="step.step"
+          :ref="(el) => setCardEl(el, index)"
+          class="flow-card sticky rounded-lg border border-line bg-white p-8 shadow-[0_20px_45px_-30px_rgba(20,33,61,0.35)]"
+          :style="{ top: `${88 + index * 14}px`, zIndex: index + 1 }"
+        >
+          <div class="grid gap-8 sm:grid-cols-[minmax(0,220px),1fr] sm:items-center">
+            <div class="illustration-slot mx-auto w-full max-w-xs sm:mx-0">
               <img
                 :src="illustrations[index].src"
                 :alt="illustrations[index].alt"
@@ -147,11 +84,22 @@ onUnmounted(() => {
                 class="h-full w-full object-contain"
               />
             </div>
-            <h3 class="text-xl">{{ step.title }}</h3>
-            <p class="mt-2 max-w-xl text-base leading-[1.9] text-body">{{ step.description }}</p>
-          </li>
-        </ol>
+            <div>
+              <span class="font-barlow text-3xl font-bold text-gold">{{
+                String(step.step).padStart(2, '0')
+              }}</span>
+              <h3 class="mt-2 text-xl">{{ step.title }}</h3>
+              <p class="mt-2 max-w-xl text-base leading-[1.9] text-body">{{ step.description }}</p>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </section>
 </template>
+
+<style scoped>
+.flow-card {
+  will-change: transform, opacity;
+}
+</style>

@@ -17,7 +17,7 @@ withDefaults(defineProps<{ alt?: boolean }>(), { alt: false })
           v-reveal
           :style="{ '--reveal-delay': `${index * 100}ms` }"
         >
-          <NuxtLink :to="`/articles/${article.slug}`" class="card group block h-full">
+          <NuxtLink :to="`/articles/${article.slug}`" v-tilt class="card group block h-full">
             <span class="text-xs font-bold text-navy">{{ article.category }}</span>
             <h3 class="mt-2 text-base leading-snug text-navy group-hover:underline">
               {{ article.title }}

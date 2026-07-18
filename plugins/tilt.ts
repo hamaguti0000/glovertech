@@ -1,5 +1,5 @@
 export default defineNuxtPlugin((nuxtApp) => {
-  nuxtApp.vueApp.directive('magnetic', {
+  nuxtApp.vueApp.directive('tilt', {
     getSSRProps() {
       return {}
     },
@@ -8,17 +8,25 @@ export default defineNuxtPlugin((nuxtApp) => {
       if (window.matchMedia('(pointer: coarse)').matches) return
 
       const { gsap } = await import('gsap')
-      const strength = 0.25
+      const maxTilt = 5
+
+      el.style.transformStyle = 'preserve-3d'
 
       function handleMove(e: MouseEvent) {
         const rect = el.getBoundingClientRect()
-        const x = (e.clientX - rect.left - rect.width / 2) * strength
-        const y = (e.clientY - rect.top - rect.height / 2) * strength
-        gsap.to(el, { x, y, duration: 0.4, ease: 'power3.out' })
+        const px = (e.clientX - rect.left) / rect.width - 0.5
+        const py = (e.clientY - rect.top) / rect.height - 0.5
+        gsap.to(el, {
+          rotateX: -py * maxTilt,
+          rotateY: px * maxTilt,
+          transformPerspective: 800,
+          duration: 0.4,
+          ease: 'power2.out',
+        })
       }
 
       function handleLeave() {
-        gsap.to(el, { x: 0, y: 0, duration: 0.5, ease: 'elastic.out(1, 0.4)' })
+        gsap.to(el, { rotateX: 0, rotateY: 0, duration: 0.6, ease: 'power2.out' })
       }
 
       el.addEventListener('mousemove', handleMove)

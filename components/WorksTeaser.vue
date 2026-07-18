@@ -20,6 +20,7 @@ defineProps<{
           v-for="(item, index) in items"
           :key="item.title"
           v-reveal
+          v-tilt
           class="card flex flex-col"
           :style="{ '--reveal-delay': `${index * 100}ms` }"
         >

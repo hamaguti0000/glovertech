@@ -52,6 +52,7 @@ function formatMax(max: number) {
         <article
           v-for="item in subsidies"
           :key="item.id"
+          v-tilt
           class="card flex flex-col"
           :class="item.status === 'closed' ? 'opacity-50' : ''"
         >

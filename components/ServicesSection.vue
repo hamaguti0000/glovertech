@@ -29,6 +29,7 @@ const cardLinks = [
           v-for="(service, index) in services"
           :key="service.title"
           v-reveal
+          v-tilt
           class="card flex flex-col"
           :style="{ '--reveal-delay': `${index * 100}ms` }"
         >
