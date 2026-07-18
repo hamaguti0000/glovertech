@@ -24,6 +24,8 @@ const cardLinks = [
         相談だけで終わらせず、実際に手を動かすところまでお手伝いします。
       </p>
 
+      <SupportScopeChart class="mt-10 max-w-3xl" />
+
       <div class="mt-10 grid gap-6 sm:grid-cols-3">
         <article
           v-for="(service, index) in services"
