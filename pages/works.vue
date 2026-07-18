@@ -94,16 +94,21 @@ useBreadcrumbJsonLd([
           </article>
         </div>
 
-        <div class="mt-12">
-          <h2 class="text-sm font-bold tracking-wide text-gold">クライアント案件</h2>
+      </div>
 
-          <div class="mt-4 grid gap-6 sm:grid-cols-3">
+      <div class="mt-12">
+        <div class="section pb-0">
+          <h2 class="text-sm font-bold tracking-wide text-gold">クライアント案件</h2>
+        </div>
+
+        <div class="mt-4 overflow-x-auto pb-6">
+          <div class="flex gap-6 pl-6 pr-6 sm:pl-[max(1.5rem,calc((100vw-72rem)/2+1.5rem))]">
             <article
               v-for="(item, index) in clientItems"
               :key="item.title"
               v-reveal
               v-tilt
-              class="card flex flex-col"
+              class="card flex w-[300px] shrink-0 flex-col sm:w-[360px]"
               :style="{ '--reveal-delay': `${index * 100}ms` }"
             >
               <span class="section-label w-fit bg-surface-alt text-body">{{ item.category }}</span>
@@ -126,8 +131,10 @@ useBreadcrumbJsonLd([
             </article>
           </div>
         </div>
+      </div>
 
-        <p class="mt-12 text-sm leading-[1.9] text-body">
+      <div class="section pt-0">
+        <p class="mt-6 text-sm leading-[1.9] text-body">
           ここでご紹介した開発実績とは別に、AI導入支援サービスも行っています。
           <NuxtLink to="/services" class="font-bold text-navy underline underline-offset-4">
             グラバーテックのAI導入支援サービスを見る →
