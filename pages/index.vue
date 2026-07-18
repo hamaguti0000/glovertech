@@ -6,7 +6,6 @@ import {
   servicesFootnote,
   flowSteps,
   worksPage,
-  profile,
   topContact,
   siteMeta,
   sectionLabels,
@@ -49,11 +48,6 @@ const worksTeaserItems = worksPage.items.slice(0, 3)
     <FlowSection :steps="flowSteps" :label="sectionLabels.flow" />
     <WorksTeaser :items="worksTeaserItems" :label="sectionLabels.works" :lead="worksPage.homeLead" />
     <ColumnSection alt />
-    <ProfileSection
-      :name="profile.name"
-      :description="profile.description"
-      :label="sectionLabels.profile"
-    />
     <TopContactSection
       :heading="topContact.heading"
       :lead="topContact.lead"
