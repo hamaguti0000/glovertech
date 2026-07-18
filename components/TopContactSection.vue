@@ -15,7 +15,7 @@ defineProps<{
       <h2 v-reveal class="section-title text-center">{{ heading }}</h2>
       <p class="section-lead mx-auto text-center">{{ lead }}</p>
 
-      <NuxtLink :to="ctaHref" class="btn-cta mt-8 inline-flex">
+      <NuxtLink v-magnetic :to="ctaHref" class="btn-cta mt-8 inline-flex">
         {{ ctaLabel }}
         <svg class="btn-arrow h-4 w-4" viewBox="0 0 16 16" fill="none" aria-hidden="true">
           <path

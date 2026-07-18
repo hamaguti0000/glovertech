@@ -11,20 +11,20 @@ export default <Partial<Config>>{
       colors: {
         surface: {
           DEFAULT: '#FFFFFF',
-          alt: '#F5F8FC',
+          alt: '#F5F2EA',
         },
         navy: {
-          DEFAULT: '#223A70',
+          DEFAULT: '#14213D',
         },
         body: '#333333',
-        yellow: {
-          DEFAULT: '#FFD338',
+        gold: {
+          DEFAULT: '#C08A2E',
         },
         cta: {
-          DEFAULT: '#FF7A1A',
-          dark: '#E86A0F',
+          DEFAULT: '#14213D',
+          dark: '#0F1830',
         },
-        line: '#E2E8EB',
+        line: '#E4E0D6',
       },
       fontFamily: {
         sans: [
@@ -38,13 +38,20 @@ export default <Partial<Config>>{
           'Meiryo',
           'sans-serif',
         ],
+        serif: [
+          '"Noto Serif JP"',
+          '"游明朝"',
+          '"Yu Mincho"',
+          '"Hiragino Mincho ProN"',
+          'serif',
+        ],
         barlow: ['"Barlow Condensed"', 'sans-serif'],
       },
       transitionTimingFunction: {
         reveal: 'cubic-bezier(0.22, 1, 0.36, 1)',
       },
       borderRadius: {
-        lg: '10px',
+        lg: '6px',
       },
     },
   },
