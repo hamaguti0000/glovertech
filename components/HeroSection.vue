@@ -152,9 +152,9 @@ const highlightSegments = computed(() => {
 </style>
 
 <template>
-  <section class="overflow-hidden border-b border-line">
-    <div class="section grid items-center gap-10 py-16 sm:py-20 lg:grid-cols-[1.05fr_0.95fr] lg:gap-16 lg:py-20">
-      <div class="hero-copy">
+  <section class="relative overflow-hidden border-b border-line">
+    <div class="section relative grid items-center gap-10 py-16 sm:py-20 lg:py-28">
+      <div class="hero-copy relative z-10 lg:max-w-xl">
         <h1
           class="hero-anim hero-anim-1 max-w-2xl font-serif text-4xl leading-snug sm:text-5xl [word-break:keep-all] [overflow-wrap:break-word]"
         >
@@ -185,7 +185,9 @@ const highlightSegments = computed(() => {
         </NuxtLink>
       </div>
 
-      <div class="hero-anim hero-anim-4 hero-visual relative aspect-[4/3] overflow-hidden rounded-md lg:aspect-[5/4]">
+      <div
+        class="hero-anim hero-anim-4 hero-visual relative aspect-[4/3] overflow-hidden rounded-md lg:absolute lg:inset-y-0 lg:right-0 lg:aspect-auto lg:w-[44vw] lg:rounded-none"
+      >
         <div class="hero-visual-glow" aria-hidden="true" />
         <svg class="hero-visual-frame-svg" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
           <rect
