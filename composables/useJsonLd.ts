@@ -1,4 +1,4 @@
-import { siteMeta, type FaqItem } from '~/data/site'
+import { footer, siteMeta, type FaqItem } from '~/data/site'
 
 export function useProfessionalServiceJsonLd() {
   const professionalService = {
@@ -7,6 +7,7 @@ export function useProfessionalServiceJsonLd() {
     name: siteMeta.title,
     description: siteMeta.description,
     url: siteMeta.url,
+    sameAs: [footer.relatedSite.href],
     areaServed: [
       { '@type': 'City', name: '長崎市' },
       { '@type': 'City', name: '佐世保市' },
