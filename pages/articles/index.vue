@@ -3,7 +3,8 @@ import { articles } from '~/data/articles'
 import { siteMeta } from '~/data/site'
 
 const articlesTitle = `コラム｜${siteMeta.name}`
-const articlesDescription = 'AI活用や補助金について、長崎の中小企業・個人事業主向けに分かりやすく解説するコラムです。'
+const articlesDescription =
+  'ChatGPTの使い方から補助金の探し方まで。長崎の中小企業・個人事業主が今日から使えるAI活用のヒントを分かりやすく解説するコラムです。'
 const canonical = `${siteMeta.url}/articles`
 
 useHead({

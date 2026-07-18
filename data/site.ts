@@ -56,7 +56,7 @@ export const siteMeta = {
   name: 'グラバーテック',
   title: '長崎の中小企業向けAI導入支援｜グラバーテック',
   description:
-    '長崎県内の中小企業・個人事業主向けに、反復業務の整理、AI業務診断、1業務からの試験導入、導入後の改善を支援します。',
+    '「今日も請求書の転記が終わらない」——そんな長崎の中小企業・個人事業主向けに、AI業務診断（3万円〜）から1業務の試験導入まで、無料相談30分で伴走支援します。',
   url: 'https://glovertech.jp',
   ogImage: '/ogp.png',
   areaServed: '長崎県',
@@ -307,7 +307,8 @@ export const contact = {
 
 export const contactPage = {
   title: `お問い合わせ｜${siteMeta.name}`,
-  description: '長崎県内の中小企業・個人事業主向けに、AI導入・業務改善・Web制作のご相談を承ります。',
+  description:
+    '無料相談は30分・0円。長崎県内の中小企業・個人事業主向けに、AI導入・業務改善・Web制作のご相談を承ります。まずはお気軽にお問い合わせください。',
   heading: 'お問い合わせ',
   lead: 'AI導入・業務改善やWeb制作について、まずはお気軽にご相談ください。',
   consultationNote:
@@ -467,7 +468,7 @@ export const reportSamplePage = {
 export const worksPage = {
   heading: '実績',
   homeLead: '自社サービスの開発・運営から、長崎県内の店舗・個人事業主向けの受託開発まで。',
-  lead: 'これまでに開発・運営してきたサービス・サイトの一部をご紹介します。クライアント様の案件は屋号を伏せた形で掲載しています。',
+  lead: '補助金情報サイトの自社開発から、長崎県内の店舗・個人事業主向けの受託開発まで。これまで手がけてきたサービス・サイトの実績をご紹介します。',
   items: [
     {
       title: '補助金ナビ　長崎',
