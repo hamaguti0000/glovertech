@@ -57,8 +57,11 @@ onUnmounted(() => {
 </script>
 
 <template>
-  <section class="section-alt border-b border-line">
-    <div class="section">
+  <section class="section-alt relative overflow-hidden border-b border-line">
+    <div class="pointer-events-none absolute inset-0" aria-hidden="true">
+      <div class="absolute -right-24 -top-24 h-[460px] w-[460px] rounded-full bg-navy/[0.14] blur-3xl" />
+    </div>
+    <div class="section relative">
       <span class="section-label">{{ label }}</span>
       <h2 v-reveal class="section-title">3つのステップで進めます</h2>
       <p class="section-lead">
