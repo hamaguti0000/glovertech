@@ -101,14 +101,17 @@ useBreadcrumbJsonLd([
           <h2 class="text-sm font-bold tracking-wide text-gold">クライアント案件</h2>
         </div>
 
-        <div class="mt-4 overflow-x-auto pb-6">
+        <div
+          v-drag-scroll
+          class="mt-4 snap-x snap-mandatory overflow-x-auto pb-6 [-webkit-overflow-scrolling:touch]"
+        >
           <div class="flex gap-6 pl-6 pr-6 sm:pl-[max(1.5rem,calc((100vw-72rem)/2+1.5rem))]">
             <article
               v-for="(item, index) in clientItems"
               :key="item.title"
               v-reveal
               v-tilt
-              class="card flex w-[300px] shrink-0 flex-col sm:w-[360px]"
+              class="card flex w-[300px] shrink-0 snap-start flex-col sm:w-[360px]"
               :style="{ '--reveal-delay': `${index * 100}ms` }"
             >
               <span class="section-label w-fit bg-surface-alt text-body">{{ item.category }}</span>
