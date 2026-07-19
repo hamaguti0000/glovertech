@@ -49,8 +49,9 @@
     @apply mt-4 max-w-2xl text-base leading-[1.9] text-body;
   }
 
+  /* ホバーで浮くときはスプリングで少し弾ませ、離れるときは滑らかに戻す(Apple Design: momentum-driven bounce) */
   .card {
-    @apply rounded-lg border border-line bg-white p-6 transition-all duration-300 ease-reveal hover:-translate-y-1 hover:border-gold/50 hover:shadow-[0_16px_36px_-20px_rgba(20,33,61,0.35)];
+    @apply rounded-lg border border-line bg-white p-6 transition-all duration-300 ease-reveal hover:-translate-y-1.5 hover:border-gold/50 hover:shadow-[0_20px_40px_-18px_rgba(20,33,61,0.4)] hover:duration-500 hover:ease-spring;
   }
 
   .btn-cta {
@@ -90,15 +91,18 @@
 }
 
 @layer utilities {
+  /* 出現時にわずかに弾んでから収まる(Apple Design: spring-driven entrance) */
   .reveal {
     opacity: 0;
-    transform: translateY(12px);
-    transition: opacity 500ms cubic-bezier(0.22, 1, 0.36, 1), transform 500ms cubic-bezier(0.22, 1, 0.36, 1);
+    transform: translateY(16px) scale(0.98);
+    transition:
+      opacity 500ms cubic-bezier(0.22, 1, 0.36, 1),
+      transform 650ms cubic-bezier(0.34, 1.56, 0.64, 1);
     transition-delay: var(--reveal-delay, 0ms);
   }
 
   .reveal-visible {
     opacity: 1;
-    transform: translateY(0);
+    transform: translateY(0) scale(1);
   }
 }

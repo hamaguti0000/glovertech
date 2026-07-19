@@ -49,6 +49,8 @@ export default <Partial<Config>>{
       },
       transitionTimingFunction: {
         reveal: 'cubic-bezier(0.22, 1, 0.36, 1)',
+        // 少しだけ行き過ぎてから収まる、スプリング風のイージング(Apple Design)
+        spring: 'cubic-bezier(0.34, 1.56, 0.64, 1)',
       },
       borderRadius: {
         lg: '6px',
