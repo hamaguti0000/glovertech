@@ -52,14 +52,17 @@ useSocialMeta({
 
 useFaqPageJsonLd(faqItems)
 
-useBreadcrumbJsonLd([
+const breadcrumbItems = [
   { name: 'ホーム', url: siteMeta.url },
   { name: 'サービス', url: canonical },
-])
+]
+useBreadcrumbJsonLd(breadcrumbItems)
 </script>
 
 <template>
   <main>
+    <Breadcrumb :items="breadcrumbItems" />
+
     <!-- 1. 問題提起 -->
     <section class="border-b border-line">
       <div class="section max-w-2xl">

@@ -24,14 +24,17 @@ useSocialMeta({
 const selfItems = worksPage.items.filter((item) => item.type === 'self')
 const clientItems = worksPage.items.filter((item) => item.type === 'client')
 
-useBreadcrumbJsonLd([
+const breadcrumbItems = [
   { name: 'ホーム', url: siteMeta.url },
   { name: worksPage.heading, url: canonical },
-])
+]
+useBreadcrumbJsonLd(breadcrumbItems)
 </script>
 
 <template>
   <main>
+    <Breadcrumb :items="breadcrumbItems" />
+
     <section class="border-b border-line">
       <div class="section">
         <h1 class="section-title">{{ worksPage.heading }}</h1>

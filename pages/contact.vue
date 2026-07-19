@@ -16,14 +16,17 @@ useSocialMeta({
   type: 'website',
 })
 
-useBreadcrumbJsonLd([
+const breadcrumbItems = [
   { name: 'ホーム', url: siteMeta.url },
   { name: contactPage.heading, url: canonical },
-])
+]
+useBreadcrumbJsonLd(breadcrumbItems)
 </script>
 
 <template>
   <main>
+    <Breadcrumb :items="breadcrumbItems" />
+
     <section class="border-b border-line">
       <div class="section max-w-2xl">
         <h1 class="section-title">{{ contactPage.heading }}</h1>
