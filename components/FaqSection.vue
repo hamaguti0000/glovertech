@@ -16,7 +16,7 @@ defineProps<{
       <div class="mt-10 divide-y divide-line border-y border-line">
         <details v-for="item in items" :key="item.question" class="group py-5">
           <summary
-            class="flex cursor-pointer list-none items-center justify-between gap-4 text-navy transition-colors duration-300 hover:text-gold"
+            class="flex cursor-pointer list-none items-center justify-between gap-4 text-navy transition-[color,transform] duration-300 hover:text-gold active:scale-[0.98] active:duration-100"
           >
             <span class="text-lg">{{ item.question }}</span>
             <span class="faq-icon shrink-0 text-2xl text-gold" aria-hidden="true">+</span>
