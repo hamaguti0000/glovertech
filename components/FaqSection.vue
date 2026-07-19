@@ -37,7 +37,7 @@ summary::-webkit-details-marker {
 
 .faq-icon {
   display: inline-block;
-  transition: transform 300ms cubic-bezier(0.22, 1, 0.36, 1);
+  transition: transform 450ms cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
 .group[open] .faq-icon {
@@ -45,17 +45,17 @@ summary::-webkit-details-marker {
 }
 
 .faq-answer {
-  animation: faq-answer-in 350ms cubic-bezier(0.22, 1, 0.36, 1) both;
+  animation: faq-answer-in 450ms cubic-bezier(0.34, 1.56, 0.64, 1) both;
 }
 
 @keyframes faq-answer-in {
   from {
     opacity: 0;
-    transform: translateY(-6px);
+    transform: translateY(-8px) scale(0.97);
   }
   to {
     opacity: 1;
-    transform: translateY(0);
+    transform: translateY(0) scale(1);
   }
 }
 

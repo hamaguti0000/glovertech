@@ -26,7 +26,8 @@ export default defineNuxtPlugin((nuxtApp) => {
       }
 
       function handleLeave() {
-        gsap.to(el, { rotateX: 0, rotateY: 0, duration: 0.6, ease: 'power2.out' })
+        // 手を離した瞬間だけスプリングで戻す(Apple Design: momentum-driven bounce)
+        gsap.to(el, { rotateX: 0, rotateY: 0, duration: 0.7, ease: 'elastic.out(1, 0.6)' })
       }
 
       el.addEventListener('mousemove', handleMove)
