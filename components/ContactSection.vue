@@ -126,8 +126,18 @@ async function handleSubmit() {
         </div>
 
         <button type="submit" class="btn-cta w-full sm:w-auto" :disabled="status === 'sending'">
+          <svg
+            v-if="status === 'sending'"
+            class="h-4 w-4 animate-spin"
+            viewBox="0 0 24 24"
+            fill="none"
+            aria-hidden="true"
+          >
+            <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="3" />
+            <path class="opacity-90" d="M12 2a10 10 0 0 1 10 10" stroke="currentColor" stroke-width="3" stroke-linecap="round" />
+          </svg>
           {{ status === 'sending' ? '送信中…' : '送信する' }}
-          <svg class="btn-arrow h-4 w-4" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+          <svg v-if="status !== 'sending'" class="btn-arrow h-4 w-4" viewBox="0 0 16 16" fill="none" aria-hidden="true">
             <path
               d="M3 8h10M9 4l4 4-4 4"
               stroke="currentColor"
@@ -139,7 +149,7 @@ async function handleSubmit() {
         </button>
 
         <p v-if="status === 'sent'" class="flex items-center gap-2 text-sm text-navy">
-          <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <svg class="h-5 w-5 shrink-0" viewBox="0 0 24 24" fill="none" aria-hidden="true">
             <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="1.5" />
             <path
               d="M7 12l3 3 7-7"
@@ -154,7 +164,12 @@ async function handleSubmit() {
           </svg>
           お問い合わせありがとうございます。内容を確認のうえ、ご連絡いたします。
         </p>
-        <p v-if="status === 'error'" class="text-sm text-navy">
+        <p v-if="status === 'error'" class="flex items-center gap-2 text-sm text-red-600">
+          <svg class="h-5 w-5 shrink-0" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="1.5" />
+            <path d="M12 8v5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
+            <circle cx="12" cy="16" r="1" fill="currentColor" />
+          </svg>
           送信に失敗しました。お手数ですが、時間をおいて再度お試しください。
         </p>
       </form>
