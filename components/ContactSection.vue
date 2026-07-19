@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref } from 'vue'
+import { computed, reactive, ref } from 'vue'
 
 type SubmitStatus = 'idle' | 'sending' | 'sent' | 'error'
 
@@ -17,7 +17,31 @@ const inquiryType = ref('')
 const message = ref('')
 const status = ref<SubmitStatus>('idle')
 
+const touched = reactive({ name: false, email: false, inquiryType: false })
+
+const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+
+const errors = computed(() => ({
+  name: name.value.trim() === '' ? 'お名前を入力してください。' : '',
+  email:
+    email.value.trim() === ''
+      ? 'メールアドレスを入力してください。'
+      : !emailPattern.test(email.value)
+        ? 'メールアドレスの形式が正しくありません。'
+        : '',
+  inquiryType: inquiryType.value === '' ? '相談種別を選択してください。' : '',
+}))
+
+function markTouched(field: keyof typeof touched) {
+  touched[field] = true
+}
+
 async function handleSubmit() {
+  touched.name = true
+  touched.email = true
+  touched.inquiryType = true
+  if (errors.value.name || errors.value.email || errors.value.inquiryType) return
+
   status.value = 'sending'
 
   try {
@@ -44,6 +68,9 @@ async function handleSubmit() {
     email.value = ''
     inquiryType.value = ''
     message.value = ''
+    touched.name = false
+    touched.email = false
+    touched.inquiryType = false
   } catch {
     status.value = 'error'
   }
@@ -67,8 +94,15 @@ async function handleSubmit() {
             name="name"
             required
             :disabled="status === 'sending'"
+            :aria-invalid="touched.name && !!errors.name"
+            aria-describedby="name-error"
             class="field-input mt-2 disabled:opacity-50"
+            :class="{ 'border-red-500 focus:border-red-500 focus:ring-red-500/10': touched.name && errors.name }"
+            @blur="markTouched('name')"
           >
+          <p v-if="touched.name && errors.name" id="name-error" class="mt-1.5 text-xs text-red-600">
+            {{ errors.name }}
+          </p>
         </div>
 
         <div>
@@ -92,8 +126,15 @@ async function handleSubmit() {
             name="email"
             required
             :disabled="status === 'sending'"
+            :aria-invalid="touched.email && !!errors.email"
+            aria-describedby="email-error"
             class="field-input mt-2 disabled:opacity-50"
+            :class="{ 'border-red-500 focus:border-red-500 focus:ring-red-500/10': touched.email && errors.email }"
+            @blur="markTouched('email')"
           >
+          <p v-if="touched.email && errors.email" id="email-error" class="mt-1.5 text-xs text-red-600">
+            {{ errors.email }}
+          </p>
         </div>
 
         <div>
@@ -104,13 +145,20 @@ async function handleSubmit() {
             name="inquiryType"
             required
             :disabled="status === 'sending'"
+            :aria-invalid="touched.inquiryType && !!errors.inquiryType"
+            aria-describedby="inquiryType-error"
             class="field-input mt-2 disabled:opacity-50"
+            :class="{ 'border-red-500 focus:border-red-500 focus:ring-red-500/10': touched.inquiryType && errors.inquiryType }"
+            @blur="markTouched('inquiryType')"
           >
             <option value="" disabled>相談種別を選択してください</option>
             <option value="無料相談を希望">無料相談を希望</option>
             <option value="Web制作・IT運用について相談">Web制作・IT運用について相談</option>
             <option value="その他のお問い合わせ">その他のお問い合わせ</option>
           </select>
+          <p v-if="touched.inquiryType && errors.inquiryType" id="inquiryType-error" class="mt-1.5 text-xs text-red-600">
+            {{ errors.inquiryType }}
+          </p>
         </div>
 
         <div>
