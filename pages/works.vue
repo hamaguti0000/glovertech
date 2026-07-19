@@ -101,7 +101,10 @@ useBreadcrumbJsonLd([
           <h2 class="text-sm font-bold tracking-wide text-gold">クライアント案件</h2>
         </div>
 
-        <div class="mt-4 snap-x snap-mandatory overflow-x-auto pb-6 [-webkit-overflow-scrolling:touch]">
+        <div
+          v-drag-scroll
+          class="mt-4 snap-x snap-mandatory overflow-x-auto pb-6 [-webkit-overflow-scrolling:touch]"
+        >
           <div class="flex gap-6 pl-6 pr-6 sm:pl-[max(1.5rem,calc((100vw-72rem)/2+1.5rem))]">
             <article
               v-for="(item, index) in clientItems"
