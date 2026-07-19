@@ -12,10 +12,17 @@ useHead({
   ],
   link: [{ rel: 'canonical', href: `${siteMeta.url}/privacy` }],
 })
+
+const breadcrumbItems = [
+  { name: 'ホーム', url: siteMeta.url },
+  { name: privacyPage.heading, url: `${siteMeta.url}/privacy` },
+]
 </script>
 
 <template>
   <main>
+    <Breadcrumb :items="breadcrumbItems" />
+
     <section class="border-b border-line">
       <div class="section max-w-2xl">
         <h1 class="section-title">{{ privacyPage.heading }}</h1>
