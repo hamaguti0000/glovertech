@@ -42,6 +42,12 @@ useBreadcrumbJsonLd(breadcrumbItems)
           <li v-for="article in articles" :key="article.slug" class="py-6">
             <NuxtLink :to="`/articles/${article.slug}`" class="group block">
               <span class="section-label">{{ article.category }}</span>
+              <span
+                v-if="article.level === 'advanced'"
+                class="section-label ml-2 border-navy/20 bg-navy text-white"
+              >
+                上級者向け
+              </span>
               <h2 class="mt-3 text-xl text-navy group-hover:underline">{{ article.title }}</h2>
               <p class="mt-2 max-w-2xl text-sm leading-[1.9] text-body">{{ article.description }}</p>
               <p class="mt-2 text-xs text-body">{{ article.publishedAt }}</p>

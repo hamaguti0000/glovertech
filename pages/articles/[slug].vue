@@ -9,9 +9,14 @@ if (!article) {
   throw createError({ statusCode: 404, statusMessage: 'Article not found' })
 }
 
-const relatedArticles = articles
-  .filter((item) => item.category === article.category && item.slug !== article.slug)
-  .sort((a, b) => (a.publishedAt < b.publishedAt ? 1 : -1))
+const articleLevel = article.level ?? 'beginner'
+const byDateDesc = (a: (typeof articles)[number], b: (typeof articles)[number]) =>
+  a.publishedAt < b.publishedAt ? 1 : -1
+const sameCategory = articles.filter((item) => item.category === article.category && item.slug !== article.slug)
+const relatedArticles = sameCategory
+  .filter((item) => (item.level ?? 'beginner') === articleLevel)
+  .sort(byDateDesc)
+  .concat(sameCategory.filter((item) => (item.level ?? 'beginner') !== articleLevel).sort(byDateDesc))
   .slice(0, 3)
 
 const canonical = `${siteMeta.url}/articles/${article.slug}`
@@ -68,6 +73,12 @@ useHead({
     <section class="border-b border-line">
       <div class="section max-w-2xl">
         <span class="section-label">{{ article.category }}</span>
+        <span
+          v-if="article.level === 'advanced'"
+          class="section-label ml-2 border-navy/20 bg-navy text-white"
+        >
+          上級者向け
+        </span>
         <h1 class="section-title">{{ article.title }}</h1>
         <p class="mt-3 text-sm text-body">{{ article.publishedAt }}</p>
 

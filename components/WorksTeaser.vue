@@ -3,6 +3,7 @@ import type { WorkItem } from '~/data/site'
 
 defineProps<{
   items: WorkItem[]
+  totalCount: number
   label: string
   lead: string
 }>()
@@ -14,6 +15,11 @@ defineProps<{
       <span class="section-label">{{ label }}</span>
       <h2 v-reveal class="section-title max-w-xl">開発・運営してきたもの</h2>
       <p class="section-lead">{{ lead }}</p>
+
+      <div class="mt-8 flex flex-wrap gap-10 border-y border-line py-6">
+        <CountUpStat :value="3" suffix="県" label="展開エリア(補助金ナビ 長崎)" />
+        <CountUpStat :value="totalCount" suffix="件" label="開発・運営したサービス" />
+      </div>
 
       <div class="mt-10 grid gap-6 sm:grid-cols-3">
         <article
