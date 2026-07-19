@@ -26,8 +26,8 @@ onMounted(async () => {
   if (typeof window === 'undefined') return
   if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
 
-  const { gsap } = await import('gsap')
-  const { ScrollTrigger } = await import('gsap/ScrollTrigger')
+  const { gsap } = await loadGsap()
+  const { ScrollTrigger } = await loadScrollTrigger()
   gsap.registerPlugin(ScrollTrigger)
 
   const cards = cardEls.value.filter((el): el is HTMLElement => el !== null)

@@ -73,9 +73,19 @@ export default defineNuxtConfig({
         { rel: 'apple-touch-icon', sizes: '180x180', href: '/apple-touch-icon.png' },
         { rel: 'preconnect', href: 'https://fonts.googleapis.com' },
         { rel: 'preconnect', href: 'https://fonts.gstatic.com', crossorigin: '' },
+        // レンダリングをブロックしないよう、印刷用として読み込んでから
+        // 全メディアに切り替える(フォント読み込みがLCPを遅らせないようにする)
         {
           rel: 'stylesheet',
           href: 'https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@700&family=Noto+Serif+JP:wght@600;700&display=swap',
+          media: 'print',
+          onload: "this.media='all'",
+        },
+      ],
+      noscript: [
+        {
+          innerHTML:
+            '<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@700&family=Noto+Serif+JP:wght@600;700&display=swap">',
         },
       ],
       script: gaScripts,
