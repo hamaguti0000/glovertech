@@ -16,7 +16,7 @@ onMounted(async () => {
   if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
 
   const length = frameRectEl.value.getTotalLength()
-  const { gsap } = await import('gsap')
+  const { gsap } = await loadGsap()
   gsap.set(frameRectEl.value, { strokeDasharray: length, strokeDashoffset: length })
   gsap.to(frameRectEl.value, {
     strokeDashoffset: 0,
@@ -158,7 +158,7 @@ const highlightSegments = computed(() => {
     <div class="section relative grid items-center gap-10 py-16 sm:py-20 lg:py-28">
       <div class="hero-copy relative z-10 lg:max-w-xl">
         <h1
-          class="hero-anim hero-anim-1 max-w-2xl font-serif text-4xl leading-snug sm:text-5xl [word-break:keep-all] [overflow-wrap:break-word]"
+          class="max-w-2xl font-serif text-4xl leading-snug sm:text-5xl [word-break:keep-all] [overflow-wrap:break-word]"
         >
           {{ titleParts.before }}<wbr /><span
             v-if="titleParts.highlight"
