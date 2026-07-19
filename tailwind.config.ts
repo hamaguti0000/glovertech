@@ -18,7 +18,7 @@ export default <Partial<Config>>{
         },
         body: '#333333',
         gold: {
-          DEFAULT: '#906722',
+          DEFAULT: '#805A15',
         },
         cta: {
           DEFAULT: '#14213D',

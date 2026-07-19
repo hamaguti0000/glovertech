@@ -5,7 +5,7 @@
 @layer base {
   :root {
     --navy: #14213d;
-    --gold: #906722;
+    --gold: #805a15;
     --gray-text: #6b7680;
     --gray-line: #e4e0d6;
   }
@@ -82,8 +82,9 @@
     background-repeat: no-repeat;
   }
 
+  /* フォーカスの瞬間に反応する(Apple Design: Response) */
   .field-input {
-    @apply w-full rounded-lg border border-line bg-white px-4 py-3 text-navy outline-none transition-colors duration-500 ease-reveal focus:border-navy;
+    @apply w-full rounded-lg border border-line bg-white px-4 py-3 text-navy outline-none transition-[border-color,box-shadow] duration-300 ease-reveal focus:border-navy focus:ring-4 focus:ring-navy/10;
   }
 
   .illustration-slot {
