@@ -53,6 +53,8 @@ export default defineNuxtConfig({
         '/articles/ai-for-restaurant-hospitality',
         '/articles/ai-for-construction-manufacturing',
         '/articles/ai-for-sole-proprietors',
+        '/articles/ai-for-retail-salon',
+        '/articles/ai-adoption-cost-guide',
       ],
     },
   },
