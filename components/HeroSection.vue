@@ -173,18 +173,20 @@ const highlightSegments = computed(() => {
           {{ subtitle }}
         </p>
 
-        <NuxtLink id="hero-cta" :to="ctaHref" class="hero-anim hero-anim-3 btn-cta mt-8">
-          {{ ctaLabel }}
-          <svg class="btn-arrow h-4 w-4" viewBox="0 0 16 16" fill="none" aria-hidden="true">
-            <path
-              d="M3 8h10M9 4l4 4-4 4"
-              stroke="currentColor"
-              stroke-width="1.5"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-            />
-          </svg>
-        </NuxtLink>
+        <div class="hero-anim hero-anim-3">
+          <NuxtLink id="hero-cta" :to="ctaHref" class="btn-cta mt-8">
+            {{ ctaLabel }}
+            <svg class="btn-arrow h-4 w-4" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+              <path
+                d="M3 8h10M9 4l4 4-4 4"
+                stroke="currentColor"
+                stroke-width="1.5"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+            </svg>
+          </NuxtLink>
+        </div>
       </div>
 
       <div

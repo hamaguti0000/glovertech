@@ -26,8 +26,8 @@ onUnmounted(() => {
 
 <template>
   <header
-    class="sticky top-0 z-50 bg-white transition-shadow duration-300"
-    :class="scrolled ? 'shadow-md' : 'shadow-none'"
+    class="site-header sticky top-0 z-50 transition-shadow duration-300"
+    :class="scrolled ? 'site-header--scrolled shadow-md' : 'bg-white shadow-none'"
   >
     <div class="mx-auto flex max-w-6xl items-center justify-between px-6 py-3">
       <NuxtLink to="/" class="flex items-center gap-2.5 leading-tight">
@@ -67,3 +67,20 @@ onUnmounted(() => {
     </div>
   </header>
 </template>
+
+<style scoped>
+/* スクロール時は半透明マテリアルとしてコンテンツの上に浮かせる(Apple Design: Materials) */
+.site-header--scrolled {
+  background: rgba(255, 255, 255, 0.72);
+  backdrop-filter: blur(16px) saturate(180%);
+  -webkit-backdrop-filter: blur(16px) saturate(180%);
+}
+
+@media (prefers-reduced-transparency: reduce) {
+  .site-header--scrolled {
+    background: #ffffff;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+  }
+}
+</style>
