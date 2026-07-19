@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { faqItems, plans, pricingNote, sectionLabels, siteMeta } from '~/data/site'
+import { faqItems, plans, pricingNote, sectionLabels, siteMeta, subsidy } from '~/data/site'
 import {
   aiCompanyVision,
   articlesCrossLink,
@@ -274,6 +274,13 @@ useBreadcrumbJsonLd(breadcrumbItems)
     </section>
 
     <PricingSection :plans="plans" :label="sectionLabels.pricing" :note="pricingNote" />
+
+    <SubsidySection
+      :lead="subsidy.lead"
+      :body="subsidy.body"
+      :notes="subsidy.notes"
+      :label="sectionLabels.subsidy"
+    />
 
     <!-- 8. AI秘書・AIカンパニーのビジョン -->
     <section class="section-alt border-b border-line">
