@@ -7,7 +7,10 @@ defineProps<{
 }>()
 
 const heroCtaVisible = ref(true)
-const contactVisible = ref(false)
+// お問い合わせセクションが「見えている」または「画面より上を通り過ぎた」状態。
+// isIntersectingだけで判定すると、フッターまでスクロールした際にセクションが
+// 再び画面外(上)になってfalseへ戻り、StickyCtaがフッターに重なって再表示されてしまう。
+const contactReached = ref(false)
 let heroObserver: IntersectionObserver | null = null
 let contactObserver: IntersectionObserver | null = null
 
@@ -24,7 +27,7 @@ onMounted(() => {
 
   if (contactSection) {
     contactObserver = new IntersectionObserver(([entry]) => {
-      contactVisible.value = entry.isIntersecting
+      contactReached.value = entry.isIntersecting || entry.boundingClientRect.top < 0
     })
     contactObserver.observe(contactSection)
   }
@@ -39,7 +42,7 @@ onUnmounted(() => {
 <template>
   <Transition name="sticky-fade">
     <div
-      v-if="!heroCtaVisible && !contactVisible"
+      v-if="!heroCtaVisible && !contactReached"
       class="fixed inset-x-0 bottom-0 z-40 border-t border-line bg-white p-3 sm:inset-x-auto sm:bottom-6 sm:right-6 sm:border-none sm:bg-transparent sm:p-0"
     >
       <a :href="href" class="btn-cta w-full justify-center shadow-lg sm:w-auto">
