@@ -55,6 +55,8 @@ export default defineNuxtConfig({
         '/articles/ai-for-sole-proprietors',
         '/articles/ai-for-retail-salon',
         '/articles/ai-adoption-cost-guide',
+        '/articles/prompt-engineering-for-business',
+        '/articles/ai-api-integration-guide',
       ],
     },
   },

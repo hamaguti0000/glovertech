@@ -9,6 +9,8 @@ import {
   topContact,
   siteMeta,
   sectionLabels,
+  plans,
+  pricingNote,
 } from '~/data/site'
 
 useHead({
@@ -46,7 +48,13 @@ const worksTeaserItems = worksPage.items.slice(0, 3)
     />
     <ServicesSection :services="services" :label="sectionLabels.services" :footnote="servicesFootnote" />
     <FlowSection :steps="flowSteps" :label="sectionLabels.flow" />
-    <WorksTeaser :items="worksTeaserItems" :label="sectionLabels.works" :lead="worksPage.homeLead" />
+    <PricingSection :plans="plans" :label="sectionLabels.pricing" :note="pricingNote" />
+    <WorksTeaser
+      :items="worksTeaserItems"
+      :total-count="worksPage.items.length"
+      :label="sectionLabels.works"
+      :lead="worksPage.homeLead"
+    />
     <ColumnSection alt />
     <TopContactSection
       :heading="topContact.heading"
