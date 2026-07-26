@@ -474,6 +474,10 @@ export const worksPage = {
   heading: '実績',
   homeLead: '自社サービスの開発・運営から、長崎県内の店舗・個人事業主向けの受託開発まで。',
   lead: '補助金情報サイトの自社開発から、長崎県内の店舗・個人事業主向けの受託開発まで。これまで手がけてきたサービス・サイトの実績をご紹介します。',
+  selfHeading: '自社サービス',
+  selfLead: '企画から開発・運営まで、すべて個人で手がけているサービスです。',
+  clientHeading: 'クライアント案件',
+  clientLead: '長崎県内の店舗・個人事業主のみなさまからご依頼いただき、制作したサイト・システムです。',
   items: [
     {
       title: '補助金ナビ　長崎',
@@ -489,7 +493,7 @@ export const worksPage = {
         src: '/images/works/hojokin-navi.webp',
         alt: '補助金ナビ 長崎のトップページのスクリーンショット',
         width: 960,
-        height: 720,
+        height: 600,
       },
     },
     {
@@ -502,9 +506,9 @@ export const worksPage = {
       points: ['商品・お知らせ・FAQ・写真をノーコードで更新できる管理画面', '本番サーバーの構築・運用まで一貫して担当'],
       image: {
         src: '/images/works/wagashi.webp',
-        alt: '和洋菓子店「お菓子のみよしや」の店舗外観写真',
+        alt: '和洋菓子店「お菓子のみよしや」のホームページのスクリーンショット',
         width: 960,
-        height: 565,
+        height: 600,
       },
     },
     {
@@ -519,7 +523,7 @@ export const worksPage = {
         src: '/images/works/wedding.webp',
         alt: '結婚式の招待・出欠管理サイトのトップページのスクリーンショット',
         width: 960,
-        height: 720,
+        height: 600,
       },
     },
     {
@@ -533,7 +537,7 @@ export const worksPage = {
       image: {
         src: '/images/works/clinic.svg',
         alt: '接骨院のホームページのイメージイラスト',
-        width: 800,
+        width: 960,
         height: 600,
       },
     },
