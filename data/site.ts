@@ -504,6 +504,8 @@ export const worksPage = {
         '老舗和洋菓子店向けに、ブランドの世界観を再現したホームページと、店主自身が商品・お知らせ・写真を更新できる管理画面をセットで開発しました。',
       stack: ['TypeScript', 'Next.js', 'Prisma', 'PostgreSQL', 'Docker'],
       points: ['商品・お知らせ・FAQ・写真をノーコードで更新できる管理画面', '本番サーバーの構築・運用まで一貫して担当'],
+      href: 'https://okashinomiyoshiya.com',
+      hrefLabel: 'サイトを見る',
       image: {
         src: '/images/works/wagashi.webp',
         alt: '和洋菓子店「お菓子のみよしや」のホームページのスクリーンショット',
