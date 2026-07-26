@@ -486,10 +486,10 @@ export const worksPage = {
       href: footer.relatedSite.href,
       hrefLabel: 'サイトを見る',
       image: {
-        src: '/images/works/hojokin-navi.svg',
-        alt: '長崎・佐賀・熊本3県の補助金情報を検索できるサイトのイメージイラスト',
-        width: 800,
-        height: 600,
+        src: '/images/works/hojokin-navi.webp',
+        alt: '補助金ナビ 長崎のトップページのスクリーンショット',
+        width: 960,
+        height: 720,
       },
     },
     {
@@ -501,10 +501,10 @@ export const worksPage = {
       stack: ['TypeScript', 'Next.js', 'Prisma', 'PostgreSQL', 'Docker'],
       points: ['商品・お知らせ・FAQ・写真をノーコードで更新できる管理画面', '本番サーバーの構築・運用まで一貫して担当'],
       image: {
-        src: '/images/works/wagashi.svg',
-        alt: '和洋菓子店のホームページのイメージイラスト',
-        width: 800,
-        height: 600,
+        src: '/images/works/wagashi.webp',
+        alt: '和洋菓子店「お菓子のみよしや」の店舗外観写真',
+        width: 960,
+        height: 565,
       },
     },
     {
@@ -516,10 +516,10 @@ export const worksPage = {
       stack: ['PHP', 'Laravel'],
       points: ['ゲストの出欠管理・写真アップロード機能', 'スマートフォンからのHEIC画像アップロードにも対応'],
       image: {
-        src: '/images/works/wedding.svg',
-        alt: '結婚式の招待・出欠管理サイトのイメージイラスト',
-        width: 800,
-        height: 600,
+        src: '/images/works/wedding.webp',
+        alt: '結婚式の招待・出欠管理サイトのトップページのスクリーンショット',
+        width: 960,
+        height: 720,
       },
     },
     {
