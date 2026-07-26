@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" width="800" height="600" role="img" aria-labelledby="hojokinTitle">
+  <title id="hojokinTitle">補助金ナビ 長崎のイメージイラスト</title>
+  <rect width="800" height="600" fill="#F5F2EA" />
+
+  <!-- 背景の地図ライン -->
+  <g stroke="#14213D" stroke-opacity="0.08" stroke-width="2" fill="none">
+    <path d="M60,120 L220,90 L360,150 L520,100 L740,140" />
+    <path d="M60,460 L240,500 L420,450 L600,500 L740,460" />
+  </g>
+
+  <!-- 3県を表す3つのピン -->
+  <g>
+    <g transform="translate(300,190)">
+      <path d="M0,0 C-38,0 -60,26 -60,58 C-60,100 0,158 0,158 C0,158 60,100 60,58 C60,26 38,0 0,0 Z" fill="#14213D" opacity="0.92" />
+      <circle cx="0" cy="56" r="24" fill="#F5F2EA" />
+    </g>
+    <g transform="translate(430,150) scale(0.62)">
+      <path d="M0,0 C-38,0 -60,26 -60,58 C-60,100 0,158 0,158 C0,158 60,100 60,58 C60,26 38,0 0,0 Z" fill="#805A15" opacity="0.85" />
+      <circle cx="0" cy="56" r="24" fill="#F5F2EA" />
+    </g>
+    <g transform="translate(200,150) scale(0.62)">
+      <path d="M0,0 C-38,0 -60,26 -60,58 C-60,100 0,158 0,158 C0,158 60,100 60,58 C60,26 38,0 0,0 Z" fill="#805A15" opacity="0.85" />
+      <circle cx="0" cy="56" r="24" fill="#F5F2EA" />
+    </g>
+  </g>
+
+  <!-- 虫眼鏡（検索）と書類（補助金） -->
+  <g transform="translate(300,420)">
+    <rect x="-90" y="-70" width="120" height="150" rx="8" fill="#FFFFFF" stroke="#14213D" stroke-width="4" />
+    <line x1="-70" y1="-38" x2="10" y2="-38" stroke="#14213D" stroke-width="6" stroke-linecap="round" opacity="0.65" />
+    <line x1="-70" y1="-10" x2="10" y2="-10" stroke="#14213D" stroke-width="6" stroke-linecap="round" opacity="0.45" />
+    <line x1="-70" y1="18" x2="-20" y2="18" stroke="#14213D" stroke-width="6" stroke-linecap="round" opacity="0.45" />
+
+    <g transform="translate(60,20)">
+      <circle r="52" fill="none" stroke="#805A15" stroke-width="12" />
+      <line x1="38" y1="38" x2="86" y2="86" stroke="#805A15" stroke-width="14" stroke-linecap="round" />
+    </g>
+  </g>
+</svg>

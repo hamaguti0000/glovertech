@@ -34,6 +34,13 @@ export interface ReportSampleChapter {
   sample: string
 }
 
+export interface WorkImage {
+  src: string
+  alt: string
+  width: number
+  height: number
+}
+
 export interface WorkItem {
   title: string
   type: 'self' | 'client'
@@ -43,6 +50,7 @@ export interface WorkItem {
   points: string[]
   href?: string
   hrefLabel?: string
+  image: WorkImage
 }
 
 export interface InfoItem {
@@ -477,6 +485,12 @@ export const worksPage = {
       points: ['マルチテナント構成で3地域に展開', '公開中の補助金情報を日々更新・管理'],
       href: footer.relatedSite.href,
       hrefLabel: 'サイトを見る',
+      image: {
+        src: '/images/works/hojokin-navi.svg',
+        alt: '長崎・佐賀・熊本3県の補助金情報を検索できるサイトのイメージイラスト',
+        width: 800,
+        height: 600,
+      },
     },
     {
       title: '和洋菓子店のホームページ＋商品管理システム',
@@ -486,6 +500,12 @@ export const worksPage = {
         '老舗和洋菓子店向けに、ブランドの世界観を再現したホームページと、店主自身が商品・お知らせ・写真を更新できる管理画面をセットで開発しました。',
       stack: ['TypeScript', 'Next.js', 'Prisma', 'PostgreSQL', 'Docker'],
       points: ['商品・お知らせ・FAQ・写真をノーコードで更新できる管理画面', '本番サーバーの構築・運用まで一貫して担当'],
+      image: {
+        src: '/images/works/wagashi.svg',
+        alt: '和洋菓子店のホームページのイメージイラスト',
+        width: 800,
+        height: 600,
+      },
     },
     {
       title: '結婚式の招待・出欠管理サイト',
@@ -495,6 +515,12 @@ export const worksPage = {
         '新郎新婦の結婚式向けに、招待状代わりとなる特設サイトを開発。ゲストの出欠回答やプロフィール紹介、写真掲載などの機能を実装しました。',
       stack: ['PHP', 'Laravel'],
       points: ['ゲストの出欠管理・写真アップロード機能', 'スマートフォンからのHEIC画像アップロードにも対応'],
+      image: {
+        src: '/images/works/wedding.svg',
+        alt: '結婚式の招待・出欠管理サイトのイメージイラスト',
+        width: 800,
+        height: 600,
+      },
     },
     {
       title: '接骨院のホームページ',
@@ -504,6 +530,12 @@ export const worksPage = {
         '交通事故治療を専門とする接骨院向けに、フルスクラッチのWordPressテーマを開発。院の運営担当者が管理画面から診療時間や案内文をノーコードで更新できる設計にしました。',
       stack: ['WordPress', 'PHP'],
       points: ['カスタマイザーで診療時間・院名などをノーコード編集可能', '交通事故・むちうち治療に特化した案内ページを構成'],
+      image: {
+        src: '/images/works/clinic.svg',
+        alt: '接骨院のホームページのイメージイラスト',
+        width: 800,
+        height: 600,
+      },
     },
   ] satisfies WorkItem[],
 }
