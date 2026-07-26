@@ -492,8 +492,8 @@ export const worksPage = {
       image: {
         src: '/images/works/hojokin-navi.webp',
         alt: '補助金ナビ 長崎のトップページのスクリーンショット',
-        width: 960,
-        height: 600,
+        width: 1440,
+        height: 900,
       },
     },
     {
@@ -507,8 +507,8 @@ export const worksPage = {
       image: {
         src: '/images/works/wagashi.webp',
         alt: '和洋菓子店「お菓子のみよしや」のホームページのスクリーンショット',
-        width: 960,
-        height: 600,
+        width: 1440,
+        height: 900,
       },
     },
     {
@@ -521,9 +521,9 @@ export const worksPage = {
       points: ['ゲストの出欠管理・写真アップロード機能', 'スマートフォンからのHEIC画像アップロードにも対応'],
       image: {
         src: '/images/works/wedding.webp',
-        alt: '結婚式の招待・出欠管理サイトのトップページのスクリーンショット',
-        width: 960,
-        height: 600,
+        alt: '結婚式の招待・出欠管理サイトの出欠登録画面のスクリーンショット',
+        width: 1440,
+        height: 900,
       },
     },
     {
@@ -537,8 +537,8 @@ export const worksPage = {
       image: {
         src: '/images/works/clinic.svg',
         alt: '接骨院のホームページのイメージイラスト',
-        width: 960,
-        height: 600,
+        width: 1440,
+        height: 900,
       },
     },
   ] satisfies WorkItem[],
