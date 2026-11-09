@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 600" width="1440" height="900" role="img" aria-labelledby="clinicTitle">
+  <title id="clinicTitle">接骨院のホームページのイメージイラスト</title>
+  <rect width="960" height="600" fill="#F5F2EA" />
+
+  <!-- 建物(院)のイメージ -->
+  <g transform="translate(480,300)">
+    <path d="M-260,-20 L0,-180 L260,-20 Z" fill="#14213D" />
+    <rect x="-205" y="-20" width="410" height="200" fill="#FFFFFF" stroke="#14213D" stroke-width="4" />
+    <rect x="-42" y="80" width="84" height="100" fill="#14213D" opacity="0.9" />
+    <rect x="-160" y="20" width="62" height="62" fill="#805A15" opacity="0.22" />
+    <rect x="98" y="20" width="62" height="62" fill="#805A15" opacity="0.22" />
+  </g>
+
+  <!-- 医療(十字)マーク -->
+  <g transform="translate(480,182)">
+    <circle r="50" fill="#805A15" />
+    <rect x="-10" y="-28" width="20" height="56" fill="#FFFFFF" />
+    <rect x="-28" y="-10" width="56" height="20" fill="#FFFFFF" />
+  </g>
+</svg>
